@@ -19,7 +19,7 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
            
-                    <li><a href="1index.html" class="Titulo nav-ink">AETNA</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li><a href="index.html" class="Titulo nav-ink">AETNA</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
                     <li><a href="tienda.html" class="nav-link px-2 text-white">Cursos</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
                   
                 </ul>
@@ -42,37 +42,36 @@
                 <div class="register-box" id="register-box">
                 <h2 class="">Registro</h2>
           
-                <div class="formulario">
+                <div class="formulario" id="form">
                 
                 <div class="form-floating">
-                    <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre completo" name="name"
+                    <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre completo" id="name"
                     required> 
                     <label for="floatingInput">Nombre Completo</label>
                 </div>
                 <div class="form-floating"> 
-                    <input type="input-email" class="form-control"  placeholder="Ingrese su email" name="email" 
-                    pattern="^[a-z0-9!#$%'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+                    <input type="input-email" class="form-control"  placeholder="Ingrese su email" id="email" 
                     required> 
                     <label for="floatingInput">Email</label>
                 </div>
 
                 <div class="form-floating"> 
-                    <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" name="username" 
-                    minlength="3" required> 
+                    <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username" 
+                     required> 
                     <label for="floatingInput">Usuario</label>
                 </div>
 
                 <div class="form-floating"> 
-                    <input type="password" class="form-control"  placeholder="Ingrese su contaseña" name="password"
+                    <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password"
                     pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                    minlength="8" required>
+                    required>
                     <label for="floatingInput">Contraseña</label>
 
                 </div>
                 
                 <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="sexo" name="sexo" id="sexo" >
-                      <option selected>Elija una opcion</option>
+                    <select class="form-select" aria-label="Floating label select example"  id="sexo"  required >
+                        <option selected value="0">Elija una opcion</option>
                       <option value="1">Femenino</option>
                       <option value="2">Masculino</option>
                       <option value="3">No especificar</option>
@@ -81,8 +80,8 @@
                 </div>
 
                 <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="rol" name="rol" id="rol" >
-                      <option selected>Elija una opcion</option>
+                    <select class="form-select"  aria-label="Floating label select example" id="tipo_usuario" >
+                        <option selected value="0">Elija una opcion</option>
                       <option value="1">Público (Compra y/o Venta)</option>
                       <option value="2">Privado (Compra) </option>
                     </select>
@@ -90,8 +89,8 @@
                 </div>
 
                 <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="rol" name="rol" id="rol" >
-                      <option selected>Elija una opcion</option>
+                    <select class="form-select" aria-label="Floating label select example"  id="rol"  >
+                      <option selected value="0">Elija una opcion</option>
                       <option value="1">Instructor</option>
                       <option value="2">Estudiante</option>
                       <option value="3">Administrador</option>
@@ -100,18 +99,18 @@
                 </div>
                 <div class="item"> 
                     <label class="nav-link px-2 " >Fecha de nacimiento</label>
-                    <input type="date" class="form-control" name="nacimiento" required> 
+                    <input type="date" class="form-control" id="nacimiento" required> 
                 </div>
 
                 <div class="item"> 
                     <label class="nav-link px-2">Elija una imagen como avatar </label>
-                        <input type="file" class="form-control" id="customFile" name="avatar" required> 
+                        <input type="file" class="form-control" id="customFile" id="avatar" required> 
                 </div>
 
  
                 <div class="espacio_Boton">
                 <button class="boton_Registro" type="submit"  value="Enviar">Registrate</button>
-
+                <p class="warnings" id="warnings"></p>
                 </div>
 
         
@@ -123,6 +122,8 @@
     </main>
 
       </body>
+
+      <script src="../js/registro.js"></script>
     <footer class="main-footer">
         <div class="footer__section">
             <h2 class="footer__title">Conocenos</h2>

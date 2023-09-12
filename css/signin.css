@@ -38,3 +38,10 @@
   margin-bottom: 10px;
 }
 
+.warnings{
+  width: 200px;
+  text-align: center;
+  margin: auto;
+  color: crimson;
+  padding-top: 20px;
+}

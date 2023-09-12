@@ -21,7 +21,7 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
            
-                    <li><a href="1index.html" class="Titulo nav-ink">AETNA</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li><a href="index.html" class="Titulo nav-ink">AETNA</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
                     <li><a href="tienda.html" class="nav-link px-2 text-white">Cursos</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
                   
                 </ul>
@@ -48,20 +48,18 @@
             <div class="formulario">
        
                 <div class="form-floating"> 
-                    <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" name="username"required>
+                    <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username">
                      <label for="floatingInput">Usuario</label>
                 </div>
 
                 <div class="form-floating"> 
-                    <input type="password" class="form-control"  placeholder="Ingrese su contaseña" name="password"
-                    pattern="^(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})(?=(?:.*[0-9]){1})(?=(?:.*[?¿.,:;-]){1})\S{8,}"
-                    required
-                    minlength="8">
+                    <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password">
                     <label for="floatingInput">Contraseña</label>
 
                 </div>
                 <br>
                 <button class="btn-login" type="submit"  value="Enviar">Login</button>
+                <p class="warnings" id="warnings"></p>
 
         
             </div>
