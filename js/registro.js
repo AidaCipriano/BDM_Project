@@ -1,5 +1,6 @@
 
 const nombre = document.getElementById("name");
+const apellido = document.getElementById("apellido");
 const email = document.getElementById("email");
 const user = document.getElementById("username");
 const pass = document.getElementById("password");
@@ -22,6 +23,12 @@ form.addEventListener("submit", e=>{
     parrafo.innerHTML = ""
 
     if(!regexName.test(nombre.value)){
+        //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
+        warnings += "Solo se permiten letras <br>"
+        entrar = true
+    }
+
+    if(!regexName.test(apellido.value)){
         //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
         warnings += "Solo se permiten letras <br>"
         entrar = true
@@ -56,12 +63,12 @@ form.addEventListener("submit", e=>{
         entrar = true
     }
     
-    if(type_user.value==0 ||sex.value=="" ){
+    if(type_user.value==0 ||type_user.value=="" ){
         //alert("La contraseña es muy corta");
         warnings += "Selecciona una opcion en tipo de usuario <br>"
         entrar = true
     }
-    if(rol.value==0 ||sex.value=="" ){
+    if(rol.value==0 ||rol.value=="" ){
         //alert("La contraseña es muy corta");
         warnings += "Selecciona una opcion en rol <br>"
         entrar = true

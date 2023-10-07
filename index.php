@@ -1,7 +1,7 @@
 <?php
 
 include("home.php");
-//include("db.php");
+//include("conexion.php");
 //$conexion=conectar();
 
 

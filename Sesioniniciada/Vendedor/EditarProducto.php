@@ -37,7 +37,7 @@
                 <li><a class="dropdown-item" href="MisOrdenes.php">Mis Ordenes</a></li>
                 <li><a class="dropdown-item" href="MisCategorias.php">Mis Categorias</a></li>
                 <li><a class="dropdown-item" href="Chat.php">Chat</a></li>
-                <li><a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="home.php"> Cerrar sesión</a></li>
+                <li><a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="../../home.php"> Cerrar sesión</a></li>
               </ul>
             </li>
           </ul>

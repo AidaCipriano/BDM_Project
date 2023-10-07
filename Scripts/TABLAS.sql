@@ -22,6 +22,7 @@ CREATE TABLE USUARIO (
 	genero					varchar(10)					not null comment "Genero del Usuario",
 	nacimiento				date						not null comment "Fecha de Nacimiento del Usuario",
 	email					varchar(50)					not null comment "Email del Usuario",
+    nombreusuario			varchar(20)					not null comment "Nombre de Usuario",
 	contrasena				varchar(20)					not null comment "Contrasena de la cuenta del Usuario",
     tipousuario				varchar(20)					not null comment "Cuenta publica o privada",
     rol						varchar(20)					not null comment "Rol del usuario: Instructor o Estudiante",

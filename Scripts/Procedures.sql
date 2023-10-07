@@ -12,11 +12,11 @@ DELIMITER $$
 	pgenero					varchar(10)		,
 	pnacimiento				date			,
 	pemail					varchar(50)		,
+    pnombreusuario			varchar(20)		,
 	pcontrasena				varchar(20)		,
     ptipousuario			varchar(20)		,
     prol					varchar(20)		,
-    pimagen					longblob		,
-    padministrador			bit				
+    pimagen					longblob		
 	)
 BEGIN
 DECLARE busqueda_Cuenta INT; DECLARE v_buscaremail int ;
@@ -27,8 +27,21 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 		
          IF (v_buscaremail = 0) 
 		THEN
-			INSERT INTO USUARIO (nombres, apellidos, genero, nacimiento, email, contrasena, tipousuario, rol, fecharegistro, ultimamodicacion, imagen, activo, administrador)
-			VALUES 				(pnombres, papellidos, pgenero, pnacimiento, pemail, pcontrasena, ptipousuario, prol, (SELECT NOW()), (SELECT NOW()), pimagen, 1, padministrador);
+			
+			IF(prol='Administrador')
+			THEN
+				INSERT INTO USUARIO (nombres, apellidos, genero, nacimiento, email, nombreusuario, contrasena, tipousuario, rol, fecharegistro, ultimamodicacion, imagen, activo, administrador)
+				VALUES 				(pnombres, papellidos, pgenero, pnacimiento, pemail, pnombreusuario, pcontrasena, ptipousuario, prol, (SELECT NOW()), (SELECT NOW()), pimagen, 1, 1);
+			END IF;
+
+			IF(prol!='Administrador')
+			THEN
+				INSERT INTO USUARIO (nombres, apellidos, genero, nacimiento, email, nombreusuario, contrasena, tipousuario, rol, fecharegistro, ultimamodicacion, imagen, activo, administrador)
+				VALUES 				(pnombres, papellidos, pgenero, pnacimiento, pemail, pnombreusuario, pcontrasena, ptipousuario, prol, (SELECT NOW()), (SELECT NOW()), pimagen, 1, 0);
+			END IF;
+			
+			
+			
 		END IF;
         
         IF (v_buscaremail = 1) 
