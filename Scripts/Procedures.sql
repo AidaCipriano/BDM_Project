@@ -1,5 +1,5 @@
 /*Procedures*/
- /* USE BD_BDM;*/
+ /* USE BD_BDM_project;*/
 
 #1. Gestion de Usuarios
 DROP procedure IF EXISTS sp_Usuarios;
@@ -13,6 +13,7 @@ DELIMITER $$
 	pnacimiento				date			,
 	pemail					varchar(50)		,
 	pcontrasena				varchar(20)		,
+    ptipousuario			varchar(20)		,
     prol					varchar(20)		,
     pimagen					longblob		,
     padministrador			bit				
@@ -26,8 +27,8 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 		
          IF (v_buscaremail = 0) 
 		THEN
-			INSERT INTO USUARIO (nombres, apellidos, genero, nacimiento, email, contrasena, rol, fecharegistro, ultimamodicacion, imagen, activo, administrador)
-			VALUES 				(pnombres, papellidos, pgenero, pnacimiento, pemail, pcontrasena, prol, (SELECT NOW()), (SELECT NOW()), pimagen, 1, padministrador);
+			INSERT INTO USUARIO (nombres, apellidos, genero, nacimiento, email, contrasena, tipousuario, rol, fecharegistro, ultimamodicacion, imagen, activo, administrador)
+			VALUES 				(pnombres, papellidos, pgenero, pnacimiento, pemail, pcontrasena, ptipousuario, prol, (SELECT NOW()), (SELECT NOW()), pimagen, 1, padministrador);
 		END IF;
         
         IF (v_buscaremail = 1) 
@@ -37,7 +38,7 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 						activo = 1
 					WHERE
 						id_usuario 	= pid_usuario ;
-				set opc='Cuenta activa';
+				set opc='Cuenta activa. Inicie sesion.';
 		END IF;
 
 	end if;
@@ -80,7 +81,6 @@ BEGIN
 	DECLARE busqueda_Cuenta INT; DECLARE v_buscaremail int ; DECLARE v_buscarpasword VARCHAR(20) ; DECLARE v_id INT; DECLARE intentos tinyint;
     declare pactivo bit;
 	SET busqueda_Cuenta =  (SELECT COUNT(id_usuario) FROM USUARIO WHERE email = pemail AND contrasena = pcontrasena);
-	SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
     SET pactivo = (SELECT activo FROM USUARIO WHERE email = pemail);
 
  IF (busqueda_Cuenta = 1) 

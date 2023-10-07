@@ -1,7 +1,8 @@
-create database BD_BDM_project;
+/*create database BD_BDM_project;*/
 
-USE BD_BDM_project;
+/*USE bd_bdm_project;*/
 
+/*
 DROP TABLE IF EXISTS MENSAJES;
 DROP TABLE IF EXISTS CHAT;
 DROP TABLE IF EXISTS COMENTARIOS;
@@ -11,7 +12,7 @@ DROP TABLE IF EXISTS IMAGEN_PRODUCTO;
 DROP TABLE IF EXISTS VIDEO_PRODUCTO;
 DROP TABLE IF EXISTS PRODUCTO_VENDEDOR;
 DROP TABLE IF EXISTS CATEGORIA;
-DROP TABLE IF EXISTS USUARIO;
+DROP TABLE IF EXISTS USUARIO;*/
 
 
 CREATE TABLE USUARIO (
@@ -22,6 +23,7 @@ CREATE TABLE USUARIO (
 	nacimiento				date						not null comment "Fecha de Nacimiento del Usuario",
 	email					varchar(50)					not null comment "Email del Usuario",
 	contrasena				varchar(20)					not null comment "Contrasena de la cuenta del Usuario",
+    tipousuario				varchar(20)					not null comment "Cuenta publica o privada",
     rol						varchar(20)					not null comment "Rol del usuario: Instructor o Estudiante",
     fecharegistro			datetime					not null  comment "Fecha en la que el Usuario se registro",
     ultimamodicacion		datetime					not null comment "Ultima vez que el Usuario modifico su informacion",
@@ -34,7 +36,7 @@ CREATE TABLE USUARIO (
 );
 
 CREATE TABLE CATEGORIA (
-	id_categoria				int					not null comment "ID de la Categoría",
+	id_categoria				int					not null comment "ID de la Categoria",
     nombre						varchar(50)			not null comment "Nombre de la Categoria",
 	creador						int					not null comment "ID del usuario",
     descripcion					varchar(100)		not null comment "Descripcion sobre la categoria",
