@@ -1,9 +1,9 @@
 <?php
     require 'conexion.php';
 
-    if(!empty($_POST['name']) && !empty($_POST['apellido']) && !empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['sexo']) 
+   /* if(!empty($_POST['name']) && !empty($_POST['apellido']) && !empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['sexo']) 
     && !empty($_POST['tipo_usuario'])&& !empty($_POST['rol'])&& !empty($_POST['nacimiento'])&& !empty($_POST['avatar'])){
-        $sql="CALL sp_Usuarios( 'Crear', null , :name, :apellido, :sexo, :nacimiento, :email, :username, :password, :tipo_usuario, :rol, :avatar);";
+        $sql=  mysqli_query( "CALL sp_Usuarios( 'Crear', null , :name, :apellido, :sexo, :nacimiento, :email, :username, :password, :tipo_usuario, :rol, :avatar)" );
         $stm = $conexion->prepare($sql);
         $stm->bindParam(':name', $_POST['name']);
         $stm->bindParam(':apeliido', $_POST['apellido']);
@@ -18,11 +18,11 @@
        
         if ($stmt->execute()) {
             $message = 'Successfully created new user';
-        } else {
+          } else {
             $message = 'Sorry there must have been an issue creating your account';
         }
 
-    }
+    }*/
 
 
 ?>
