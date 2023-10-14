@@ -34,7 +34,7 @@ form.addEventListener("submit", e=>{
         entrar = true
     }
 
-     if(!regexEmail.test(email.value)){
+    if(!regexEmail.test(email.value)){
         //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
         warnings += "Formato Email incorrecto <br>"
         entrar = true

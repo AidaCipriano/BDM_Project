@@ -46,37 +46,28 @@
       
         <main class="main-registrar ">
         <div class="form-signin w-100 m-auto">
-            <form action="" method="post" id="form" class="form-login" >
-            <div class="inicio-box" >
-            <h2 class="">Inicio de sesion</h2>
-           <br>
-            <div class="formulario">
-       
-                <div class="form-floating"> 
-                    <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username">
-                     <label for="floatingInput">Usuario</label>
-                </div>
-
-                <div class="form-floating"> 
-                    <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password">
-                    <label for="floatingInput">Contraseña</label>
-
-                </div>
-                <br>
-                <button class="btn-login" type="submit"  value="Enviar">Login</button>
-                <p class="warnings" id="warnings"></p>
-
-        
+            <form action="controladores/login.php" method="POST" id="form" class="form-login" >
+                 <div class="inicio-box" >
+                    <h2 class="">Inicio de sesion</h2>
+                    <br>
+                    <div class="formulario">
+                        <div class="form-floating"> 
+                            <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username">
+                            <label for="floatingInput">Usuario</label>
+                        </div>
+                        <div class="form-floating"> 
+                            <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password">
+                            <label for="floatingInput">Contraseña</label>
+                        </div>
+                        <br>
+                        <button class="btn-login" type="submit"  value="Enviar">Login</button>
+                        <p class="warnings" id="warnings"></p>
+                    </div>
+                </form>
             </div>
-        </form>
-        </div>
-        
-        
-        
-    </main>
-</body>
+        </main>
+    </body>
     
-
     <script src="js/iniciosesion.js"></script>
 
     <footer class="main-footer">

@@ -1,5 +1,9 @@
 <?php
-    require 'conexion.php';
+
+include("Sesioniniciada/controladores/registrate.php");
+
+
+  //  require 'conexion.php';
 
    /* if(!empty($_POST['name']) && !empty($_POST['apellido']) && !empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['sexo']) 
     && !empty($_POST['tipo_usuario'])&& !empty($_POST['rol'])&& !empty($_POST['nacimiento'])&& !empty($_POST['avatar'])){
@@ -93,7 +97,6 @@
 
                         <div class="form-floating"> 
                             <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password"
-                            pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                             required>
                             <label for="floatingInput">Contraseña</label>
 
@@ -138,8 +141,10 @@
                         </div>
                         
                         <div class="espacio_Boton">
-                            <button class="boton_Registro" type="submit"  value="Enviar">Registrate</button>
+                            <!--<button class="boton_Registro" type="submit"  value="Enviar">Registrate</button>-->
+                            <input class="boton_Registro"  onclick="btn_guardar_dato();"  value="Registrate">
                             <p class="warnings" id="warnings"></p>
+                            <input class="btn btn-primary"  type="submit"  name="register" id="btnregister" value="Enviar">
                         </div>
                     </div>
                 </form>
