@@ -32,6 +32,7 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 			THEN
 				INSERT INTO USUARIO (nombres, apellidos, genero, nacimiento, email, nombreusuario, contrasena, tipousuario, rol, fecharegistro, ultimamodicacion, imagen, activo, administrador)
 				VALUES 				(pnombres, papellidos, pgenero, pnacimiento, pemail, pnombreusuario, pcontrasena, ptipousuario, prol, (SELECT NOW()), (SELECT NOW()), pimagen, 1, 1);
+                
 			END IF;
 
 			IF(prol!='Administrador')
@@ -81,17 +82,19 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 				id_usuario 	= pid_usuario ;
     end if;
 END$$
-
+/*
+call sp_Usuarios('Registro', null, '1', '2', '3', '2000-12-10', '4', '5', '6', '7', '8', null);
+select * from usuario;
+select * from imagen_avatar;*/
 #Iniciar sesion
 DROP procedure IF EXISTS sp_Inicio_Sesion;
 DELIMITER $$
  CREATE PROCEDURE sp_Inicio_Sesion(
 	IN pemail					VARCHAR(50)		,
-	IN pcontrasena				VARCHAR(20)	,	
-    OUT prol VARCHAR(50)
+	IN pcontrasena				VARCHAR(20)	
 	) 
 BEGIN
-	DECLARE busqueda_Cuenta INT; DECLARE v_buscaremail int ; DECLARE v_buscarpasword VARCHAR(20) ; DECLARE v_id INT; DECLARE intentos tinyint;
+	DECLARE busqueda_Cuenta INT; DECLARE v_buscaremail int ; DECLARE v_buscarpasword VARCHAR(20) ; DECLARE v_id INT; declare prol varchar(50);
     declare pactivo bit;
 	SET busqueda_Cuenta =  (SELECT COUNT(id_usuario) FROM USUARIO WHERE email = pemail AND contrasena = pcontrasena);
     SET pactivo = (SELECT activo FROM USUARIO WHERE email = pemail);
@@ -100,7 +103,7 @@ BEGIN
     THEN
 		IF (pactivo = 1) 
 		THEN
-			SET prol = (SELECT rol FROM USUARIO WHERE email = pemail);
+			SELECT rol FROM USUARIO WHERE email = pemail;
 		END IF;
         IF (pactivo = 0) 
 		THEN

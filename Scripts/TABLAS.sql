@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS IMAGEN_PRODUCTO;
 DROP TABLE IF EXISTS VIDEO_PRODUCTO;
 DROP TABLE IF EXISTS PRODUCTO_VENDEDOR;
 DROP TABLE IF EXISTS CATEGORIA;
+DROP TABLE IF EXISTS IMAGEN_AVATAR;
 DROP TABLE IF EXISTS USUARIO;*/
 
 
@@ -25,16 +26,31 @@ CREATE TABLE USUARIO (
     nombreusuario			varchar(20)					not null comment "Nombre de Usuario",
 	contrasena				varchar(20)					not null comment "Contrasena de la cuenta del Usuario",
     tipousuario				varchar(20)					not null comment "Cuenta publica o privada",
-    rol						varchar(20)					not null comment "Rol del usuario: Instructor o Estudiante",
+    rol						varchar(20)					not null comment "Rol del usuario: Vendedor, Administrador o Comprador",
     fecharegistro			datetime					not null  comment "Fecha en la que el Usuario se registro",
     ultimamodicacion		datetime					not null comment "Ultima vez que el Usuario modifico su informacion",
-    imagen					longblob					null comment "Avatar/Imagen del Perfil del Usuario",
+    imagen					longblob					null comment 	"Avatar/Imagen del Perfil del Usuario",
     activo					bit							not null comment "Estado del Usuario.",
     administrador			bool						not null comment "Si el usuario es Admin o no",
 
 	CONSTRAINT PK_USUARIO
 			PRIMARY KEY (id_usuario)
 );
+/*
+CREATE TABLE IMAGEN_AVATAR (
+	id_imagen_avatar		int auto_increment		not null comment "ID de la Imagen",
+	titulo  					int					not null comment "Titulo de la foto de perfil del usuario",
+    usuario  					int					not null comment "Usuario que guardo la imagen",
+
+	CONSTRAINT PK_IMAGEN_AVATAR
+			PRIMARY KEY (id_imagen_avatar),
+	CONSTRAINT FK_IMAGEN_AVATAR
+			FOREIGN KEY (usuario)
+			REFERENCES USUARIO(id_usuario)
+);
+*/
+
+/*
 
 CREATE TABLE CATEGORIA (
 	id_categoria				int					not null comment "ID de la Categoria",
@@ -186,4 +202,4 @@ CREATE TABLE MENSAJES (
 	CONSTRAINT FK_MENSAJES_EMISOR
 			FOREIGN KEY (emisor)
 			REFERENCES USUARIO(id_usuario)
-);
+);*/

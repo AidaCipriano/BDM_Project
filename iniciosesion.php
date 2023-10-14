@@ -46,29 +46,35 @@
       
         <main class="main-registrar ">
         <div class="form-signin w-100 m-auto">
-            <form action="controladores/login.php" method="POST" id="form" class="form-login" >
+
+            <form action="Sesioniniciada/controladores/login.php" method="POST" id="form" class="form-login" >
                  <div class="inicio-box" >
                     <h2 class="">Inicio de sesion</h2>
                     <br>
                     <div class="formulario">
                         <div class="form-floating"> 
-                            <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username">
-                            <label for="floatingInput">Usuario</label>
+                            <input type="input-email" class="form-control"  placeholder="Ingrese su nombre de usuario" id="email" name="email" >
+                            <label for="floatingInput">Email</label>
                         </div>
                         <div class="form-floating"> 
-                            <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password">
+                            <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password" name="password" >
                             <label for="floatingInput">Contraseña</label>
                         </div>
                         <br>
-                        <button class="btn-login" type="submit"  value="Enviar">Login</button>
+
+                        <input class="btn-login"  onclick="btn_iniciarsesion();"  value="Login">
+                        
                         <p class="warnings" id="warnings"></p>
+                        <input class="btn btn-primary"  type="submit"  name="login" id="btnlogin" value="Enviar">
                     </div>
                 </form>
             </div>
         </main>
     </body>
     
+    
     <script src="js/iniciosesion.js"></script>
+
 
     <footer class="main-footer">
         <div class="footer__section">

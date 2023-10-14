@@ -12,8 +12,10 @@ const avatar = document.getElementById("avatar");
 const form = document.getElementById("form");
 const parrafo = document.getElementById("warnings");
 
-form.addEventListener("submit", e=>{
-    e.preventDefault()
+const btn = document.getElementById("btnregister");
+
+function btn_guardar_dato()
+{
     let regexPass = /^(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})(?=(?:.*[0-9]){1})(?=(?:.*[?¿.#%=*,:;}{"'-]){1})\S{8,}/
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     let regexName = /^[ a-zA-ZÀ-ÿ]*$/
@@ -77,9 +79,9 @@ form.addEventListener("submit", e=>{
         parrafo.innerHTML = warnings
     }
     else{
-        parrafo.innerHTML = "Enviado"
+        btn.click();
     }
-} )
+} 
 
 
 

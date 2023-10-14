@@ -2,13 +2,13 @@
 
 	session_start();
 	error_reporting(0);
-
 	
 	/*if (isset($_SESSION['user_id'])) {
 	header('location:../pantalladeljuego.php');
 	}*/
 
 	require 'conexion.php';
+	echo('coenxion exito');
 
 
 	if(isset($_POST['login'])) {
@@ -24,13 +24,33 @@
        //                 VALUES('$idsuario', '$email', '$username', '$password')";
         $resultado = mysqli_query($conexion, $consulta);
 		$filas = mysqli_fetch_array($resultado);
-        if($resultado){
-			$_SESSION['user_id'] = $filas['nombreusuario'];
-			header("location:../pantalladeljuego.php");
-        }
-        else{
-            echo('Error');
-        }
+        
+		//Vendedor
+		if($filas['rol']==1){
+			$_SESSION['usuario'] = $filas['nombreusuario'];
+			header("location:../Vendedor/Home.php");
+		}
+		//Cliente
+		else if($filas['rol']==2){
+			$_SESSION['usuario'] = $filas['nombreusuario'];
+			header("location:../Cliente/Home.php");
+		}
+		//Administradpr
+		/*else if($filas['rol']==3){
+			$_SESSION['usuario'] = $filas['nombreusuario'];
+			header("location:../Administrador/Home.php");
+		}*/
+		/*
+		else{
+			?>
+			<?php
+				include("iniciosesion.php")
+			?>
+			<center>><h1>ERROR DE AUTENTIFICACION</h1></center>
+			<?php
+
+			<script src="js/iniciosesion.js"></script>
+		}*/
 
 
     }

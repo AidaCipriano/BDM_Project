@@ -3,31 +3,6 @@
 include("Sesioniniciada/controladores/registrate.php");
 
 
-  //  require 'conexion.php';
-
-   /* if(!empty($_POST['name']) && !empty($_POST['apellido']) && !empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['sexo']) 
-    && !empty($_POST['tipo_usuario'])&& !empty($_POST['rol'])&& !empty($_POST['nacimiento'])&& !empty($_POST['avatar'])){
-        $sql=  mysqli_query( "CALL sp_Usuarios( 'Crear', null , :name, :apellido, :sexo, :nacimiento, :email, :username, :password, :tipo_usuario, :rol, :avatar)" );
-        $stm = $conexion->prepare($sql);
-        $stm->bindParam(':name', $_POST['name']);
-        $stm->bindParam(':apeliido', $_POST['apellido']);
-        $stm->bindParam(':sexo', $_POST['sexo']);
-        $stm->bindParam(':nacimiento', $_POST['nacimiento']);
-        $stm->bindParam(':email', $_POST['email']);
-        $stm->bindParam(':username', $_POST['username']);
-        $stm->bindParam(':password', $_POST['password']);
-        $stm->bindParam(':tipo_usuario', $_POST['tipo_usuario']);
-        $stm->bindParam(':rol', $_POST['rol']);
-        $stm->bindParam(':avatar', $_POST['avatar']);
-       
-        if ($stmt->execute()) {
-            $message = 'Successfully created new user';
-          } else {
-            $message = 'Sorry there must have been an issue creating your account';
-        }
-
-    }*/
-
 
 ?>
 <html lang="es">
@@ -74,36 +49,36 @@ include("Sesioniniciada/controladores/registrate.php");
                     <div class="formulario" id="form">
                     
                         <div class="form-floating">
-                            <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre" id="name"
+                            <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre" id="name" name="name"
                             required> 
                             <label for="floatingInput">Nombre/s</label>
                         </div>
                         <div class="form-floating">
-                            <input type="apellido" class="form-control"  placeholder="Ingrese su apellido" placeholder="Ingrese su apellido" id="apellido"
+                            <input type="apellido" class="form-control"  placeholder="Ingrese su apellido" placeholder="Ingrese su apellido" id="apellido" name="apellido"
                             required> 
                             <label for="floatingInput">Apellido/s</label>
                         </div>
                         <div class="form-floating"> 
-                            <input type="input-email" class="form-control"  placeholder="Ingrese su email" id="email" 
+                            <input type="input-email" class="form-control"  placeholder="Ingrese su email" id="email" name="email"
                             required> 
                             <label for="floatingInput">Email</label>
                         </div>
 
                         <div class="form-floating"> 
-                            <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username" 
+                            <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username" name="username"
                             required> 
                             <label for="floatingInput">Usuario</label>
                         </div>
 
                         <div class="form-floating"> 
-                            <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password"
+                            <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password" name="password"
                             required>
                             <label for="floatingInput">Contraseña</label>
 
                         </div>
                     
                         <div class="form-floating">
-                            <select class="form-select" aria-label="Floating label select example"  id="sexo"  required >
+                            <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo" required >
                                 <option selected value="0">Elija una opcion</option>
                             <option value="1">Femenino</option>
                             <option value="2">Masculino</option>
@@ -113,7 +88,7 @@ include("Sesioniniciada/controladores/registrate.php");
                         </div>
 
                         <div class="form-floating">
-                            <select class="form-select"  aria-label="Floating label select example" id="tipo_usuario" >
+                            <select class="form-select"  aria-label="Floating label select example" id="tipo_usuario" name="tipo_usuario" >
                                 <option selected value="0">Elija una opcion</option>
                             <option value="1">Público (Compra o Venta)</option>
                             <option value="2">Privado (Compra) </option>
@@ -122,7 +97,7 @@ include("Sesioniniciada/controladores/registrate.php");
                         </div>
 
                         <div class="form-floating">
-                            <select class="form-select" aria-label="Floating label select example"  id="rol"  >
+                            <select class="form-select" aria-label="Floating label select example"  id="rol" name="rol" >
                             <option selected value="0">Elija una opcion</option>
                             <option value="1">Vendedor</option>
                             <option value="2">Cliente</option>
@@ -132,12 +107,12 @@ include("Sesioniniciada/controladores/registrate.php");
                         </div>
                         <div class="item"> 
                             <label class="nav-link px-2 " >Fecha de nacimiento</label>
-                            <input type="date" class="form-control" id="nacimiento" required> 
+                            <input type="date" class="form-control" id="nacimiento" name="nacimiento" required> 
                         </div>
 
                         <div class="item"> 
                             <label class="nav-link px-2">Elija una imagen como avatar </label>
-                                <input type="file" class="form-control" id="customFile" id="avatar" required> 
+                                <input type="file" class="form-control" id="customFile" id="avatar" name="avatar" required> 
                         </div>
                         
                         <div class="espacio_Boton">

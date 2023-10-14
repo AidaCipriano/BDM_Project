@@ -383,6 +383,9 @@
         display: none;
     }
 
+    #btnlogin {
+        display: none;
+    }
 
 
  /*Inicio de sesion*/
@@ -405,6 +408,7 @@
     font-size: 18px; 
     color: white; 
     border-radius: 25px; 
+    text-align: center;
     background-image: linear-gradient(to right, #00dbde 0%, #fc00ff 100%); 
 }
 
