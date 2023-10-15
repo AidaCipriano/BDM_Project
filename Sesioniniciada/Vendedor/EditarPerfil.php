@@ -3,51 +3,23 @@
   include '../controladores/conexion.php';
   $user = $_SESSION['usuario'];
 
-  $consulta = "CALL sp_Usuarios('ID', 'null', 'null', 'null', 'null', 'null', 'null', '$user', 'null', 'null', 'null', 'null');";
+  $consulta = "SELECT * FROM usuario where nombreusuario = '$user'";
   $resultado = mysqli_query($conexion, $consulta);
 
   while($filas = mysqli_fetch_array($resultado)){
-    $idsuario= $filas['id_usuario'];
+    $nombre= $filas['nombres'];
+    $apellido= $filas['apellidos'];
+    $email= $filas['email'];
+    $_usuario= $filas['nombreusuario'];
+    $password= $filas['contrasena'];
+    $sexo= $filas['genero'];
+    $nacimiento= $filas['nacimiento'];
+    $imagen= $filas['imagen'];
+    $idusuario = $filas['id_usuario'];
+    
 
   }
-
-  if(isset($_POST['update'])){
-    if(
-        strlen($_POST['name'])     >= 1 &&
-        strlen($_POST['apellido'])  >= 1 &&
-        strlen($_POST['sexo'])     >= 1 &&
-        strlen($_POST['nacimiento'])  >= 1 &&
-        strlen($_POST['email'])     >= 1 &&
-        strlen($_POST['username'])  >= 1 &&
-        strlen($_POST['password'])     >= 1 &&
-        strlen($_POST['avatar'])  >= 1 
-    ){
-        $id = $idsuario;
-        $name = trim($_POST['name']);
-        $apellido = trim($_POST['apellido']);
-        $sexo = trim($_POST['sexo']);
-        $nacimiento = date("d/m/y");
-        $email = trim($_POST['email']);
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        $tipo_usuario = null;
-        $rol = null;
-        $avatar = trim($_POST['avatar']);
-        
-        $consulta = "CALL sp_Usuarios('Registro', '$idsuario', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
-       // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)
-       //                 VALUES('$idsuario', '$email', '$username', '$password')";
-        $resultado = mysqli_query($conexion, $consulta);
-        if($resultado){
-          header("location:iniciosesion.php");
-        }
-        else{
-            echo('Error');
-        }
-
-    }
-}
-
+  include("../controladores/UpdatePerfil.php");
 ?>
 
 
@@ -121,67 +93,67 @@
       </div>
       <div class="perfil-usuario-body">
         <br>
-        <form action="" method="post" id="form" class="form-editarperfil" >
-          <div class="formulario">
+        <form action="" method="POST" id="form" class="form-register" >
+
+
+          <div class="formulario" id="form">
             <div class="form-floating">
-              <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese sus nombres" name="name"
-               >
-              <label for="floatingInput">Nombres</label>
+              <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre" id="name" name="name"  value="<?= $nombre?>"
+              > 
+              <label for="floatingInput">Nombre/s</label>
             </div>
             <div class="form-floating">
-              <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre completo" name="apellido"
-               >
-              <label for="floatingInput">Apellidos</label>
+              <input type="apellido" class="form-control"  placeholder="Ingrese su apellido" placeholder="Ingrese su apellido" id="apellido" name="apellido"  value="<?= $apellido?>" > 
+              <label for="floatingInput">Apellido/s</label>
             </div>
-            <div class="form-floating">
-              <input type="input-email" class="form-control"  placeholder="Ingrese su email" name="email" 
-              >
+            <div class="form-floating"> 
+              <input type="input-email" class="form-control"  placeholder="Ingrese su email" id="email" name="email" value="<?= $email?>" > 
               <label for="floatingInput">Email</label>
             </div>
             <div class="form-floating"> 
-              <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" name="username" required> 
-              <label for="floatingInput">Usuario</label>
+            <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username" name="username" value="<?= $_usuario?>" > 
+            <label for="floatingInput">Usuario</label>
+          </div>
+          <div class="form-floating"> 
+            <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password" name="password"  value="<?= $password?>" >
+            <label for="floatingInput">Contraseña</label>
+          </div>
+          <div class="form-floating">
+            <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo"  value="<?= $sexo?>" >
+              <option selected value="0">Elija una opcion</option>
+              <option value="1">Femenino</option>
+              <option value="2">Masculino</option>
+              <option value="3">No especificar</option>
+            </select>
+            <label for="floatingSelect">Sexo</label>
+          </div>
+          <br>
+          <div class="item"> 
+            <label class="nav-link px-2 text-black text" >Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="nacimiento" name="nacimiento"value="<?= $nacimiento?>" >
+          </div>
+          <br>
+          <div class="item"> 
+            <label class="nav-link px-2 text-black text" >Elija una imagen como avatar </label>
+            <input type="file" class="form-control" id="customFile" id="avatar" name="avatar" value="<?= $imagen?>" >
             </div>
-            <div class="form-floating"> 
-              <input type="password" class="form-control"  placeholder="Ingrese su contaseña" name="password"
-              pattern="^(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})(?=(?:.*[0-9]){1})(?=(?:.*[?¿.#%=*,:;}{"'-]){1})\S{8,}"
-              minlength="8" required>
-              <label for="floatingInput">Contraseña</label>
+
+            <input type="input-email" class="form-control"  id="btn_id" name="usuario_id" value="<?= $idusuario?>" > 
+            <div class="espacio_Boton">
+              <label class="nav-link px-2 text-black text-center"> 
+                <input class="btn btn-success" onclick="btn_updatePerfil();" value="Guardar Cambios">
+                <p class="warnings" id="warnings"></p>
+                <input class="btn btn-primary"  type="submit"  name="update"  id="btn_update_Perfil" value="Enviar">
+              </label>
+              <p></p>
+              <label class="nav-link px-2 text-black text-center"> <button type="submit" value="Enviar" class="btn btn-danger ">Borrar Cuenta</button></label>
             </div>
-            <div class="form-floating">
-              <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="sexo" name="sexo" id="sexo" >
-                <option selected>Elija una opcion</option>
-                <option value="1">Femenino</option>
-                <option value="2">Masculino</option>
-                <option value="3">No especificar</option>
-              </select>
-              <label for="floatingSelect">Sexo</label>
-            </div>
-            <br>
-            <div class="item"> 
-              <label class="nav-link px-2 text-black text" >Fecha de nacimiento</label>
-              <input type="date" class="form-control" name="nacimiento" > 
-            </div>
-            <br>
-            <div class="item">
-              <label class="nav-link px-2 text-black">Elija una imagen como avatar </label>
-              <input type="file" class="form-control" id="customFile" name="avatar" > 
-            </div>
-            <p></p>
-            <label class="nav-link px-2 text-black text-center"> 
-              <input class="btn btn-success" onclick="btn_updatePerfil();" value="Guardar Cambios">
-              <p class="warnings" id="warnings"></p>
-              <input class="btn btn-primary"  type="submit"  name="update"  id="btn_update_Perfil" value="Enviar">
-            </label>
-            <p></p>
-            <label class="nav-link px-2 text-black text-center"> <button type="submit" value="Enviar" class="btn btn-danger ">Borrar Cuenta</button></label>
-            <br>
           </div>
         </form>
       </div>
     </section>
 
-    <script src="js/perfilupdate.js"></script>
+    <script src="../../js/perfilupdate.js"></script>
   
     <footer class="main-footer">
           <div class="footer__section">

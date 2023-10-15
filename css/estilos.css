@@ -391,6 +391,10 @@
         display: none;
     }
 
+    #btn_id {
+        display: none;
+    }
+
 
  /*Inicio de sesion*/
     .inicio-box {

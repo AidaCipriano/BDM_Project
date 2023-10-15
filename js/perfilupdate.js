@@ -1,5 +1,5 @@
 
-const nombre = document.getElementById("name");
+const nombre1 = document.getElementById("name");
 const apellido = document.getElementById("apellido");
 const email = document.getElementById("email");
 const user = document.getElementById("username");
@@ -24,7 +24,7 @@ function btn_updatePerfil()
     let warnings = ""
     parrafo.innerHTML = ""
 
-    if(!regexName.test(nombre.value)){
+    if(!regexName.test(nombre1.value)){
         //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
         warnings += "Solo se permiten letras <br>"
         entrar = true
@@ -35,7 +35,7 @@ function btn_updatePerfil()
         warnings += "Solo se permiten letras <br>"
         entrar = true
     }
-
+/*
     if(!regexEmail.test(email.value)){
         //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
         warnings += "Formato Email incorrecto <br>"
@@ -59,7 +59,7 @@ function btn_updatePerfil()
         entrar = true
     }
 
-
+*/
     if(entrar){
         parrafo.innerHTML = warnings
     }
