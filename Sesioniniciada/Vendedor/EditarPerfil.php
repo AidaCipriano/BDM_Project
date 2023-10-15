@@ -1,3 +1,57 @@
+<?php
+  session_start();
+  include '../controladores/conexion.php';
+  $user = $_SESSION['usuario'];
+
+  $consulta = "CALL sp_Usuarios('ID', 'null', 'null', 'null', 'null', 'null', 'null', '$user', 'null', 'null', 'null', 'null');";
+  $resultado = mysqli_query($conexion, $consulta);
+
+  while($filas = mysqli_fetch_array($resultado)){
+    $idsuario= $filas['id_usuario'];
+
+  }
+
+  if(isset($_POST['update'])){
+    if(
+        strlen($_POST['name'])     >= 1 &&
+        strlen($_POST['apellido'])  >= 1 &&
+        strlen($_POST['sexo'])     >= 1 &&
+        strlen($_POST['nacimiento'])  >= 1 &&
+        strlen($_POST['email'])     >= 1 &&
+        strlen($_POST['username'])  >= 1 &&
+        strlen($_POST['password'])     >= 1 &&
+        strlen($_POST['avatar'])  >= 1 
+    ){
+        $id = $idsuario;
+        $name = trim($_POST['name']);
+        $apellido = trim($_POST['apellido']);
+        $sexo = trim($_POST['sexo']);
+        $nacimiento = date("d/m/y");
+        $email = trim($_POST['email']);
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        $tipo_usuario = null;
+        $rol = null;
+        $avatar = trim($_POST['avatar']);
+        
+        $consulta = "CALL sp_Usuarios('Registro', '$idsuario', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
+       // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)
+       //                 VALUES('$idsuario', '$email', '$username', '$password')";
+        $resultado = mysqli_query($conexion, $consulta);
+        if($resultado){
+          header("location:iniciosesion.php");
+        }
+        else{
+            echo('Error');
+        }
+
+    }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -36,7 +90,7 @@
           </form>
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>
-              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Usuario </a>
+              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <?php echo( $user ); ?>  </a>
               <ul class="dropdown-menu dropdown-menu-dark ">
                 <li><a class="dropdown-item" href="MiPerfil.php">Mi Perfil</a></li>
                 <li><a class="dropdown-item" href="TodosProductos.php">Mis Productos</a></li>
@@ -50,98 +104,101 @@
         </div>
       </div>
     </header>
-
-      <section class="seccion-perfil-usuario">
-        <div class="perfil-usuario-header">
-            <div class="perfil-usuario-portada">
-                <div class="perfil-usuario-avatar">
-                    <img src="../../img/avatar.jpg" alt="img-avatar">
-                    <button type="button" class="boton-avatar">
-                        <i class="far fa-image"></i>
-                    </button>
-                </div>
-                <button type="button" class="boton-portada">
-                    <i class="far fa-image"></i> Cambiar fondo
-                </button>
-            </div>
+    
+    <section class="seccion-perfil-usuario">
+      <div class="perfil-usuario-header">
+        <div class="perfil-usuario-portada">
+          <div class="perfil-usuario-avatar">
+            <img src="../../img/avatar.jpg" alt="img-avatar">
+            <button type="button" class="boton-avatar">
+              <i class="far fa-image"></i>
+            </button>
+          </div>
+          <button type="button" class="boton-portada">
+            <i class="far fa-image"></i> Cambiar fondo
+          </button>
         </div>
-        <div class="perfil-usuario-body">
+      </div>
+      <div class="perfil-usuario-body">
+        <br>
+        <form action="" method="post" id="form" class="form-editarperfil" >
+          <div class="formulario">
+            <div class="form-floating">
+              <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese sus nombres" name="name"
+               >
+              <label for="floatingInput">Nombres</label>
+            </div>
+            <div class="form-floating">
+              <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre completo" name="apellido"
+               >
+              <label for="floatingInput">Apellidos</label>
+            </div>
+            <div class="form-floating">
+              <input type="input-email" class="form-control"  placeholder="Ingrese su email" name="email" 
+              >
+              <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating"> 
+              <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" name="username" required> 
+              <label for="floatingInput">Usuario</label>
+            </div>
+            <div class="form-floating"> 
+              <input type="password" class="form-control"  placeholder="Ingrese su contaseña" name="password"
+              pattern="^(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})(?=(?:.*[0-9]){1})(?=(?:.*[?¿.#%=*,:;}{"'-]){1})\S{8,}"
+              minlength="8" required>
+              <label for="floatingInput">Contraseña</label>
+            </div>
+            <div class="form-floating">
+              <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="sexo" name="sexo" id="sexo" >
+                <option selected>Elija una opcion</option>
+                <option value="1">Femenino</option>
+                <option value="2">Masculino</option>
+                <option value="3">No especificar</option>
+              </select>
+              <label for="floatingSelect">Sexo</label>
+            </div>
             <br>
-            <div class="formulario">
-                
-                <div class="form-floating">
-                    <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre completo" name="name"
-                    required> 
-                    <label for="floatingInput">Nombre Completo</label>
-                </div>
-                <div class="form-floating"> 
-                    <input type="input-email" class="form-control"  placeholder="Ingrese su email" name="email" 
-                    pattern="^[a-z0-9!#$%'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
-                    required> 
-                    <label for="floatingInput">Email</label>
-                </div>
-        
-                <div class="form-floating"> 
-                    <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" name="username" required> 
-                    <label for="floatingInput">Usuario</label>
-                </div>
-        
-                <div class="form-floating"> 
-                    <input type="password" class="form-control"  placeholder="Ingrese su contaseña" name="password"
-                    pattern="^(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})(?=(?:.*[0-9]){1})(?=(?:.*[?¿.,:;-]){1})\S{8,}"
-                    minlength="8" required>
-                    <label for="floatingInput">Contraseña</label>
-        
-                </div>
-                <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="sexo" name="sexo" id="sexo" >
-                      <option selected>Elija una opcion</option>
-                      <option value="1">Femenino</option>
-                      <option value="2">Masculino</option>
-                      <option value="3">No especificar</option>
-                    </select>
-                    <label for="floatingSelect">Sexo</label>
-                </div>
-
-                <br>
-        
-                <div class="item"> 
-                    <label class="nav-link px-2 text-black text" >Fecha de nacimiento</label>
-                    <input type="date" class="form-control" name="nacimiento" required> 
-                </div>
-                
-                <br>
-                <div class="item"> 
-                    <label class="nav-link px-2 text-black">Elija una imagen como avatar </label>
-                        <input type="file" class="form-control" id="customFile" name="avatar" required> 
-                </div>
-
-                <p></p>
-                <label class="nav-link px-2 text-black text-center"> <button type="submit" value="Enviar" class="btn btn-success ">Guardar Cambios</button></label>
-                <p></p>
-                <label class="nav-link px-2 text-black text-center"> <button type="submit" value="Enviar" class="btn btn-danger ">Borrar Cuenta</button></label>
-                <br>
-        
-        </div>
-        </section>
-
-
-
-
-        <footer class="main-footer">
-            <div class="footer__section">
-                <h2 class="footer__title">Conocenos</h2>
-                <p class="footer__txt">blah blah </p>
+            <div class="item"> 
+              <label class="nav-link px-2 text-black text" >Fecha de nacimiento</label>
+              <input type="date" class="form-control" name="nacimiento" > 
             </div>
-            <div class="footer__section">
-                <h2 class="footer__title">Metodos de Pago</h2>
-                <p class="footer__txt">blah blah </p>
+            <br>
+            <div class="item">
+              <label class="nav-link px-2 text-black">Elija una imagen como avatar </label>
+              <input type="file" class="form-control" id="customFile" name="avatar" > 
             </div>
-            <div class="footer__section">
-                <h2 class="footer__title">Contactanos</h2>
-                <p class="footer__txt">Email:</p>
-            </div>
-            <div class="footer__section">
+            <p></p>
+            <label class="nav-link px-2 text-black text-center"> 
+              <input class="btn btn-success" onclick="btn_updatePerfil();" value="Guardar Cambios">
+              <p class="warnings" id="warnings"></p>
+              <input class="btn btn-primary"  type="submit"  name="update"  id="btn_update_Perfil" value="Enviar">
+            </label>
+            <p></p>
+            <label class="nav-link px-2 text-black text-center"> <button type="submit" value="Enviar" class="btn btn-danger ">Borrar Cuenta</button></label>
+            <br>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script src="js/perfilupdate.js"></script>
+  
+    <footer class="main-footer">
+          <div class="footer__section">
+            <h2 class="footer__title">Conocenos</h2>
+            <p class="footer__txt">blah blah </p>
+          </div>
+          <div class="footer__section">
+            <h2 class="footer__title">Metodos de Pago</h2>
+            <p class="footer__txt">blah blah </p>
+          </div>
+          
+          <div class="footer__section">
+            <h2 class="footer__title">Contactanos</h2>
+            <p class="footer__txt">Email:</p>
+          </div>
+
+          <div class="footer__section">
                 <h2 class="footer__title">¿Necesitas Ayuda?</h2>
                 <p class="footer__txt">blah blah </p>
             </div>

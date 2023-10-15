@@ -28,11 +28,15 @@
 		//Vendedor
 		if($filas['rol']==1){
 			$_SESSION['usuario'] = $filas['nombreusuario'];
+			$nombre['nombres'] = $filas['nombres'];
+			$apellido['apellidos'] = $filas['apellidos'];
 			header("location:../Vendedor/Home.php");
 		}
 		//Cliente
 		else if($filas['rol']==2){
 			$_SESSION['usuario'] = $filas['nombreusuario'];
+			$_nombre['_nombres'] = $filas['nombres'];
+			$_apellido['_apellidos'] = $filas['apellidos'];
 			header("location:../Cliente/Home.php");
 		}
 		//Administradpr

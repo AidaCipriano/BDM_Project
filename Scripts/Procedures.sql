@@ -56,6 +56,10 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 		END IF;
 
 	end if;
+	if(opc='ID')
+	then
+		SELECT id_usuario FROM usuario where pnombreusuario = nombreusuario;
+	end if;
 	
     if(opc='Actualizar')
     then
@@ -65,6 +69,7 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 				apellidos			= 	papellidos,
 				genero				= 	pgenero,
 				nacimiento			= 	pnacimiento,
+				nombreusuario		= 	pnombreusuario,
 				email				= 	pemail,
 				contrasena			= 	pcontrasena,
 				ultimamodicacion	= 	(SELECT NOW()),
@@ -81,6 +86,12 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 			WHERE
 				id_usuario 	= pid_usuario ;
     end if;
+	if(opc='Mi Perfil')
+	then
+
+		SELECT nombres, apellidos FROM usuario where pnombreusuario = nombreusuario;
+
+	end if;
 END$$
 /*
 call sp_Usuarios('Registro', null, '1', '2', '3', '2000-12-10', '4', '5', '6', '7', '8', null);
@@ -103,7 +114,7 @@ BEGIN
     THEN
 		IF (pactivo = 1) 
 		THEN
-			SELECT rol FROM USUARIO WHERE email = pemail;
+			SELECT rol, id_usuario, nombreusuario, nombres, apellidos FROM USUARIO WHERE email = pemail;
 		END IF;
         IF (pactivo = 0) 
 		THEN

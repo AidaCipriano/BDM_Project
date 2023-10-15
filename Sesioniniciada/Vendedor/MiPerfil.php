@@ -1,3 +1,32 @@
+<?php
+  session_start();
+  include '../controladores/conexion.php';
+  $user = $_SESSION['usuario'];
+
+  $idsuario = null;
+  $name = null;
+  $apellido = null;
+  $sexo = null;
+  $nacimiento = null;
+  $email = null;
+  $username = $user;
+  $password = null;
+  $tipo_usuario = null;
+  $rol = null;
+  $avatar = null;
+
+  $consulta = "CALL sp_Usuarios('Mi Perfil', '$idsuario', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
+  $resultado = mysqli_query($conexion, $consulta);
+
+  while($filas = mysqli_fetch_array($resultado)){
+    $nombre= $filas['nombres'];
+    $apellido= $filas['apellidos'];
+
+  }
+  //$nombrecompleto = $nombre;
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -31,7 +60,7 @@
           </form>
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>
-              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Usuario </a>
+              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <?php echo( $user ); ?>  </a>
               <ul class="dropdown-menu dropdown-menu-dark ">
                 <li><a class="dropdown-item" href="MiPerfil.php">Mi Perfil</a></li>
                 <li><a class="dropdown-item" href="TodosProductos.php">Mis Productos</a></li>
@@ -62,9 +91,7 @@
         </div>
         <div class="perfil-usuario-body">
             <div class="perfil-usuario-bio">
-                <h3 class="titulo">Johann Perez</h3>
-                <p class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h3 class="titulo"> <?php echo( $nombre ); ?> <?php echo( $apellido ); ?>  </h3>
             </div>
 
     
