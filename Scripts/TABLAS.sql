@@ -35,7 +35,7 @@ CREATE TABLE USUARIO (
 
 	CONSTRAINT PK_USUARIO
 			PRIMARY KEY (id_usuario)
-)
+);
 
 CREATE TABLE IMAGEN_AVATAR (
 	id_imagen_avatar		int auto_increment		not null comment "ID de la Imagen",

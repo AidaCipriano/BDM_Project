@@ -53,7 +53,7 @@
 <div id="title-sect">
 <h1>bd_bdm_project<br> Data Dictionay</h1>
 <p>
-<em>2023-10-06</em>
+<em>2023-10-15</em>
 </p>
 <p class="proj-desc">
 <em></em>
@@ -65,6 +65,7 @@
 <li><a href='#chat'>chat</a></li>
 <li><a href='#comentarios'>comentarios</a></li>
 <li><a href='#compraproducto_cliente'>compraproducto_cliente</a></li>
+<li><a href='#imagen_avatar'>imagen_avatar</a></li>
 <li><a href='#imagen_producto'>imagen_producto</a></li>
 <li><a href='#mensajes'>mensajes</a></li>
 <li><a href='#producto_cliente'>producto_cliente</a></li>
@@ -421,6 +422,61 @@
     <td class='attr'>&nbsp;</td>
     <td></td>
     <td>Forma de pago</td>
+</tr>
+<table id='imagen_avatar'>
+<caption>imagen_avatar</caption>
+<tr><td colspan='11'></td></tr>
+<tr>
+    <th>Column name</th>
+    <th>DataType</th>
+    <th><abbr title='Primary Key'>PK</abbr></th>
+    <th><abbr title='Not Null'>NN</abbr></th>
+    <th><abbr title='Unique'>UQ</abbr></th>
+    <th><abbr title='Binary'>BIN</abbr></th>
+    <th><abbr title='Unsigned'>UN</abbr></th>
+    <th><abbr title='Zero Fill'>ZF</abbr></th>
+    <th><abbr title='Auto Increment'>AI</abbr></th>
+    <th>Default</th>
+    <th>Comment</th>
+</tr>
+<tr>
+    <td>id_imagen_avatar</td>
+    <td>INT</td>
+    <td>&#10004;</td>
+    <td>&#10004;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&#10004;</td>
+    <td></td>
+    <td>ID de la Imagen</td>
+</tr>
+<tr>
+    <td>titulo</td>
+    <td>INT</td>
+    <td>&nbsp;</td>
+    <td>&#10004;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class='attr'>&nbsp;</td>
+    <td></td>
+    <td>Titulo de la foto de perfil del usuario</td>
+</tr>
+<tr>
+    <td>usuario</td>
+    <td>INT</td>
+    <td>&nbsp;</td>
+    <td>&#10004;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class='attr'>&nbsp;</td>
+    <td></td>
+    <td>Usuario que guardo la imagen</td>
 </tr>
 <table id='imagen_producto'>
 <caption>imagen_producto</caption>
@@ -955,7 +1011,7 @@
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
     <td></td>
-    <td>Rol del usuario: Instructor o Estudiante</td>
+    <td>Rol del usuario: Vendedor, Administrador o Comprador</td>
 </tr>
 <tr>
     <td>fecharegistro</td>
