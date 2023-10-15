@@ -119,13 +119,17 @@
             <label for="floatingInput">Contraseña</label>
           </div>
           <div class="form-floating">
-            <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo"  value="<?= $sexo?>" >
-              <option selected value="0">Elija una opcion</option>
+            <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo" value="<?= $sexo?>" >
+              <option value="0">Elija una opcion</option>
               <option value="1">Femenino</option>
               <option value="2">Masculino</option>
               <option value="3">No especificar</option>
             </select>
             <label for="floatingSelect">Sexo</label>
+
+            
+
+
           </div>
           <br>
           <div class="item"> 
@@ -143,10 +147,14 @@
               <label class="nav-link px-2 text-black text-center"> 
                 <input class="btn btn-success" onclick="btn_updatePerfil();" value="Guardar Cambios">
                 <p class="warnings" id="warnings"></p>
-                <input class="btn btn-primary"  type="submit"  name="update"  id="btn_update_Perfil" value="Enviar">
+                <input class="btn btn-primary"  type="submit"  name="updatePerfil"  id="btn_update_Perfil" value="Enviar">
               </label>
               <p></p>
-              <label class="nav-link px-2 text-black text-center"> <button type="submit" value="Enviar" class="btn btn-danger ">Borrar Cuenta</button></label>
+              <label class="nav-link px-2 text-black text-center"> 
+                <input class="btn btn-danger"  type="submit"  name="deletePerfil"  id="btn_delete_Perfil" value="Borrar Cuenta">
+              </label>
+
+            
             </div>
           </div>
         </form>

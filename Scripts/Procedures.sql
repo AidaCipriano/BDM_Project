@@ -9,7 +9,7 @@ DELIMITER $$
     pid_usuario				int				,
 	pnombres				varchar(50)		,
     papellidos				varchar(50)		,
-	pgenero					varchar(10)		,
+	pgenero					varchar(15)		,
 	pnacimiento				date			,
 	pemail					varchar(50)		,
     pnombreusuario			varchar(20)		,
@@ -52,7 +52,7 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 						activo = 1
 					WHERE
 						id_usuario 	= pid_usuario ;
-				set opc='Cuenta activa. Inicie sesion.';
+				set opc='Cuenta re-activa. Inicie sesion.';
 		END IF;
 
 	end if;
@@ -110,6 +110,8 @@ BEGIN
 	SET busqueda_Cuenta =  (SELECT COUNT(id_usuario) FROM USUARIO WHERE email = pemail AND contrasena = pcontrasena);
     SET pactivo = (SELECT activo FROM USUARIO WHERE email = pemail);
 
+
+
  IF (busqueda_Cuenta = 1) 
     THEN
 		IF (pactivo = 1) 
@@ -118,7 +120,15 @@ BEGIN
 		END IF;
         IF (pactivo = 0) 
 		THEN
-			SET prol = "Cuenta enexistente. Favor de registrarse";
+			UPDATE USUARIO
+					SET
+						activo = 1
+					WHERE
+						email 	= pemail ;
+
+					SELECT rol, id_usuario, nombreusuario, nombres, apellidos FROM USUARIO WHERE email = pemail;
+
+				
 		END IF;
     END IF;
     

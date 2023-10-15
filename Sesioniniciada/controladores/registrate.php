@@ -20,7 +20,7 @@ if(isset($_POST['register'])){
         $name = trim($_POST['name']);
         $apellido = trim($_POST['apellido']);
         $sexo = trim($_POST['sexo']);
-        $nacimiento = date("d/m/y");
+        $nacimiento = date("y/m/d");
         $email = trim($_POST['email']);
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);

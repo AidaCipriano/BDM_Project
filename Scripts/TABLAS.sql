@@ -20,7 +20,7 @@ CREATE TABLE USUARIO (
 	id_usuario				int auto_increment			not null comment "ID del Usuario",
 	nombres					varchar(50)					not null comment "Nombre o nombres del Usuario",
     apellidos				varchar(50)					not null comment "Apellido o apellidos del Usuario",
-	genero					varchar(10)					not null comment "Genero del Usuario",
+	genero					varchar(15)					not null comment "Genero del Usuario",
 	nacimiento				date						not null comment "Fecha de Nacimiento del Usuario",
 	email					varchar(50)					not null comment "Email del Usuario",
     nombreusuario			varchar(20)					not null comment "Nombre de Usuario",
@@ -35,8 +35,8 @@ CREATE TABLE USUARIO (
 
 	CONSTRAINT PK_USUARIO
 			PRIMARY KEY (id_usuario)
-);
-/*
+)
+
 CREATE TABLE IMAGEN_AVATAR (
 	id_imagen_avatar		int auto_increment		not null comment "ID de la Imagen",
 	titulo  					int					not null comment "Titulo de la foto de perfil del usuario",
@@ -48,9 +48,9 @@ CREATE TABLE IMAGEN_AVATAR (
 			FOREIGN KEY (usuario)
 			REFERENCES USUARIO(id_usuario)
 );
-*/
 
-/*
+
+
 
 CREATE TABLE CATEGORIA (
 	id_categoria				int					not null comment "ID de la Categoria",
@@ -202,4 +202,4 @@ CREATE TABLE MENSAJES (
 	CONSTRAINT FK_MENSAJES_EMISOR
 			FOREIGN KEY (emisor)
 			REFERENCES USUARIO(id_usuario)
-);*/
+);
