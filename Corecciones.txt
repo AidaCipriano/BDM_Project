@@ -1,0 +1,2 @@
+Corecciones:
+- inicio de sesion : notificar que no esta registrado un usuario

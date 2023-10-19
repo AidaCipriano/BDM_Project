@@ -66,7 +66,7 @@
           
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>
-                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Usuario </a>
+                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?php echo( $user ); ?> </a>
                 <ul class="dropdown-menu dropdown-menu-dark ">
                   <li><a class="dropdown-item" href="MiPerfil.php">Mi Perfil</a></li>
                   <li><a class="dropdown-item" href="MisPedidos.php">Mis Pedidos</a></li>
@@ -99,11 +99,16 @@
                 
             </div>
         </div>
+        <div class="perfil-usuario-body">
+            <div class="perfil-usuario-bio">
+                <h3 class="titulo"> <?php echo( $nombre ); ?> <?php echo( $apellido ); ?>  </h3>
+            </div>
         <div class="album py-5 bg-light">
           <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             </div>
           </div>
+        </div>
         </div>
         <p></p>  
     </section>

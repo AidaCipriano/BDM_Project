@@ -62,7 +62,7 @@
           
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>
-                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Usuario </a>
+                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <?php echo( $user ); ?>   </a>
                 <ul class="dropdown-menu dropdown-menu-dark ">
                   <li><a class="dropdown-item" href="MiPerfil.php">Mi Perfil</a></li>
                   <li><a class="dropdown-item" href="MisPedidos.php">Mis Pedidos</a></li>
@@ -80,6 +80,7 @@
         </div>
       </div>
     </header>
+    
     <section class="seccion-perfil-usuario">
       <div class="perfil-usuario-header">
         <div class="perfil-usuario-portada">
@@ -163,6 +164,7 @@
         </form>
       </div>
     </section>
+
 
     <script src="../../js/perfilupdate.js"></script>
   

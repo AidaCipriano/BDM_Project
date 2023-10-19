@@ -1,7 +1,7 @@
 <?php
 
 include("conexion.php");
-echo('coenxion exito');
+//echo('coenxion exito');
 
 if(isset($_POST['register'])){
     if(
