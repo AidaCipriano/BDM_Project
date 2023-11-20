@@ -391,8 +391,8 @@
         display: none;
     }
 
-    #btn_id {
-        display: none;
+    #btn_id, #selecsexo {
+       display: none;
     }
 
 

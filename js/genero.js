@@ -1,19 +1,20 @@
 
+const generoseleccion = document.getElementById("sexo");
+const selectext = document.getElementById("selecsexo");
 
-const combo2 = document.getElementById("tipo_usuario");
 
-
-const combo = document.getElementById("rol");
-function seleccion_tipousuario(){
-    if(combo.value==2 ){
-        //document.getElementById("rol").value=2;
-        //console.log("Hola")
-        combo2.value=2;
-    }
-    //console.log("Hola")
+function seleccion(){
+      
+    if(selectext.value == "1" ){
+        generoseleccion.value = 1;
+    }  
+    else if(selectext.value == "2" ){
+        generoseleccion.value = 2;
+    } 
+    else if(selectext.value == "3" ){
+        generoseleccion.value = 3;
+    }  
 }
-            
-
 
 
 

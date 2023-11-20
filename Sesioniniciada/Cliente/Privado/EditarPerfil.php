@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include '../controladores/conexion.php';
+  include '../../controladores/conexion.php';
   $user = $_SESSION['usuario'];
 
   $consulta = "SELECT * FROM usuario where nombreusuario = '$user'";
@@ -19,7 +19,7 @@
     
 
   }
-  include("../controladores/UpdatePerfil.php");
+  include("../../controladores/UpdatePerfil.php");
 ?>
 
 
@@ -29,12 +29,12 @@
     <meta charset="UTF-8">
     <title>Aetna</title>
     <meta name="viewport" content="width=devide-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="../../css/estilos.css">
+    <link rel="stylesheet" href="../../../css/estilos.css">
     <link rel="stylesheet" href="../../css/estilosmodals.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="icon" type="image/png" href="img/logo.JPG">
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/dropdowns.css" rel="stylesheet">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/dropdowns.css" rel="stylesheet">
   </head>
   <body onload="seleccion();">
 
@@ -70,7 +70,7 @@
                   <li><a class="dropdown-item" href="MisCategorias.php">Mis Categorias</a></li>     
                   <li><a class="dropdown-item" href="Chat.php">Chat</a></li>                   
                   <li>
-                    <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="../../home.php">
+                    <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="../../../home.php">
                     
                       Cerrar sesión
                     </a>
@@ -157,7 +157,7 @@
         </form>
       </div>
     </section>
-      <script src="../../js/perfilupdate.js"></script>
+      <script src="../../../js/perfilupdate.js"></script>
   
         <footer class="main-footer">
             <div class="footer__section">
@@ -185,10 +185,10 @@
             
         </footer>
         <div class="Copyright"><p class="copy">© 2022, Echo</p></div>
-        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
         
-        <script src="../../js/modal.js"></script>
-        <script src="../../js/genero.js"></script>
+        <script src="../../../js/modal.js"></script>
+        <script src="../../../js/genero.js"></script>
     </body>
 </html>
 

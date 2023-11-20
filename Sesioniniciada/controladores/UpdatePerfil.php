@@ -11,20 +11,12 @@
 	//echo('coenxion exito');
 	
 
-	$user = $_SESSION['usuario'];
+	//$user = $_SESSION['usuario'];
 
 
-  if(isset($_POST['updatePerfil'])){
+if(isset($_POST['ActPerfil'])){
     if(
-        strlen($_POST['usuario_id'])     >= 1 &&
-		strlen($_POST['name'])     >= 1 &&
-        strlen($_POST['apellido'])  >= 1 &&
-        strlen($_POST['sexo'])     >= 1 &&
-        strlen($_POST['nacimiento'])  >= 1 &&
-        strlen($_POST['email'])     >= 1 &&
-        strlen($_POST['username'])  >= 1 &&
-        strlen($_POST['password'])     >= 1 &&
-        strlen($_POST['avatar'])  >= 1 
+        strlen($_POST['usuario_id']) 
     ){
         $id = trim($_POST['usuario_id']);
         $name = trim($_POST['name']);
@@ -43,7 +35,7 @@
        //                 VALUES('$idsuario', '$email', '$username', '$password')";
         $resultado = mysqli_query($conexion, $consulta);
         if($resultado){
-          header("location:EditarPerfil.php");
+         header("location:EditarPerfil.php");
         }
         else{
             echo('Error');
@@ -68,7 +60,7 @@ if(isset($_POST['deletePerfil'])){
         $rol = null;
         $avatar = trim($_POST['avatar']);
         
-        $consulta = "CALL sp_Usuarios('Dar de baja', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
+        $consulta = "CALL sp_Usuarios('Dar de Baja', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
        // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)
        //                 VALUES('$idsuario', '$email', '$username', '$password')";
         $resultado = mysqli_query($conexion, $consulta);
@@ -78,6 +70,43 @@ if(isset($_POST['deletePerfil'])){
         else{
             echo('Error');
         }
+
+    }
+}
+
+if(isset($_POST['tipoperfil'])){
+    if(
+        strlen($_POST['usuario_id']) 
+    ){
+        $id = trim($_POST['usuario_id']);
+        $name = null;
+        $apellido = null;
+        $sexo = null;
+        $nacimiento =null;
+        $email = null;
+        $username = null;
+        $password = null;
+        $tipo_usuario =trim($_POST['tipousuario']);
+        $rol = null;
+        $avatar = null;
+        
+        $consulta = "CALL sp_Usuarios('Tipo Perfil', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
+       // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)
+       //                 VALUES('$idsuario', '$email', '$username', '$password')";
+        $resultado = mysqli_query($conexion, $consulta);
+        if($filas['tipousuario']==1){
+			$_SESSION['usuario'] = $filas['nombreusuario'];
+			//$nombre['nombres'] = $filas['nombres'];
+			//$apellido['apellidos'] = $filas['apellidos'];
+			header("location:../Cliente/MiPerfilPublico.php");
+		}
+		//Cliente
+		else if($filas['tipousuario']==2){
+			$_SESSION['usuario'] = $filas['nombreusuario'];
+			//$_nombre['_nombres'] = $filas['nombres'];
+			//$_apellido['_apellidos'] = $filas['apellidos'];
+			header("location:../Cliente/MiPerfil.php");
+		}
 
     }
 }

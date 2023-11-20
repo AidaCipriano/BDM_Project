@@ -35,7 +35,7 @@ function btn_updatePerfil()
         warnings += "Solo se permiten letras <br>"
         entrar = true
     }
-/*
+
     if(!regexEmail.test(email.value)){
         //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
         warnings += "Formato Email incorrecto <br>"
@@ -59,7 +59,7 @@ function btn_updatePerfil()
         entrar = true
     }
 
-*/
+
     if(entrar){
         parrafo.innerHTML = warnings
     }

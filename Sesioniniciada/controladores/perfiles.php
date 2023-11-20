@@ -34,20 +34,10 @@
 		}
 		//Cliente
 		else if($filas['rol']==2){
-			if($filas['tipousuario'] == 1){
-				$_SESSION['usuario'] = $filas['nombreusuario'];
-				$_nombre['_nombres'] = $filas['nombres'];
-				$_apellido['_apellidos'] = $filas['apellidos'];
-				header("location:../Cliente/Publico/Home.php");
-			}
-			if($filas['tipousuario'] == 2){
-				$_SESSION['usuario'] = $filas['nombreusuario'];
-				$_nombre['_nombres'] = $filas['nombres'];
-				$_apellido['_apellidos'] = $filas['apellidos'];
-				header("location:../Cliente/Privado/Home.php");
-			}
-
-
+			$_SESSION['usuario'] = $filas['nombreusuario'];
+			$_nombre['_nombres'] = $filas['nombres'];
+			$_apellido['_apellidos'] = $filas['apellidos'];
+			header("location:../Cliente/Home.php");
 		}
 		//Administradpr
 		/*else if($filas['rol']==3){

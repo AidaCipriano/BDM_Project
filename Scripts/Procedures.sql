@@ -82,7 +82,9 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
     then
 		UPDATE USUARIO
 			SET
-				activo = 0
+				activo = 0,
+                ultimamodicacion	= 	(SELECT NOW())
+
 			WHERE
 				id_usuario 	= pid_usuario ;
     end if;
@@ -92,11 +94,13 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 		SELECT nombres, apellidos FROM usuario where pnombreusuario = nombreusuario;
 
 	end if;
+	
+
 END$$
-/*
-call sp_Usuarios('Registro', null, '1', '2', '3', '2000-12-10', '4', '5', '6', '7', '8', null);
+
+call sp_Usuarios('Actualizar', 1, '1', '2', '3', '2000-12-10', '4', '5', '7', null, null, null);
 select * from usuario;
-select * from imagen_avatar;*/
+/*select * from imagen_avatar;*/
 #Iniciar sesion
 DROP procedure IF EXISTS sp_Inicio_Sesion;
 DELIMITER $$
@@ -116,7 +120,7 @@ BEGIN
     THEN
 		IF (pactivo = 1) 
 		THEN
-			SELECT rol, id_usuario, nombreusuario, nombres, apellidos FROM USUARIO WHERE email = pemail;
+			SELECT rol, id_usuario, tipousuario, nombreusuario, nombres, apellidos FROM USUARIO WHERE email = pemail;
 		END IF;
         IF (pactivo = 0) 
 		THEN
@@ -126,7 +130,7 @@ BEGIN
 					WHERE
 						email 	= pemail ;
 
-					SELECT rol, id_usuario, nombreusuario, nombres, apellidos FROM USUARIO WHERE email = pemail;
+					SELECT rol, tipousuario, id_usuario, nombreusuario, nombres, apellidos FROM USUARIO WHERE email = pemail;
 
 				
 		END IF;

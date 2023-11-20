@@ -43,7 +43,7 @@
 
 
   </head>
-  <body>
+  <body onload="seleccion();">
     <header class="p-2 text-bg-dark">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -119,7 +119,7 @@
             <label for="floatingInput">Contraseña</label>
           </div>
           <div class="form-floating">
-            <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo" value="<?= $sexo?>" >
+            <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo"  >
               <option value="0">Elija una opcion</option>
               <option value="1">Femenino</option>
               <option value="2">Masculino</option>
@@ -142,12 +142,13 @@
             <input type="file" class="form-control" id="customFile" id="avatar" name="avatar" value="<?= $imagen?>" >
             </div>
 
-            <input type="input-email" class="form-control"  id="btn_id" name="usuario_id" value="<?= $idusuario?>" > 
+            <input type="input-email" class="form-control"  id="btn_id" name="usuario_id" value="<?= $idusuario?>" >
+            <input class="form-control"  id="selecsexo"  value="<?= $sexo?>" >
             <div class="espacio_Boton">
               <label class="nav-link px-2 text-black text-center"> 
                 <input class="btn btn-success" onclick="btn_updatePerfil();" value="Guardar Cambios">
                 <p class="warnings" id="warnings"></p>
-                <input class="btn btn-primary"  type="submit"  name="updatePerfil"  id="btn_update_Perfil" value="Enviar">
+                <input class="btn btn-primary"  type="submit"  name="ActPerfil"  id="btn_update_Perfil" value="Enviar">
               </label>
               <p></p>
               <label class="nav-link px-2 text-black text-center"> 
@@ -194,6 +195,8 @@
         <script src="../../js/bootstrap.bundle.min.js"></script>
         
         <script src="../../js/modal.js"></script>
+        <script src="../../js/genero.js"></script>
+
     </body>
 </html>
 

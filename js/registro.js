@@ -80,8 +80,8 @@ function btn_guardar_dato()
         warnings += "Selecciona una opcion en rol <br>"
         entrar = true
     }
-    else if(rol.value ==2 && type_user.value ==1){
-        warnings += "Los Clientes solo pueden ser privados <br>"
+    else if(rol.value ==1 && type_user.value ==2){
+        warnings += "Los Vendedores son usuarios publicos <br>"
         entrar = true
        
     }
