@@ -66,6 +66,22 @@ CREATE TABLE CATEGORIA (
 			REFERENCES USUARIO(id_usuario)
 );
 
+CREATE TABLE IMAGEN_CATEGORIA (
+	id_imagen_categoria		int auto_increment		not null comment "ID de la Imagen",
+	titulo  					int					not null comment "Titulo de la imagen de la categoria",
+    categoria  					int					not null comment "Nombre de la categoria",
+    usuario  					int					not null comment "Usuario que guardo la imagen",
+
+	CONSTRAINT PK_IMAGEN_CATEGORIA
+			PRIMARY KEY (id_imagen_avatar),
+	CONSTRAINT FK_IMAGEN_CATEGORIA
+			FOREIGN KEY (usuario)
+			REFERENCES USUARIO(id_usuario),
+	CONSTRAINT FK_IMAGEN_CATEGORIA
+			FOREIGN KEY (categoria)
+			REFERENCES CATEGORIA(id_categoria)
+);
+
 CREATE TABLE PRODUCTO_VENDEDOR (
 	id_producto_vendedor		int auto_increment		not null comment "ID del Producto",
 	vendedor  					int						not null comment "ID del Vendedor",

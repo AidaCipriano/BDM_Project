@@ -58,7 +58,7 @@
                 <h1 class="Bievenida_Titulo ">Aetna es el lugar perfecto para comprar</h1>
                 <p class="lead ">Encuentra lo que tanto buscas</p> 
                 <br>
-                <a class="boton1" href="/Sesionsininiciar/tienda.php">Ver más productos</a> &nbsp;&nbsp;
+                <a class="boton1" href="tienda.php">Ver más productos</a> &nbsp;&nbsp;
             </div>
         </section>
 

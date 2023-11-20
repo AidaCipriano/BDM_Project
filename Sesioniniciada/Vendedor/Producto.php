@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  include '../controladores/conexion.php';
+  $user = $_SESSION['usuario'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -30,7 +37,7 @@
           </form>
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>
-              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Usuario </a>
+              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?php echo( $user ); ?> </a>
               <ul class="dropdown-menu dropdown-menu-dark ">
                 <li><a class="dropdown-item" href="MiPerfil.php">Mi Perfil</a></li>
                 <li><a class="dropdown-item" href="TodosProductos.php">Mis Productos</a></li>
