@@ -15,9 +15,8 @@ include("Sesioniniciada/controladores/registrate.php");
         <link rel="icon" type="image/png" href="../img/logo.JPG">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/signin.css" rel="stylesheet">
-
     </head>
-    
+   
     <body>
         <header class="p-2 text-bg-dark">
             <div class="container">
@@ -39,7 +38,21 @@ include("Sesioniniciada/controladores/registrate.php");
                 </div>
             </div>
         </header>
-       
+        
+        <script>
+
+           /* const combo = document.getElementById("rol");
+            
+            function seleccion_tipousuario(){
+                if(combo.value==0 ){
+                //document.getElementById("rol").value=2;
+                console.log("Hola")
+                }
+                //console.log("Hola")
+            }*/
+           
+        </script>
+
         <main class="main-registrar modal position-static d-block" >
             <div class="form-signin w-100 m-auto">
                 <form action="" method="post" id="form" class="form-register" >
@@ -86,7 +99,17 @@ include("Sesioniniciada/controladores/registrate.php");
                             </select>
                             <label for="floatingSelect">Sexo</label>
                         </div>
-
+                        
+                        <div class="form-floating" id="prueba">
+                            <select class="form-select" aria-label="Floating label select example"  id="rol" name="rol" onchange ="seleccion_tipousuario();">
+                            <option selected value="0">Elija una opcion</option>
+                            <option value="1">Vendedor</option>
+                            <option value="2">Cliente</option>
+                            <option value="3">Administrador</option>
+                            </select>
+                            <label for="floatingSelect">Rol de usuario</label>
+                        </div>
+                        
                         <div class="form-floating">
                             <select class="form-select"  aria-label="Floating label select example" id="tipo_usuario" name="tipo_usuario" >
                                 <option selected value="0">Elija una opcion</option>
@@ -96,18 +119,10 @@ include("Sesioniniciada/controladores/registrate.php");
                             <label for="floatingSelect">Usuario...</label>
                         </div>
 
-                        <div class="form-floating">
-                            <select class="form-select" aria-label="Floating label select example"  id="rol" name="rol" >
-                            <option selected value="0">Elija una opcion</option>
-                            <option value="1">Vendedor</option>
-                            <option value="2">Cliente</option>
-                            <option value="3">Administrador</option>
-                            </select>
-                            <label for="floatingSelect">Rol de usuario</label>
-                        </div>
+                        
                         <div class="item"> 
                             <label class="nav-link px-2 " >Fecha de nacimiento</label>
-                            <input type="date" class="form-control" id="nacimiento" name="nacimiento" required> 
+                            <input type="date" class="form-control" id="nacimiento" name="nacimiento"  max="2005-11-30" min="1923-01-01" required> 
                         </div>
 
                         <div class="item"> 
@@ -128,6 +143,9 @@ include("Sesioniniciada/controladores/registrate.php");
     </body>
 
     <script src="js/registro.js"></script>
+    <script src="js/validacionroles.js"></script>
+
+
     <footer class="main-footer">
         <div class="footer__section">
             <h2 class="footer__title">Conocenos</h2>

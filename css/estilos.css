@@ -535,7 +535,7 @@
 
 .perfil-usuario-footer,
 .perfil-usuario-bio {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     padding: 1.5rem 2rem;
     box-shadow: 0 0 12px rgba(0, 0, 0, .2);
@@ -543,7 +543,10 @@
     border-radius: 15px;
     width: 100%;
     text-align: center;
+    
 }
+
+
 
 .perfil-usuario-bio {
     margin-bottom: 1.25rem;
@@ -1170,3 +1173,4 @@
     text-align: center;
     border: 1px solid rgb(0, 0, 0);
   }
+

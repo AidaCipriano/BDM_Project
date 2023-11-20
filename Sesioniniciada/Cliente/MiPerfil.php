@@ -103,13 +103,9 @@
             <div class="perfil-usuario-bio">
                 <h3 class="titulo"> <?php echo( $nombre ); ?> <?php echo( $apellido ); ?>  </h3>
             </div>
-        <div class="album py-5 bg-light">
-          <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            </div>
-          </div>
-        </div>
-        </div>
+             <div class="perfil-usuario-footer">
+                <i class="fa-solid fa-lock">  Es una cuenta privada</i> 
+            </div> </div>
         <p></p>  
     </section>
 

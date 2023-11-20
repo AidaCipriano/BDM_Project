@@ -24,6 +24,8 @@ function btn_guardar_dato()
     let warnings = ""
     parrafo.innerHTML = ""
 
+    
+
     if(!regexName.test(nombre.value)){
         //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
         warnings += "Solo se permiten letras <br>"
@@ -70,12 +72,24 @@ function btn_guardar_dato()
         warnings += "Selecciona una opcion en tipo de usuario <br>"
         entrar = true
     }
+
+
+
     if(rol.value==0 ||rol.value=="" ){
         //alert("La contraseña es muy corta");
         warnings += "Selecciona una opcion en rol <br>"
         entrar = true
     }
-    if(entrar){
+    else if(rol.value ==2 && type_user.value ==1){
+        warnings += "Los Clientes solo pueden ser privados <br>"
+        entrar = true
+       
+    }
+
+        
+    
+
+    if(entrar == true){
         parrafo.innerHTML = warnings
     }
     else{

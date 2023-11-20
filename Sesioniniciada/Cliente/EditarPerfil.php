@@ -37,6 +37,16 @@
     <link href="../../css/dropdowns.css" rel="stylesheet">
   </head>
   <body>
+    <script>
+      const generoseleccion = document.getElementById("sexo");
+     // function seleccion_genero(){
+          if("<?= $sexo?>"== "2" ){
+              generoseleccion.value=2;
+          }
+          //console.log("<?= $sexo?>")
+
+      //}
+      </script>
     <header class="p-2 text-bg-dark">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -123,7 +133,7 @@
             <label for="floatingInput">Contraseña</label>
           </div>
           <div class="form-floating">
-            <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo" value="<?= $sexo?>" >
+            <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo" >           
               <option value="0">Elija una opcion</option>
               <option value="1">Femenino</option>
               <option value="2">Masculino</option>
@@ -138,7 +148,7 @@
           <br>
           <div class="item"> 
             <label class="nav-link px-2 text-black text" >Fecha de nacimiento</label>
-            <input type="date" class="form-control" id="nacimiento" name="nacimiento"value="<?= $nacimiento?>" >
+            <input type="date" class="form-control" id="nacimiento" name="nacimiento"value="<?= $nacimiento?>" max="2005-11-30" min="1923-01-01">
           </div>
           <br>
           <div class="item"> 
@@ -197,6 +207,7 @@
         <script src="../../js/bootstrap.bundle.min.js"></script>
         
         <script src="../../js/modal.js"></script>
+        <script src="../../js/genero.js"></script>
     </body>
 </html>
 
