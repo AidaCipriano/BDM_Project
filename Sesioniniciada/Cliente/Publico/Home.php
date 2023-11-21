@@ -3,6 +3,17 @@
   include '../../controladores/conexion.php';
   $user = $_SESSION['usuario'];
 
+  $id =  $_REQUEST['id'];
+
+  $consulta = "SELECT * FROM usuario where id_usuario = $id";
+  $resultado = mysqli_query($conexion, $consulta);
+
+  while($filas = mysqli_fetch_array($resultado)){
+    $usuario= $filas['nombreusuario'];
+    
+
+  }
+
 ?>
 
 
@@ -45,7 +56,7 @@
           
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>
-              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?php echo( $user ); ?> </a>
+              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?php echo( $usuario ); ?> </a>
               <ul class="dropdown-menu dropdown-menu-dark ">
                 <li><a class="dropdown-item" href="MiPerfilPublico.php">Mi Perfil</a></li>
                 <li><a class="dropdown-item" href="MisPedidos.php">Mis Pedidos</a></li>

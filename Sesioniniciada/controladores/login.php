@@ -25,6 +25,7 @@
         $resultado = mysqli_query($conexion, $consulta);
 		$filas = mysqli_fetch_array($resultado);
         
+		$id =  $filas['id_usuario'];
 		//Vendedor
 		
 		if($filas['Mensaje']=="Contraseña incorrecta"){
@@ -40,23 +41,21 @@
 			$ID['iduser'] = $filas['id_usuario'];
 			$nombre['nombres'] = $filas['nombres'];
 			$apellido['apellidos'] = $filas['apellidos'];
-			header("location:Sesioniniciada/Vendedor/Home.php");
+			header("location:Sesioniniciada/Vendedor/Home.php?id=$id");
 		}
 		//Cliente
 		else if($filas['rol']==2){
 			if($filas['tipousuario'] == 1){
 				$_SESSION['usuario'] = $filas['nombreusuario'];
-				$_SESSION['iduser'] = $filas['id_usuario'];
 				$_nombre['_nombres'] = $filas['nombres'];
 				$_apellido['_apellidos'] = $filas['apellidos'];
-				header("location: Sesioniniciada/Cliente/Publico/Home.php");
+				header("location: Sesioniniciada/Cliente/Publico/Home.php?id=$id");
 			}
-		else if($filas['tipousuario'] == 2){
+			else if($filas['tipousuario'] == 2){
 				$_SESSION['usuario'] = $filas['nombreusuario'];
-				 $_SESSION['iduser'] = $filas['id_usuario'];
 				$_nombre['_nombres'] = $filas['nombres'];
 				$_apellido['_apellidos'] = $filas['apellidos'];
-				header("location: Sesioniniciada/Cliente/Privado/Home.php");
+				header("location: Sesioniniciada/Cliente/Privado/Home.php?id=$id");
 			}
 
 
