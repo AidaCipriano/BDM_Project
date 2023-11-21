@@ -48,7 +48,7 @@
                   </div>
                   <div class="form-floating">
                     <h4 class="product__title text-center mt-5"> <label> Descripcion</label></h3>
-                    <input type="descripcion" class="form-control" name="description"  required  value="<?= $descripcion?>"> > 
+                    <input type="descripcion" class="form-control" name="description"  required  value="<?= $descripcion?>"> 
                   </div>
                   
                   
