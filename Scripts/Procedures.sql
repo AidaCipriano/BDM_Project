@@ -174,7 +174,6 @@ BEGIN
     DECLARE busqueda_Categoria INT; DECLARE v_buscarcat int ;
 SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
 	
-    
     if(opc='Crear')
     then
 		 IF (v_buscarcat = 0) 
@@ -191,7 +190,6 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
 		END IF;
 	end if;
     
-	
     if(opc='Actualizar')
     then
     		UPDATE CATEGORIA
@@ -202,13 +200,47 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
 			id_categoria = pid_categoria ;
     end if;
     
-	
+	if(opc='Ver')
+    then
+		select c.id_categoria as id_categoria, c.nombre as nombre , c.creador as creador, c.descripcion as descripcion, u.nombreusuario as nombreusuario
+        from categoria 
+         inner join usuario u
+			on u.id_usuario = c.creador
+        where pcreador = creador;
+    end if;
+        
+    if(opc='Editar Categoria')
+    then
+		SELECT id_categoria, nombre, creador, descripcion, fechahoracreacion FROM categoria where id_categoria = pid_categoria;
+    end if;
 END$$
+
+DROP procedure IF EXISTS sp_Gestion;
+DELIMITER $$
+ CREATE PROCEDURE sp_Gestion(
+	opc							varchar(30),
+    pnombreusuario				varchar(50)	
+	)
+BEGIN
+	if(opc='Mis Categorias')
+    then
+		select c.id_categoria as id_categoria, c.nombre as nombre , c.creador as creador, c.descripcion as descripcion, date(c.fechahoracreacion) as creacion, u.nombreusuario as nombreusuario, concat(u.nombres, ' ', u.apellidos) as nombrecompleto
+        from categoria c
+         inner join usuario u
+			on u.id_usuario = c.creador
+        where pnombreusuario = u.nombreusuario;
+    end if;
+    if(opc='Editar Perfil')
+    then
+		SELECT nombres, apellidos, email, nombreusuario, contrasena, genero, nacimiento, imagen, id_usuario FROM usuario where nombreusuario = pnombreusuario;
+    end if;
+END$$
+
 
 INSERT INTO CATEGORIA ( nombre, creador, descripcion, fechahoracreacion)
 			VALUES( '2', 1, '3',  (SELECT DATE(NOW())));
 select * from categoria
-call sp_GestionCategorias('Crear', null, '6', 1, '3');
+call sp_GestionCategorias('Ver', null, null, 1, null);
 #2. Vendedor - Gestion de los productos
 DROP procedure IF EXISTS sp_GestionCursos;
 DELIMITER $$

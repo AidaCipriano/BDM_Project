@@ -1,6 +1,10 @@
 <?php
   session_start();
+<<<<<<< HEAD
   include ('../controladores/conexion.php');
+=======
+  include ('../../controladores/conexion.php');
+>>>>>>> 40267a18bdd8e48a9ccb622ef3f87b3146045672
   $user = $_SESSION['usuario'];
 
   $idsuario = null;

@@ -37,7 +37,7 @@
           
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>
-                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Usuario </a>
+                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?php echo( $user ); ?> </a>
                 <ul class="dropdown-menu dropdown-menu-dark ">
                   <li><a class="dropdown-item" href="MiPerfilPublico.php">Mi Perfil</a></li>
                   <li><a class="dropdown-item" href="MisPedidos.php">Mis Pedidos</a></li>
@@ -77,7 +77,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                               <div class="btn-group">
                                 <a type="button" class="btn btn-sm btn-outline-secondary" href="DetallesCategorias.html">Ver</a>
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="/Sesioniniciada/Estudiante/EditarCategoria.html">Editar</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="EditarCategoria.html">Editar</a>
                                 <button type="button" class="btn btn-sm btn-outline-secondary red">Eliminar</button>
                                 
 
@@ -111,7 +111,7 @@
                                     
                                   </div>
                                   <div class="modal-footer flex-nowrap p-0 ">
-                                    <a href="CrearLista.html" >
+                                    <a href="CrearCategoria.php" >
                                       
                                       <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end text-center" ><strong>Si&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></button>
 

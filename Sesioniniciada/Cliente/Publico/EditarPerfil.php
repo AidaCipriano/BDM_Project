@@ -3,7 +3,7 @@
   include '../controladores/conexion.php';
   $user = $_SESSION['usuario'];
 
-  $consulta = "SELECT * FROM usuario where nombreusuario = '$user'";
+  $consulta = "CALL sp_Gestion('Editar Perfil', '$user')";
   $resultado = mysqli_query($conexion, $consulta);
 
   while($filas = mysqli_fetch_array($resultado)){

@@ -34,12 +34,12 @@
             $categoria = $nombre;
             if($filas['Mensaje']=="Se registro con exito"){
                 echo '<script> alert("La categoria se ha registrado con exito"); </script>';
-                header("location: ../Cliente/Privado/CrearCategoria.php");
+                //header("location: /CrearCategoria.php");
             }
             else if($filas['Mensaje']=='Categoria existente'){
                 
                 echo '<script>  alert("La categoria ya existe. Ingrese otra por favor"); </script>';
-                header("location: ../Cliente/Privado/CrearCategoria.php");
+                //header("location: ../Privado/CrearCategoria.php");
 
 
             }
