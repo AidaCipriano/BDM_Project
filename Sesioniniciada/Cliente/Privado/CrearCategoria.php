@@ -32,63 +32,21 @@
     <link href="../../../css/dropdowns.css" rel="stylesheet">
   </head>
   <body>
-    <header class="p-2 text-bg-dark">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <ul class="nav col-10 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="Home.php" class="Titulo nav-ink">AETNA</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="dropdown">
-              <button class="dropbtn">Tienda</button>
-              <div class="dropdown-content">
-                <a href="Tienda.php">Todos los cursos</a>
-                <a href="Listas.php">Categorias</a>
-              </div>
-            </div>
-          </ul>
-          
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-5" role="search">
-            <input type="search" class="form-control " placeholder="Buscar ..." aria-label="Search">
-          </form>
-
-          <div class="text-end">
-              <a href="Carrito.php" class="nav-link px-2 text-white"> <i class="fa-solid fa-cart-shopping"></i> &nbsp;&nbsp;Carrito </a>
-              
-          </div>&nbsp;&nbsp;
-          
-          <ul class="nav col-12 col-lg-auto  mb-md-0">
-            <li>
-                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?php echo( $user ); ?>  </a>
-                <ul class="dropdown-menu dropdown-menu-dark ">
-                  <li><a class="dropdown-item" href="MiPerfil.php">Mi Perfil</a></li>
-                  <li><a class="dropdown-item" href="MisPedidos.php">Mis Pedidos</a></li>
-                  <li><a class="dropdown-item" href="MisCategorias.php">Mis Categorias</a></li>     
-                  <li><a class="dropdown-item" href="Chat.php">Chat</a></li>                   
-                  <li>
-                    <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="../../../home.php">
-                    
-                      Cerrar sesión
-                    </a>
-                  </li>
-                </ul>
-              </li>
-        </ul>
-        </div>
-      </div>
-    </header>
-      <main class="main">
+  <?php  include("header.php"); ?>
+    <main class="main">
       <div class="row ">
-      <div class="">
-        <div class="row g-0 border rounded mb-4 shadow-sm ">
-          <div class="col CrearLista_CajaImagen " >
-            <img src="../../img/Listas/img/Predeterminado.jpg" width="100%" class="CrearLista_Imagen">
-          </div>
-          <div class="col CrearLista_CajaTexto">
-            <div class=" CrearLista_Texto"> 
-              <form action="" method="post" id="form_categoria" >
-                <div class="form-floating">
-                  <h3 class="product__title text-center mt-5"> <label >Nombre de la Lista</label></h3>
-                  <input type="name" class="form-control" id= "nombre_categoria" name="nombre_categoria"
-                    required> 
+        <div class="">
+          <div class="row g-0 border rounded mb-4 shadow-sm "> 
+            <form action="" method="post" id="form_categoria" >
+              <div class="col CrearLista_CajaImagen " >
+                <img src="../../img/Listas/img/Predeterminado.jpg" width="100%" class="CrearLista_Imagen">
+              </div>
+              <div class="col CrearLista_CajaTexto">
+                <div class=" CrearLista_Texto"> 
+                  <div class="form-floating">
+                    <h3 class="product__title text-center mt-5"> <label >Nombre de la Lista</label></h3>
+                    <input type="name" class="form-control" id= "nombre_categoria" name="nombre_categoria"
+                      required> 
                   </div>
                   <input type="input-email" class="form-control"  id="btn_id"  name="usuario_id" value="<?= $idusuario?>" >
                   <div class="form-floating">
@@ -110,22 +68,16 @@
                     </label>
                   </div>
                   <p></p><p></p>
-                </form>
+                </div>
+            
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
-        </main>
-        
-       
-
-
- 
-
-
-
-        <footer class="main-footer">
+    </main>
+    
+    <footer class="main-footer">
             <div class="footer__section">
                 <h2 class="footer__title">Conocenos</h2>
                 <p class="footer__txt">blah blah </p>
