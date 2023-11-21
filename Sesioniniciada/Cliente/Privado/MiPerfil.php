@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include '../../controladores/conexion.php';
+
   $user = $_SESSION['usuario'];
 
   $idsuario = null;
@@ -19,6 +19,7 @@
   $resultado = mysqli_query($conexion, $consulta);
 
   while($filas = mysqli_fetch_array($resultado)){
+    $avatar = 'data:image/jpeg;base64,' . base64_encode($filas['imagen']);
     $nombre= $filas['nombres'];
     $apellido= $filas['apellidos'];
 
@@ -89,7 +90,7 @@
         <div class="perfil-usuario-header">
             <div class="perfil-usuario-portada">
                 <div class="perfil-usuario-avatar">
-                    <img src="../../img/avatar.jpg" alt="img-avatar">
+                    <img id="imagen" src="<?php echo $avatar; ?>" alt="Imagen de perfil">
     
                 </div>
                 <button type="button" class="boton-portada">
@@ -143,5 +144,20 @@
         
         <script src="../../../js/modal.js"></script>
     </body>
+    <script>
+        document.getElementById('file-input').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.readAsDataURL(file);
+
+                reader.onload = function () {
+                    document.getElementById('imagen').src = reader.result;
+                };
+            }
+        });
+    </script>
 </html>
 

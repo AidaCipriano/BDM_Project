@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include '../controladores/conexion.php';
+  include ('../controladores/conexion.php');
   $user = $_SESSION['usuario'];
 
   $idsuario = null;
@@ -19,6 +19,7 @@
   $resultado = mysqli_query($conexion, $consulta);
 
   while($filas = mysqli_fetch_array($resultado)){
+    $avatar = 'data:image/jpeg;base64,' . base64_encode($filas['imagen']);
     $nombre= $filas['nombres'];
     $apellido= $filas['apellidos'];
 
@@ -28,7 +29,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="es" >
   <head>
     <meta charset="UTF-8">
     <title>Aetna</title>

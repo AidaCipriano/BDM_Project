@@ -14,12 +14,12 @@
     $password= $filas['contrasena'];
     $sexo= $filas['genero'];
     $nacimiento= $filas['nacimiento'];
-    $imagen= $filas['imagen'];
+    $avatar = 'data:image/jpeg;base64,' . base64_encode($filas['imagen']);
     $idusuario = $filas['id_usuario'];
     
 
   }
-  include("../controladores/UpdatePerfil.php");
+  include("../controladores/UpdatePerfil.php"); 
 ?>
 
 
@@ -81,7 +81,7 @@
       <div class="perfil-usuario-header">
         <div class="perfil-usuario-portada">
           <div class="perfil-usuario-avatar">
-            <img src="../../img/avatar.jpg" alt="img-avatar">
+          <img id="avatar" src="<?php echo $avatar; ?>" alt="Imagen de perfil">
             <button type="button" class="boton-avatar">
               <i class="far fa-image"></i>
             </button>
@@ -139,7 +139,7 @@
           <br>
           <div class="item"> 
             <label class="nav-link px-2 text-black text" >Elija una imagen como avatar </label>
-            <input type="file" class="form-control" id="customFile" id="avatar" name="avatar" value="<?= $imagen?>" >
+            <input type="file" class="form-control" id="customFile" id="imagen" name="imagen" value="<?= $imagen?>" >
             </div>
 
             <input type="input-email" class="form-control"  id="btn_id" name="usuario_id" value="<?= $idusuario?>" >

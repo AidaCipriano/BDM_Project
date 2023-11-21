@@ -19,6 +19,7 @@
   $resultado = mysqli_query($conexion, $consulta);
 
   while($filas = mysqli_fetch_array($resultado)){
+    $avatar = 'data:image/jpeg;base64,' . base64_encode($filas['imagen']);
     $nombre= $filas['nombres'];
     $apellido= $filas['apellidos'];
 
@@ -79,7 +80,7 @@
         <div class="perfil-usuario-header">
             <div class="perfil-usuario-portada">
                 <div class="perfil-usuario-avatar">
-                    <img src="../../img/avatar.jpg" alt="img-avatar">
+                <img id="avatar" src="<?php echo $avatar; ?>" alt="Imagen de perfil">
     
                 </div>
                 <button type="button" class="boton-portada">

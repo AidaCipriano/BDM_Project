@@ -55,8 +55,8 @@ include("Sesioniniciada/controladores/registrate.php");
 
         <main class="main-registrar modal position-static d-block" >
             <div class="form-signin w-100 m-auto">
-                <form action="" method="post" id="form" class="form-register" >
-                    <div class="register-box" id="register-box">
+                <form action="" method="post" id="form" class="form-register" enctype="multipart/form-data">
+                    <div class= "register-box" id="register-box">
                     <h2 class="">Registro</h2>
             
                     <div class="formulario" id="form">
@@ -127,7 +127,7 @@ include("Sesioniniciada/controladores/registrate.php");
 
                         <div class="item"> 
                             <label class="nav-link px-2">Elija una imagen como avatar </label>
-                                <input type="file" class="form-control" id="customFile" id="avatar" name="avatar" required> 
+                                <input type="file" class="form-control" id="customFile" id="imagen" name="imagen" required> 
                         </div>
                         
                         <div class="espacio_Boton">
