@@ -1,3 +1,23 @@
+<?php
+  session_start();
+  include '../../controladores/conexion.php';
+
+  $user = $_SESSION['usuario'];
+
+  $consulta = "SELECT * FROM usuario where nombreusuario = '$user'";
+  $resultado = mysqli_query($conexion, $consulta);
+
+  while($filas = mysqli_fetch_array($resultado)){
+    $idusuario = $filas['id_usuario'];
+    
+
+  }
+
+  include("../../controladores/CategoriasGestion.php");
+  $user = $_SESSION['usuario'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" >
   <head>
@@ -76,8 +96,8 @@
                             <p class="card-text">Adentrate en los campos de la era moderna y del futuro.</p>
                             <div class="d-flex justify-content-between align-items-center">
                               <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="DetallesCategorias.html">Ver</a>
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="/Sesioniniciada/Estudiante/EditarCategoria.html">Editar</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="DetallesCategorias.php">Ver</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="EditarCategoria.php">Editar</a>
                                 <button type="button" class="btn btn-sm btn-outline-secondary red">Eliminar</button>
                                 
 
@@ -111,7 +131,7 @@
                                     
                                   </div>
                                   <div class="modal-footer flex-nowrap p-0 ">
-                                    <a href="CrearLista.html" >
+                                    <a href="CrearCategoria.php" >
                                       
                                       <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end text-center" ><strong>Si&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></button>
 

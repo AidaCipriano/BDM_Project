@@ -1,5 +1,5 @@
 <?php
-    
+    include("Sesioniniciada/controladores/login.php");
 
 ?>
 
@@ -47,7 +47,7 @@
         <main class="main-registrar ">
         <div class="form-signin w-100 m-auto">
 
-            <form action="Sesioniniciada/controladores/login.php" method="POST" id="form" class="form-login" >
+            <form action="" method="POST" id="form" class="form-login" >
                  <div class="inicio-box" >
                     <h2 class="">Inicio de sesion</h2>
                     <br>

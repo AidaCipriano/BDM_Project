@@ -32,8 +32,15 @@ if(isset($_POST['register'])){
        // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)
        //                 VALUES('$idsuario', '$email', '$username', '$password')";
         $resultado = mysqli_query($conexion, $consulta);
-        if($resultado){
-          header("location:iniciosesion.php");
+        $filas = mysqli_fetch_array($resultado);
+
+        if($filas['Mensaje']=="Registrado"){
+            echo '<script>  alert("Usuario registrado"); </script>';
+            header("location:iniciosesion.php");
+        }
+        else if($filas['Mensaje']=='Cuenta existente'){    
+            echo '<script>  alert("Cuenta existente. Intentelo de nuevo"); </script>';
+            //header("location:registro.php");
         }
         else{
             echo('Error');

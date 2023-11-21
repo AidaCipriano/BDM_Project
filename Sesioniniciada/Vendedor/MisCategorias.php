@@ -106,11 +106,11 @@
                                   <div class="modal-body p-4 text-center">
                                     <h5 class="mb-0"><strong>Lista Nueva</strong>  </h5>
                                     <p></p>
-                                    <p class="mb-0">¿Desea crear una nueva lista?</p>
+                                    <p class="mb-0">¿Desea crear una categoria?</p>
                                     
                                   </div>
                                   <div class="modal-footer flex-nowrap p-0 ">
-                                    <a href="CrearLista.php" >
+                                    <a href="CrearCategoria.php" >
                                       
                                       <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end text-center" ><strong>Si&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></button>
 

@@ -36,6 +36,7 @@ if(isset($_POST['ActPerfil'])){
         $resultado = mysqli_query($conexion, $consulta);
         if($resultado){
          header("location:EditarPerfil.php");
+         echo '<script>  alert("Informacion actualizada"); </script>';
         }
         else{
             echo('Error');
@@ -65,6 +66,7 @@ if(isset($_POST['deletePerfil'])){
        //                 VALUES('$idsuario', '$email', '$username', '$password')";
         $resultado = mysqli_query($conexion, $consulta);
         if($resultado){
+            echo '<script>  alert("Usuario dado de baja"); </script>';
           header("location: ../../iniciosesion.php");
         }
         else{

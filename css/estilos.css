@@ -379,7 +379,7 @@
     }
 
 
-    #btnregister {
+    #btnregister, #btn_guardar_categoria {
         display: none;
     }
 

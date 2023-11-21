@@ -53,7 +53,7 @@ CREATE TABLE IMAGEN_AVATAR (
 
 
 CREATE TABLE CATEGORIA (
-	id_categoria				int					not null comment "ID de la Categoria",
+	id_categoria				int auto_increment					not null comment "ID de la Categoria",
     nombre						varchar(50)			not null comment "Nombre de la Categoria",
 	creador						int					not null comment "ID del usuario",
     descripcion					varchar(100)		not null comment "Descripcion sobre la categoria",

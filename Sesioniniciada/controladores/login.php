@@ -8,7 +8,7 @@
 	}*/
 
 	require 'conexion.php';
-	echo('coenxion exito');
+	//echo('coenxion exito');
 
 
 	if(isset($_POST['login'])) {
@@ -26,11 +26,20 @@
 		$filas = mysqli_fetch_array($resultado);
         
 		//Vendedor
-		if($filas['rol']==1){
+		
+		if($filas['Mensaje']=="Contraseña incorrecta"){
+            echo '<script>  alert("Contraseña incorrecta"); </script>';
+           // header("location:iniciosesion.php");
+        }
+		else if($filas['Mensaje']=="Email incorrecto"){
+            echo '<script>  alert("Email incorrecto"); </script>';
+           // header("location:iniciosesion.php");
+        }
+		else if($filas['rol']==1){
 			$_SESSION['usuario'] = $filas['nombreusuario'];
 			$nombre['nombres'] = $filas['nombres'];
 			$apellido['apellidos'] = $filas['apellidos'];
-			header("location:../Vendedor/Home.php");
+			header("location:Sesioniniciada/Vendedor/Home.php");
 		}
 		//Cliente
 		else if($filas['rol']==2){
@@ -38,13 +47,13 @@
 				$_SESSION['usuario'] = $filas['nombreusuario'];
 				$_nombre['_nombres'] = $filas['nombres'];
 				$_apellido['_apellidos'] = $filas['apellidos'];
-				header("location:../Cliente/Publico/Home.php");
+				header("location: Sesioniniciada/Cliente/Publico/Home.php");
 			}
 			if($filas['tipousuario'] == 2){
 				$_SESSION['usuario'] = $filas['nombreusuario'];
 				$_nombre['_nombres'] = $filas['nombres'];
 				$_apellido['_apellidos'] = $filas['apellidos'];
-				header("location:../Cliente/Privado/Home.php");
+				header("location: Sesioniniciada/Cliente/Privado/Home.php");
 			}
 
 
