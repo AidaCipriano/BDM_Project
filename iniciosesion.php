@@ -63,7 +63,6 @@
                         <br>
 
                         <input class="btn-login"  onclick="btn_iniciarsesion();"  value="Login">
-                        
                         <p class="warnings" id="warnings"></p>
                         <input class="btn btn-primary"  type="submit"  name="login" id="btnlogin" value="Enviar">
                     </div>
