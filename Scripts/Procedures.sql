@@ -97,7 +97,7 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 	if(opc='Mi Perfil')
 	then
 
-		SELECT nombres, apellidos FROM usuario where pnombreusuario = nombreusuario;
+		SELECT nombres, apellidos, imagen FROM usuario where pid_usuario = id_usuario;
 
 	end if;
 	
@@ -203,7 +203,7 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
 	if(opc='Ver')
     then
 		select c.id_categoria as id_categoria, c.nombre as nombre , c.creador as creador, c.descripcion as descripcion, u.nombreusuario as nombreusuario
-        from categoria 
+        from categoria c
          inner join usuario u
 			on u.id_usuario = c.creador
         where pcreador = creador;
@@ -219,7 +219,7 @@ DROP procedure IF EXISTS sp_Gestion;
 DELIMITER $$
  CREATE PROCEDURE sp_Gestion(
 	opc							varchar(30),
-    pnombreusuario				varchar(50)	
+    pid_usuario				varchar(50)	
 	)
 BEGIN
 	if(opc='Mis Categorias')
@@ -228,11 +228,11 @@ BEGIN
         from categoria c
          inner join usuario u
 			on u.id_usuario = c.creador
-        where pnombreusuario = u.nombreusuario;
+        where pid_usuario = u.id_usuario;
     end if;
     if(opc='Editar Perfil')
     then
-		SELECT nombres, apellidos, email, nombreusuario, contrasena, genero, nacimiento, imagen, id_usuario FROM usuario where nombreusuario = pnombreusuario;
+		SELECT nombres, apellidos, email, nombreusuario, contrasena, genero, nacimiento, imagen, id_usuario FROM usuario where id_usuario = pid_usuario;
     end if;
 END$$
 
@@ -242,56 +242,78 @@ INSERT INTO CATEGORIA ( nombre, creador, descripcion, fechahoracreacion)
 select * from categoria
 call sp_GestionCategorias('Ver', null, null, 1, null);
 #2. Vendedor - Gestion de los productos
-DROP procedure IF EXISTS sp_GestionCursos;
+DROP procedure IF EXISTS sp_GestionProductos;
 DELIMITER $$
- CREATE PROCEDURE sp_GestionCursos(
+ CREATE PROCEDURE sp_GestionProductos(
 	opc							varchar(30),
-	pID_CURSO_INSTRUCTOR		int,
-    pINSTRUCTOR					int,
-    pNOMBRE						varchar(100),
-    pCOSTO						decimal,
-    pDESCRIPCION				VARCHAR(300),
-    pIMAGEN						longblob
+	pid_producto_vendedor		int ,
+	pvendedor  					int,
+    pnombre						varchar(100),
+    pcosto						decimal	(10,2),
+    pdescripcion				varchar(300),
+    pcantidad_disponible		int,
+	pcotizacion					bit,
+	pventa						bit,
+	pcategoria					int
 	)
 BEGIN
-DECLARE pNIVEL INT;
+DECLARE busqueda_producto INT;
+
+	SET busqueda_producto =  (SELECT COUNT(id_producto_vendedor) FROM PRODUCTO_VENDEDOR WHERE nombre = pnombre and pvendedor = vendedor);
     
 	if(opc='Crear')
     then
-		INSERT INTO CURSO_INSTRUCTOR (INSTRUCTOR, NOMBRE, COSTO, DESCRIPCION, IMAGEN, ACTIVO, FECHA_CREACION)
-		VALUES(pINSTRUCTOR, pNOMBRE, pCOSTO, pDESCRIPCION, pIMAGEN, 0, (SELECT DATE(NOW())));
-		
-	end if;
-    
-    	if(opc='Pulicar')
-    then
-		UPDATE CURSO_INSTRUCTOR
-			SET
-                ACTIVO		= 1
-		WHERE
-			ID_CURSO_INSTRUCTOR = pID_CURSO_INSTRUCTOR ;
-		
+		if (busqueda_producto= 0)
+        then
+			INSERT INTO PRODUCTO_VENDEDOR (vendedor, nombre, costo, descripcion, activo, fecha_creacion, cantidad_disponible, cotizacion, venta, categoria)
+			VALUES(pvendedor, pnombre, pcosto, pdescripcion, 1,  (SELECT DATE(NOW())), pcantidad_disponible, pcotizacion, pventa, pcategoria);
+		end if;
+        
+         if(busqueda_producto= 1)
+		then
+			set opc = "El producto ya existe";
+             SELECT pnombre as Producto, opc as Mensaje;
+        end if;
 	end if;
 	
     if(opc='Actualizar')
     then
-    		UPDATE CURSO_INSTRUCTOR
+    		UPDATE PRODUCTO_VENDEDOR
 			SET
-                NOMBRE 		= pNOMBRE, 
-                COSTO		= pCOSTO, 
-                DESCRIPCION	= pDESCRIPCION, 
-                IMAGEN		= pIMAGEN
+                nombre	= pnombre, 
+                costo	= pcosto, 
+                descripcion		= pdescripcion, 
+                cantidad_disponible		= pcantidad_disponible, 
+                cotizacion	= pcotizacion, 
+                venta		= pventa,
+                categoria = pcategoria
 		WHERE
-			ID_CURSO_INSTRUCTOR = pID_CURSO_INSTRUCTOR ;
+			id_producto_vendedor = pid_producto_vendedor ;
     end if;
     
 	if(opc='Dar de baja')
     then
-    		UPDATE CURSO_INSTRUCTOR
+    		UPDATE PRODUCTO_VENDEDOR
 			SET
-                ACTIVO	= 0
+                activo	= 0
 		WHERE
-			ID_CURSO_INSTRUCTOR = pID_CURSO_INSTRUCTOR ;
-		DELETE FROM CURSO_CATEGORIA WHERE ID_CURSO_CATEGORIA = pID_CURSO_INSTRUCTOR ;
+			id_producto_vendedor = pid_producto_vendedor ;
+	
+    end if;
+    	if(opc='Ver')
+    then
+		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible,
+        pv.cotizacion as cotizacion, pv.venta as venta, pv.categoria as categoria,  u.nombreusuario as nombreusuario
+        from PRODUCTO_VENDEDOR pv 
+         inner join usuario u
+			on u.id_usuario = c.creador
+        where pcreador = creador;
+    end if;
+        
+    if(opc='Editar Producto')
+    then
+		SELECT *  FROM PRODUCTO_VENDEDOR where id_producto_vendedor = pid_producto_vendedor;
     end if;
 END$$
+call sp_GestionProductos('Crear', null, 1, '2', '1', '1', 1, 1, 1, 1);
+

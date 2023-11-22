@@ -1,8 +1,7 @@
 <?php
   include ('controlador.php');
-  $id =  $_REQUEST['id']; // id categoria
-?>
 
+?>
 <header class="p-2 text-bg-dark">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -28,21 +27,22 @@
           
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>
-                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?php echo( $usuario ); ?> </a>
-                <ul class="dropdown-menu dropdown-menu-dark ">
-                <li><a class="dropdown-item" href="MiPerfil.php?id=<?php echo( $id ); ?>">Mi Perfil</a></li>
-                  <li><a class="dropdown-item" href="MisPedidos.php?id=<?php echo( $id ); ?>">Mis Pedidos</a></li>
-                  <li><a class="dropdown-item" href="MisCategorias.php?id=<?php echo( $id ); ?>">Mis Categorias</a></li>     
-                  <li><a class="dropdown-item" href="Chat.php?id=<?php echo( $id ); ?>">Chat</a></li>                   
-                  <li>
-                    <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="../../../home.php">
-                    
-                      Cerrar sesión
-                    </a>
-                  </li>
-                </ul>
-              </li>
-        </ul>
+              <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?php echo( $usuario ); ?> </a>
+              <ul class="dropdown-menu dropdown-menu-dark ">
+                <li><a class="dropdown-item" href="MiPerfilPublico.php?id=<?php echo( $id ); ?>">Mi Perfil</a></li>
+                <li><a class="dropdown-item" href="MisPedidos.php?id=<?php echo( $id ); ?>">Mis Pedidos</a></li>
+                <li><a class="dropdown-item" href="MisCategorias.php?id=<?php echo( $id ); ?>">Mis Categorias</a></li> 
+                <li><a class="dropdown-item" href="Chat.php?id=<?php echo( $id ); ?>">Chat</a></li>
+                <li>
+                  <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="../../../home.php">
+                    Cerrar sesión
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+
         </div>
       </div>
     </header>

@@ -1,7 +1,7 @@
 <?php
-  //session_start();
-  include '../controladores/conexion.php';
-  //$user = $_SESSION['usuario'];
+  session_start();
+  include '../../controladores/conexion.php';
+  $user = $_SESSION['usuario'];
 
   $id =  $_REQUEST['id'];
 

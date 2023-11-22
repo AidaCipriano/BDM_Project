@@ -1,21 +1,22 @@
 <?php
-  session_start();
-  include '../../controladores/conexion.php';
-  $user = $_SESSION['usuario'];
+  //ssession_start();
+  include ('controlador.php');
+  //$user = $_SESSION['usuario'];
 
-  $idsuario = null;
+  $id =  $_REQUEST['id'];
+
   $name = null;
   $apellido = null;
   $sexo = null;
   $nacimiento = null;
   $email = null;
-  $username = $user;
+  $username = null;
   $password = null;
   $tipo_usuario = null;
   $rol = null;
   $avatar = null;
 
-  $consulta = "CALL sp_Usuarios('Mi Perfil', '$idsuario', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
+  $consulta = "CALL sp_Usuarios('Mi Perfil', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
   $resultado = mysqli_query($conexion, $consulta);
 
   while($filas = mysqli_fetch_array($resultado)){
@@ -26,7 +27,6 @@
   }
   //$nombrecompleto = $nombre;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en" >
@@ -52,7 +52,7 @@
     
                 </div>
                 <button type="button" class="boton-portada">
-                    <a class=" nav-link  text-white" href="EditarPerfil.php"  >Editar Perfil</a> 
+                    <a class=" nav-link  text-white" href="EditarPerfil.php?id=<?php echo( $id ); ?>"  >Editar Perfil</a> 
                    
                 </button>
                 

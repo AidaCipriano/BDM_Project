@@ -1,11 +1,5 @@
 <?php
-  session_start();
-  include '../../controladores/conexion.php';
-
-  $user = $_SESSION['usuario'];
-
-
-  
+ include ('controlador.php');
 
 ?>
 

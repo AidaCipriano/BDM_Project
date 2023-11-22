@@ -379,7 +379,7 @@
     }
 
 
-    #btnregister, #btn_guardar_categoria {
+    #btnregister, #btn_guardar_categoria, #btn_guardar_producto {
         display: none;
     }
 
