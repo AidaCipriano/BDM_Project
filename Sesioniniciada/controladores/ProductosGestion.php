@@ -25,23 +25,23 @@
             strlen($_POST['video_producto'])     >= 1 &&
             strlen($_POST['imagen_producto'])     >= 1 */
         ){
+
+            $cotvender = trim( $_POST['cotizar_vender_producto']);
             $id_producto_vendedor = null;
             $vendedor = $id;
             $nombre =  trim($_POST['nombre_producto']);
-            $costo = trim($_POST['descripcion_producto']);
-            $descripcion =  trim($_POST['precio_producto']);
-            $cantidad_disponible = trim($_POST['nombre_categoria']);
-            $cotizacion =  trim($_POST['cotizacion']);
-            $venta = trim($_POST['venta']);
-            $categoria = trim($_POST['cantidaddisponible']);
+            $costo = trim($_POST['precio_producto']);
+            $descripcion =  trim($_POST['descripcion_producto']);
+            $cantidad_disponible = trim($_POST['cantidaddisponible']);
+           
+            $categoria = trim($_POST['categoria_producto']);
             
             $consulta = "CALL sp_GestionProductos('Crear', '$id_producto_vendedor', '$vendedor', '$nombre',
-             '$costo', '$descripcion', '$cantidad_disponible', '$cotizacion', '$venta', '$categoria');";
+             '$costo', '$descripcion', '$cantidad_disponible', '$cotvender', '$categoria');";
     
             $resultado = mysqli_query($conexion, $consulta);
             $filas = mysqli_fetch_array($resultado);
             
-
             if($filas['Mensaje']=="Se registro con exito"){
                 echo '<script> alert("El producto se ha registrado con exito"); </script>';
                 //header("location: /CrearCategoria.php");

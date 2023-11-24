@@ -33,7 +33,11 @@
           
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                   
-                  
+                <?php 
+                    
+                    $consulta = "CALL sp_Gestion('Mis productos', '$id')";
+                    $resultado = mysqli_query($conexion, $consulta);
+                    while($filas = mysqli_fetch_array($resultado)){ ?>
 
                   <div class="col">
                     <div class="card h-100">
@@ -45,23 +49,24 @@
                           </div>
                       </div>
                       <div class="card-body">
-                        <h5 class="Cartas_Titulos">Consola</h5>
-                        <h6 class="Cartas_Intructor">Un curso de Johann Perez.</h6>
-                        <p class="Cartas_Textos">Aprende a instalar, usar y programar arduino.</p>
-                        <center>
-                          <div class="pie-carta">
+                        <h5 class="Cartas_Titulos"><?php echo $filas['nombre'] ?></h5>
+                        <h6 class="Cartas_Intructor"><?php echo $filas['nombreusuario'] ?></h6>
+                        <p class="Cartas_Textos"><?php echo $filas['descripcion'] ?></p>
+                        <p class="Cartas_Textos">$<?php echo $filas['costo'] ?></p>
+                         
                             <div class="d-flex justify-content-between align-items-center">
                               <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="EditarProducto.php">Editar producto</a>
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="Producto.php">Ver producto</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="EditarProducto.php?id=<?php echo( $id )?>&id_pro=<?php echo $filas['id_producto_vendedor']; ?> ">Editar producto</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="Producto.php?id=<?php echo( $id )?>&id_pro=<?php echo $filas['id_producto_vendedor']; ?> ">Ver producto</a>
                                 <button type="button" class="btn btn-sm btn-outline-secondary red">Eliminar</button>
                               </div>
                             </div>
-                        </div>
-                        </center>
+                        
+                       
                       </div>
                     </div>
                   </div>
+                  <?php } ?>
                   <div class="col">
                       <!--Boton-->
                       <div class="boton-modal">

@@ -91,8 +91,7 @@ CREATE TABLE PRODUCTO_VENDEDOR (
     activo						bit						not null comment "Estatus del Producto",
     fecha_creacion				date					not null comment "Fecha de creacion del Producto",
     cantidad_disponible			int						not null comment "Cantidad disponible del Producto",
-	cotizacion					bit						not null comment "Es para cotizar el Producto?",
-	venta						bit						not null comment "Es para venta el Producto?",
+	cotizacionventa				varchar(2)					not null comment "Es para cotizar o vender el Producto?",
 	categoria					int						not null comment "A que categoria el Producto?",
 
 	CONSTRAINT PK_PRODUCTO_VENDEDOR

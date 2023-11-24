@@ -20,7 +20,7 @@
   $resultado = mysqli_query($conexion, $consulta);
 
   while($filas = mysqli_fetch_array($resultado)){
-    $avatar = 'data:image/jpeg;base64,' . base64_encode($filas['imagen']);
+    $avatar = $filas['imagen'];
     $nombre= $filas['nombres'];
     $apellido= $filas['apellidos'];
 
@@ -49,11 +49,11 @@
         <div class="perfil-usuario-header">
             <div class="perfil-usuario-portada">
                 <div class="perfil-usuario-avatar">
-                    <img src="../../img/avatar.jpg" alt="img-avatar">
+                    <img src="<?php echo( $avatar ) ?>" alt="img-avatar">
     
                 </div>
                 <button type="button" class="boton-portada">
-                    <a class=" nav-link  text-white" href="EditarPerfil.php"  >Editar Perfil</a> 
+                    <a class=" nav-link  text-white" href="EditarPerfil.php?id=<?php echo( $id ); ?>"  >Editar Perfil</a> 
                    
                 </button>
                 

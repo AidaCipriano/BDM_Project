@@ -13,7 +13,7 @@
 
 	//$user = $_SESSION['usuario'];
 
-
+    $id =  $_REQUEST['id'];
 if(isset($_POST['ActPerfil'])){
     if(
         strlen($_POST['usuario_id']) 
@@ -28,14 +28,18 @@ if(isset($_POST['ActPerfil'])){
         $password = trim($_POST['password']);
         $tipo_usuario = null;
         $rol = null;
-        $avatar = trim($_POST['avatar']);
+        $nombreArchivo = $_FILES['avatar']['name'];
+        $rutaTemporal = $_FILES['avatar']['tmp_name'];
+        $contenidoImagen = file_get_contents($rutaTemporal);
+        $contenidoImagenEscapado = mysqli_real_escape_string($conexion, $contenidoImagen);
+
         
-        $consulta = "CALL sp_Usuarios('Actualizar', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
+        $consulta = "CALL sp_Usuarios('Actualizar', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$contenidoImagenEscapado');";
        // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)
        //                 VALUES('$idsuario', '$email', '$username', '$password')";
         $resultado = mysqli_query($conexion, $consulta);
         if($resultado){
-         header("location:EditarPerfil.php");
+         header("location:EditarPerfil.php?id=$id");
          echo '<script>  alert("Informacion actualizada"); </script>';
         }
         else{

@@ -1,7 +1,7 @@
 <?php
-  session_start();
+ // session_start();
   include '../controladores/conexion.php';
-  $user = $_SESSION['usuario'];
+  //$user = $_SESSION['usuario'];
 
 ?>
 

@@ -33,7 +33,6 @@
                 <div class="container">
                   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     <?php 
-                    
                     $consulta = "CALL sp_Gestion('Mis Categorias', '$id')";
                     $resultado = mysqli_query($conexion, $consulta);
                     while($filas = mysqli_fetch_array($resultado)){ ?>

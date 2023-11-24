@@ -16,7 +16,7 @@ DELIMITER $$
 	pcontrasena				varchar(20)		,
     ptipousuario			varchar(20)		,
     prol					varchar(20)		,
-    pimagen					longblob		
+    pimagen					varchar(255)		
 	)
 BEGIN
 DECLARE busqueda_Cuenta INT; DECLARE v_buscaremail int ;
@@ -168,6 +168,7 @@ DELIMITER $$
 	pid_categoria				int,
     pnombre						varchar(50)	,
     pcreador					int,
+    pimagen 					varchar(255),
     pdescripcion				varchar(100)
 	)
 BEGIN
@@ -178,8 +179,8 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
     then
 		 IF (v_buscarcat = 0) 
 		THEN
-			INSERT INTO CATEGORIA ( nombre, creador, descripcion, fechahoracreacion)
-			VALUES( pnombre, pcreador, pdescripcion,  (SELECT DATE(NOW())));
+			INSERT INTO CATEGORIA ( nombre, creador, descripcion, imagen, fechahoracreacion)
+			VALUES( pnombre, pcreador, pdescripcion, pimagen, (SELECT DATE(NOW())));
             set opc = "Se registro con exito";
             SELECT pnombre as Categoria, opc as Mensaje;
 		END IF;
@@ -195,7 +196,8 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
     		UPDATE CATEGORIA
 			SET
                 nombre 		= pnombre, 
-                descripcion	= pdescripcion
+                descripcion	= pdescripcion,
+                imagen		= pimagen
 		WHERE
 			id_categoria = pid_categoria ;
     end if;
@@ -211,7 +213,7 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
         
     if(opc='Editar Categoria')
     then
-		SELECT id_categoria, nombre, creador, descripcion, fechahoracreacion FROM categoria where id_categoria = pid_categoria;
+		SELECT id_categoria, nombre, creador, descripcion, imagen, fechahoracreacion FROM categoria where id_categoria = pid_categoria;
     end if;
 END$$
 
@@ -224,11 +226,20 @@ DELIMITER $$
 BEGIN
 	if(opc='Mis Categorias')
     then
-		select c.id_categoria as id_categoria, c.nombre as nombre , c.creador as creador, c.descripcion as descripcion, date(c.fechahoracreacion) as creacion, u.nombreusuario as nombreusuario, concat(u.nombres, ' ', u.apellidos) as nombrecompleto
+		select c.id_categoria as id_categoria, c.nombre as nombre , c.creador as creador, c.descripcion as descripcion, c.imagen as imagen, date(c.fechahoracreacion) as creacion, u.nombreusuario as nombreusuario, concat(u.nombres, ' ', u.apellidos) as nombrecompleto
         from categoria c
          inner join usuario u
 			on u.id_usuario = c.creador
         where pid_usuario = u.id_usuario;
+    end if;
+    if(opc='Mis productos')
+    then
+		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible,
+        pv.cotizacionventa as cotizacionventa,  pv.categoria as categoria,  u.nombreusuario as nombreusuario
+        from PRODUCTO_VENDEDOR pv 
+         inner join usuario u
+			on u.id_usuario = pv.vendedor
+        where  pid_usuario = pv.vendedor;
     end if;
     if(opc='Editar Perfil')
     then
@@ -252,8 +263,7 @@ DELIMITER $$
     pcosto						decimal	(10,2),
     pdescripcion				varchar(300),
     pcantidad_disponible		int,
-	pcotizacion					bit,
-	pventa						bit,
+	pcotizacionventa			varchar(2),
 	pcategoria					int
 	)
 BEGIN
@@ -268,6 +278,9 @@ DECLARE busqueda_producto INT;
 			INSERT INTO PRODUCTO_VENDEDOR (vendedor, nombre, costo, descripcion, activo, fecha_creacion, cantidad_disponible, cotizacion, venta, categoria)
 			VALUES(pvendedor, pnombre, pcosto, pdescripcion, 1,  (SELECT DATE(NOW())), pcantidad_disponible, pcotizacion, pventa, pcategoria);
 		end if;
+        
+        set opc = "Se registro con exito";
+             SELECT pnombre as Producto, opc as Mensaje;
         
          if(busqueda_producto= 1)
 		then
@@ -284,8 +297,7 @@ DECLARE busqueda_producto INT;
                 costo	= pcosto, 
                 descripcion		= pdescripcion, 
                 cantidad_disponible		= pcantidad_disponible, 
-                cotizacion	= pcotizacion, 
-                venta		= pventa,
+                cotizacionventa	= pcotizacionventa, 
                 categoria = pcategoria
 		WHERE
 			id_producto_vendedor = pid_producto_vendedor ;
@@ -312,7 +324,14 @@ DECLARE busqueda_producto INT;
         
     if(opc='Editar Producto')
     then
-		SELECT *  FROM PRODUCTO_VENDEDOR where id_producto_vendedor = pid_producto_vendedor;
+		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible,
+        pv.cotizacionventa as cotizacionventa, pv.categoria as categoria, ca.nombre as nombrecategoria, u.nombreusuario as nombreusuario
+        from PRODUCTO_VENDEDOR pv 
+         inner join usuario u
+			on u.id_usuario =  pv.vendedor
+		inner join categoria ca
+			on ca.id_categoria = pv.categoria
+        where pid_producto_vendedor = id_producto_vendedor;
     end if;
 END$$
 call sp_GestionProductos('Crear', null, 1, '2', '1', '1', 1, 1, 1, 1);

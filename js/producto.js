@@ -2,6 +2,7 @@
 const nombre_producto = document.getElementById("nombre_producto");
 const descripcion_producto = document.getElementById("descripcion_producto");
 const precio_producto = document.getElementById("precio_producto");
+const cantidaddisponible = document.getElementById("cantidaddisponible");
 
 const form_producto = document.getElementById("form_producto");
 const parrafo = document.getElementById("warnings");
@@ -24,9 +25,19 @@ function btn_guardarProducto()
         warnings += "Nombre es campo obligatorio <br>" 
         entrar = true
     }
+    else if(!regexName.test(nombre_producto.value)){
+        //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
+        warnings += "Nombre solo se permiten letras <br>"
+        entrar = true
+    }
     if(descripcion_producto.value ==="" ){
         //alert("Ambos son campos obligatorios");
         warnings += "Descripcion es campo obligatorio <br>" 
+        entrar = true
+    }
+    else  if(!regexName.test(descripcion_producto.value)){
+        //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
+        warnings += "Descripcion solo se permiten letras <br>"
         entrar = true
     }
     if(precio_producto.value===""){
@@ -37,20 +48,21 @@ function btn_guardarProducto()
     }
     else if(!regexnumbers.test(precio_producto.value)){
         //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
-        warnings += "Solo se permiten numeros <br>"
+        warnings += "Precio solo se permiten numeros <br>"
         entrar = true
     }
-    if(!regexName.test(nombre_producto.value)){
+    if(cantidaddisponible.value===""){
+        //alert("Ambos son campos obligatorios");
+        warnings += "Cantidad Disponible es campo obligatorio <br>" 
+
+        entrar = true
+    }
+    else if(!regexnumbers.test(cantidaddisponible.value)){
         //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
-        warnings += "Solo se permiten letras <br>"
+        warnings += "Cantidad Disponible solo se permiten numeros <br>"
         entrar = true
     }
 
-    if(!regexName.test(descripcion_producto.value)){
-        //alert("La contraseña deeb tener 1 mayuscula, una miniscula, un numero y un caracter especial");
-        warnings += "Solo se permiten letras <br>"
-        entrar = true
-    }
 
     if(entrar == true){
         parrafo.innerHTML = warnings

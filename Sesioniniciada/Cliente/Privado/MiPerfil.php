@@ -20,7 +20,7 @@
   $resultado = mysqli_query($conexion, $consulta);
 
   while($filas = mysqli_fetch_array($resultado)){
-    $avatar = 'data:image/jpeg;base64,' . base64_encode($filas['imagen']);
+    $avatar = $filas['imagen'];
     $nombre= $filas['nombres'];
     $apellido= $filas['apellidos'];
 

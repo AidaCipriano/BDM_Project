@@ -1,7 +1,7 @@
 <?php
  include ('controlador.php');
  include("../controladores/CategoriasGestion.php");
-
+ include("../controladores/ProductosGestion.php");
 
 
 ?>
@@ -61,14 +61,22 @@
                 </div>
                   
                 <div class="form-floating">
+                
                   <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  name="categoria_producto" id="categoria_producto" >
                     <option selected>Elija una opcion</option>
-                    <option value="1">Categoria1 </option>
-                  </select>
+                    <?php 
+                    
+                    $consulta = "SELECT * FROM categoria";
+                    $resultado = mysqli_query($conexion, $consulta);
+                    while($filas = mysqli_fetch_array($resultado)){ ?>
+                    <option value="<?php echo $filas['id_categoria'] ?> "><?php echo $filas['nombre'] ?>  </option>
+                  <?php } ?></select>
+                  
                   <label for="floatingSelect">Categoria</label>
                 </div>
                   
                 <div class="form-floating">
+                  
                   <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  name="cotizar_vender_producto" id="cotizar_vender_producto" >
                     <option selected>Elija una opcion</option>
                     <option value="1">Cotizar </option>
@@ -80,13 +88,13 @@
                 <div class="item"> 
                   <p></p><p></p>
                   <label class="nav-link px-2 text-black text-center">Elija un video</label>
-                  <input type="file" class="form-control" id="video_producto" name="video_producto" required> 
+                  <input type="file" class="form-control" id="video_producto" name="video_producto"> 
                 </div>
                   
                 <div class="item"> 
                   <p></p><p></p>
                   <label class="nav-link px-2 text-black text-center">Elija una imagen</label>
-                  <input type="file" class="form-control" id="imagen_producto" name="imagen_producto" required> 
+                  <input type="file" class="form-control" id="imagen_producto" name="imagen_producto" > 
                 </div>
                   
                 <p></p><p></p>

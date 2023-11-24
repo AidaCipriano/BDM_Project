@@ -1,8 +1,27 @@
 <?php
   session_start();
   include '../controladores/conexion.php';
-  $user = $_SESSION['usuario'];
+ //$user = $_SESSION['usuario'];
 
+ $id =  $_REQUEST['id']; // id categoria
+  $id_pro =  $_REQUEST['id_pro']; // id categoria
+
+  $consulta = "CALL sp_GestionProductos('Editar Producto', '$id_pro', 'null', 'null', 'null', 'null', 'null', 'null', 'null' )";
+  $resultado = mysqli_query($conexion, $consulta);
+
+  while($filas = mysqli_fetch_array($resultado)){
+    $id_producto_vendedor= $filas['id_producto_vendedor'];
+    $vendedor= $filas['vendedor'];
+    $nombre= $filas['nombre'];
+    $descripcion= $filas['descripcion'];
+    $costo= $filas['costo'];
+    $cantidad_disponible= $filas['cantidad_disponible'];
+    $cotizacionventa= $filas['cotizacionventa'];
+    $categoria= $filas['categoria'];
+    $nombrecategoria= $filas['nombrecategoria'];
+    
+
+  }
 ?>
 
 
@@ -19,7 +38,7 @@
     <link href="../../css/dropdowns.css" rel="stylesheet">
   </head>
   
-  <body>
+  <body onload="seleccion();">
   <?php  include("header.php"); ?>
     
     <main class="main">
@@ -39,55 +58,67 @@
                             <div class="formulario">
                               <p></p>
                               <div class="form-floating">
-                                  <input type="name" class="form-control"  placeholder="Ingrese el nombre del producto"  name="name_product"
-                                  required> 
+                                  <input type="name" class="form-control"  placeholder="Ingrese el nombre del producto"  name="nombre_producto" id="nombre_producto"
+                                  required  value="<?= $nombre?>"> 
                                   <label for="floatingInput">Nombre</label>
                               </div>
                               <div class="form-floating">
-                                <input type="name" class="form-control"  placeholder="Ingrese el nombre del producto"  name="name_product"
-                                required> 
+                                <input type="name" class="form-control"  placeholder="Ingrese el nombre del producto"  name="descripcion_producto" id="descripcion_producto"
+                                required  value="<?= $descripcion?>"> 
                                 <label for="floatingInput">Descripcion</label>
                               </div>
 
           
                               <div class="form-floating">
-                                <input type="name" class="form-control"  placeholder="Ingrese el nombre del producto"  name="name_product"
-                                required> 
+                                <input type="name" class="form-control"  placeholder="Ingrese el nombre del producto"  name="precio_producto" id="precio_producto"
+                                required value="<?= $costo?>"> 
                                 <label for="floatingInput">Precio</label>
                               </div>
                                 
-                            
+                              <div class="form-floating">
+                                <input type="name" class="form-control"  placeholder="Ingrese el nombre del producto" id="cantidaddisponible" name="cantidaddisponible"
+                                required value="<?php echo $cantidad_disponible ?>"> 
+                                <label for="floatingInput">Cantidad disponible</label>
+                              </div>
+                  
           
                             <div class="form-floating">
-                              <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="sexo" name="sexo" id="sexo" >
-                                <option selected>Elija una opcion</option>
-                                <option value="1">Categoria1 </option>
+                              <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="sexo" name="categoria_producto" id="categoria_producto" >
+                                <option selected  value="<?php echo $categoria ?> "><?php echo $nombrecategoria ?></option>
+                                <?php 
+                    
+                                $consulta = "SELECT * FROM categoria";
+                                $resultado = mysqli_query($conexion, $consulta);
+                                while($filas = mysqli_fetch_array($resultado)){ ?>
+                                <option value="<?php echo $filas['id_categoria'] ?> "><?php echo $filas['nombre'] ?> </option>
                                 
-                              </select>
+                                <?php } ?></select>
                               <label for="floatingSelect">Categoria</label>
                             </div>
 
+                           
                             <div class="form-floating">
-                              <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  type="sexo" name="sexo" id="sexo" >
-                                <option selected>Elija una opcion</option>
-                                <option value="1">Cotizar </option>
-                                <option value="1">Vender </option>
+                              <select class="form-select" aria-label="Floating label select example"  id="cotizar_vender_producto" name="cotizar_vender_producto" >           
+                                <option selected>Seleccione una opcion</option>
+                                <option value="1">Cotizar</option>
+                                <option value="2">Vender</option>
                               </select>
-                              <label for="floatingSelect">Es para...</label>
+                              <label for="floatingSelect">Es para..</label>
                             </div>
-          
+                            
+                            <input class="form-control"  id="seleccot"  value="<?= $cotizacionventa?>" >
 
           
                             <div class="item"> 
                               <p></p><p></p>
                               <label class="nav-link px-2 text-black text-center">Elija un video</label>
-                                  <input type="file" class="form-control" id="customFile" name="avatar" required> 
+                                  <input type="file" class="form-control" id="video_producto" name="video_producto" required> 
                             </div>
 
                             <div class="item"> 
                               <p></p><p></p>
                               <label class="nav-link px-2 text-black text-center">Elija una imagen</label>
-                                  <input type="file" class="form-control" id="customFile" name="avatar" required> 
+                                  <input type="file" class="form-control" id="imagen_producto" name="imagen_producto" required> 
                             </div>
   
                             <p></p><p></p>
@@ -139,6 +170,8 @@
         </footer>
         <div class="Copyright"><p class="copy">© 2022, Echo</p></div>
         <script src="../../js/bootstrap.bundle.min.js"></script>
+        
+        <script src="../../js/cotizarvender.js"></script>
     </body>
 
 

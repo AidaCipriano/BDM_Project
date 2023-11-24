@@ -391,7 +391,7 @@
         display: none;
     }
 
-    #btn_id, #selecsexo {
+    #btn_id, #selecsexo, #seleccot {
        display: none;
     }
 
@@ -500,7 +500,15 @@
     width: 100%;
     position: relative;
     border-radius: 50%;
+    height: 100%;
 }
+
+.perfil-usuario-avatar-img {
+    width: 10%;
+    position: block;
+    border-radius: 50%;
+}
+
 
 .boton-avatar {
     position: absolute;
