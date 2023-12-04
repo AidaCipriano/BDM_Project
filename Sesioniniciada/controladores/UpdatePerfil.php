@@ -16,35 +16,79 @@
     $id =  $_REQUEST['id'];
 if(isset($_POST['ActPerfil'])){
     if(
-        strlen($_POST['usuario_id']) 
+        strlen($_POST['usuario_id']) && strlen($_POST['rol'])     >= 1
     ){
-        $id = trim($_POST['usuario_id']);
-        $name = trim($_POST['name']);
-        $apellido = trim($_POST['apellido']);
-        $sexo = trim($_POST['sexo']);
-        $nacimiento = $_POST['nacimiento'];
-        $email = trim($_POST['email']);
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        $tipo_usuario = null;
-        $rol = null;
-        $nombreArchivo = $_FILES['avatar']['name'];
-        $rutaTemporal = $_FILES['avatar']['tmp_name'];
-        $contenidoImagen = file_get_contents($rutaTemporal);
-        $contenidoImagenEscapado = mysqli_real_escape_string($conexion, $contenidoImagen);
+        if (!empty($_FILES['imagen']['name'])) {
+            
+            if(trim($_POST['rol']) == 1){
+                $directorio_destino = "images/";
+            }
+            else if(trim($_POST['rol'])== 2){
+                $directorio_destino = "..images/";
+            }
+
+            $imagen_nombre = $_FILES['imagen']['name'];
+            $imagen_temp = $_FILES['imagen']['tmp_name'];
+
+            // Mover la imagen al directorio de destino
+            move_uploaded_file($imagen_temp, $directorio_destino . $imagen_nombre);
+
+
+            $imagen_path = $directorio_destino . $imagen_nombre;
+            
+            $id = trim($_POST['usuario_id']);
+            $name = trim($_POST['name']);
+            $apellido = trim($_POST['apellido']);
+            $sexo = trim($_POST['sexo']);
+            $nacimiento = $_POST['nacimiento'];
+            $email = trim($_POST['email']);
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
+            $tipo_usuario = null;
+            $rol = trim($_POST['rol']);
+        
+            
+            $consulta = "CALL sp_Usuarios('Actualizar', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$imagen_path');";
+        
+            $resultado = mysqli_query($conexion, $consulta);
+            if($resultado){
+            header("location:EditarPerfil.php?id=$id");
+            echo '<script>  alert("Informacion actualizada"); </script>';
+            }
+            else{
+                echo('Error');
+            }
+        }
+          
+        if (empty($_FILES['imagen']['name'])) {
+          
+            $imagen_path = trim($_POST['_imagen']);
+            
+            $id = trim($_POST['usuario_id']);
+            $name = trim($_POST['name']);
+            $apellido = trim($_POST['apellido']);
+            $sexo = trim($_POST['sexo']);
+            $nacimiento = $_POST['nacimiento'];
+            $email = trim($_POST['email']);
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
+            $tipo_usuario = null;
+            $rol = trim($_POST['rol']);
+        
+            
+            $consulta = "CALL sp_Usuarios('Actualizar', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$imagen_path');";
+
+            $resultado = mysqli_query($conexion, $consulta);
+            if($resultado){
+            header("location:EditarPerfil.php?id=$id");
+            echo '<script>  alert("Informacion actualizada"); </script>';
+            }
+            else{
+                echo('Error');
+            }
+        }
 
         
-        $consulta = "CALL sp_Usuarios('Actualizar', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$contenidoImagenEscapado');";
-       // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)
-       //                 VALUES('$idsuario', '$email', '$username', '$password')";
-        $resultado = mysqli_query($conexion, $consulta);
-        if($resultado){
-         header("location:EditarPerfil.php?id=$id");
-         echo '<script>  alert("Informacion actualizada"); </script>';
-        }
-        else{
-            echo('Error');
-        }
 
     }
 }
@@ -63,7 +107,7 @@ if(isset($_POST['deletePerfil'])){
         $password = trim($_POST['password']);
         $tipo_usuario = null;
         $rol = null;
-        $avatar = trim($_POST['avatar']);
+        $avatar = trim($_POST['imagen']);
         
         $consulta = "CALL sp_Usuarios('Dar de Baja', '$id', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$avatar');";
        // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)

@@ -15,6 +15,7 @@
     $descripcion = $filas['descripcion'];
     $nombrecompleto = $filas['nombrecompleto'];
     $fecha = $filas['creacion'];
+    $imagen = $filas['imagen'];
 
   }
 
@@ -38,7 +39,7 @@
                     while($filas = mysqli_fetch_array($resultado)){ ?>
                     <div class="col">
                       <div class="card shadow-sm">
-                        <img src="https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg" width="100%" height="225">
+                        <img src="<?php echo $filas['imagen'] ?>"width="100%" height="225">
                         <div class="card-body">
                           <dt><p class="Nombre-lista" > <?php echo $filas['nombre'] ?> </p></dt>
                           <p>Creado por <?php echo $filas['nombrecompleto'] ?>, el <?php echo $filas['creacion'] ?></p>

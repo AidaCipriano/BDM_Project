@@ -12,7 +12,6 @@ DROP TABLE IF EXISTS IMAGEN_PRODUCTO;
 DROP TABLE IF EXISTS VIDEO_PRODUCTO;
 DROP TABLE IF EXISTS PRODUCTO_VENDEDOR;
 DROP TABLE IF EXISTS CATEGORIA;
-DROP TABLE IF EXISTS IMAGEN_AVATAR;
 DROP TABLE IF EXISTS USUARIO;*/
 
 
@@ -29,7 +28,7 @@ CREATE TABLE USUARIO (
     rol						varchar(20)					not null comment "Rol del usuario: Vendedor, Administrador o Comprador",
     fecharegistro			datetime					not null  comment "Fecha en la que el Usuario se registro",
     ultimamodicacion		datetime					not null comment "Ultima vez que el Usuario modifico su informacion",
-    imagen					longblob					null comment 	"Avatar/Imagen del Perfil del Usuario",
+    imagen					varchar(255)					null comment 	"Avatar/Imagen del Perfil del Usuario",
     activo					bit							not null comment "Estado del Usuario.",
     administrador			bool						not null comment "Si el usuario es Admin o no",
 
@@ -37,26 +36,13 @@ CREATE TABLE USUARIO (
 			PRIMARY KEY (id_usuario)
 );
 
-CREATE TABLE IMAGEN_AVATAR (
-	id_imagen_avatar		int auto_increment		not null comment "ID de la Imagen",
-	titulo  					int					not null comment "Titulo de la foto de perfil del usuario",
-    usuario  					int					not null comment "Usuario que guardo la imagen",
-
-	CONSTRAINT PK_IMAGEN_AVATAR
-			PRIMARY KEY (id_imagen_avatar),
-	CONSTRAINT FK_IMAGEN_AVATAR
-			FOREIGN KEY (usuario)
-			REFERENCES USUARIO(id_usuario)
-);
-
-
-
 
 CREATE TABLE CATEGORIA (
 	id_categoria				int auto_increment					not null comment "ID de la Categoria",
     nombre						varchar(50)			not null comment "Nombre de la Categoria",
 	creador						int					not null comment "ID del usuario",
     descripcion					varchar(100)		not null comment "Descripcion sobre la categoria",
+    imagen						varchar(255)		not null comment "Imagen de la categoria",
     fechahoracreacion			datetime			not null comment "Fecha de Creacion",
 
 	CONSTRAINT PK_CATEGORIA
@@ -64,22 +50,6 @@ CREATE TABLE CATEGORIA (
 	CONSTRAINT FK_CATEGORIA_CREADOR
 			FOREIGN KEY (creador)
 			REFERENCES USUARIO(id_usuario)
-);
-
-CREATE TABLE IMAGEN_CATEGORIA (
-	id_imagen_categoria		int auto_increment		not null comment "ID de la Imagen",
-	titulo  					int					not null comment "Titulo de la imagen de la categoria",
-    categoria  					int					not null comment "Nombre de la categoria",
-    usuario  					int					not null comment "Usuario que guardo la imagen",
-
-	CONSTRAINT PK_IMAGEN_CATEGORIA
-			PRIMARY KEY (id_imagen_avatar),
-	CONSTRAINT FK_IMAGEN_CATEGORIA
-			FOREIGN KEY (usuario)
-			REFERENCES USUARIO(id_usuario),
-	CONSTRAINT FK_IMAGEN_CATEGORIA
-			FOREIGN KEY (categoria)
-			REFERENCES CATEGORIA(id_categoria)
 );
 
 CREATE TABLE PRODUCTO_VENDEDOR (
@@ -91,7 +61,7 @@ CREATE TABLE PRODUCTO_VENDEDOR (
     activo						bit						not null comment "Estatus del Producto",
     fecha_creacion				date					not null comment "Fecha de creacion del Producto",
     cantidad_disponible			int						not null comment "Cantidad disponible del Producto",
-	cotizacionventa				varchar(2)					not null comment "Es para cotizar o vender el Producto?",
+	cotizacionventa				varchar(2)				not null comment "Es para cotizar o vender el Producto?",
 	categoria					int						not null comment "A que categoria el Producto?",
 
 	CONSTRAINT PK_PRODUCTO_VENDEDOR
@@ -106,8 +76,9 @@ CREATE TABLE PRODUCTO_VENDEDOR (
 
 CREATE TABLE VIDEO_PRODUCTO (
 	id_video_producto		int auto_increment		not null comment "ID del Video",
-	titulo  					int					not null comment "Titulo del video del Producto",
-    producto  					int					not null comment "ID del Producto",
+	nombre  					varchar(255)		not null comment "Titulo del video del Producto",
+    ruta						varchar(255)		not null comment "Ruta donde se guardo el video",
+    producto  					int 				null comment "ID del Producto",
     vendedor  					int					not null comment "Vendedor del Producto",
 
 	CONSTRAINT PK_VIDEO_PRODUCTO
@@ -123,7 +94,8 @@ CREATE TABLE VIDEO_PRODUCTO (
 CREATE TABLE IMAGEN_PRODUCTO (
 	id_imagen_producto		int auto_increment		not null comment "ID de la Imagen",
 	titulo  					int					not null comment "Titulo de la imagen del Producto",
-    producto  					int					not null comment "ID del Producto",
+	contenido					longblob			not null comment "Imagen del producto",
+    producto  					int					 null comment "ID del Producto",
     vendedor  					int					not null comment "Vendedor del Producto",
 
 	CONSTRAINT PK_IMAGEN_PRODUCTO

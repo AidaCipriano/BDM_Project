@@ -44,7 +44,7 @@
                       <div class="row">
                           <div id="open">
                             <a href="#" class="thumbnail">
-                              <img src="../../img/products/consola2.jpg" class="card-img-top" alt="..." >
+                              <img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($filas['imagen'])?>" class="card-img-top" alt="..." >
                             </a>
                           </div>
                       </div>

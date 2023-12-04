@@ -13,7 +13,7 @@
     $password= $filas['contrasena'];
     $sexo= $filas['genero'];
     $nacimiento= $filas['nacimiento'];
-   
+    $rol =  $filas['rol'];
     $idusuario = $filas['id_usuario'];
     $avatar = ($filas['imagen']);
 
@@ -22,39 +22,51 @@
 ?>
 
 <section class="seccion-perfil-usuario">
-      <div class="perfil-usuario-header">
-        <div class="perfil-usuario-portada">
-          <div class="perfil-usuario-avatar">
-            <img src="<?php echo $avatar; ?>" alt="img-avatar">
-            
-          </div>
+  <div class="perfil-usuario-header">
+    <div class="perfil-usuario-portada">
+      <div class="perfil-usuario-avatar">
+         <img src="<?php echo $avatar; ?>" alt="img-avatar">
         </div>
       </div>
-      <div class="perfil-usuario-body">
-        <br>
-        <form action="" method="POST" id="form" class="form-register" >
-          <div class="formulario" id="form">
-            <div class="form-floating">
-              <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre" id="name" name="name"  value="<?= $nombre?>"> 
-              <label for="floatingInput">Nombre/s</label>
-            </div>
-            <div class="form-floating">
-              <input type="apellido" class="form-control"  placeholder="Ingrese su apellido" placeholder="Ingrese su apellido" id="apellido" name="apellido"  value="<?= $apellido?>" > 
-              <label for="floatingInput">Apellido/s</label>
-            </div>
-            <div class="form-floating"> 
-              <input type="input-email" class="form-control"  placeholder="Ingrese su email" id="email" name="email" value="<?= $email?>" > 
-              <label for="floatingInput">Email</label>
-            </div>
-            <div class="form-floating"> 
+    </div>
+    
+    <div class="perfil-usuario-body">
+      <br>
+      <form action="" method="POST" id="form" class="form-register"   enctype="multipart/form-data">
+        <div class="formulario" id="form">
+          <div class="form-floating">
+            <input type="name" class="form-control"  placeholder="Ingrese su nombre" placeholder="Ingrese su nombre" id="name" name="name"  value="<?= $nombre?>"> 
+            <label for="floatingInput">Nombre/s</label>
+          </div>
+          <div class="form-floating">
+            <input type="apellido" class="form-control"  placeholder="Ingrese su apellido" placeholder="Ingrese su apellido" id="apellido" name="apellido"  value="<?= $apellido?>" > 
+            <label for="floatingInput">Apellido/s</label>
+          </div>
+          <div class="form-floating"> 
+            <input type="input-email" class="form-control"  placeholder="Ingrese su email" id="email" name="email" value="<?= $email?>" > 
+            <label for="floatingInput">Email</label>
+          </div>
+            
+          <div class="form-floating"> 
             <input type="input-user" class="form-control"  placeholder="Ingrese su nombre de usuario" id="username" name="username" value="<?= $_usuario?>" > 
             <label for="floatingInput">Usuario</label>
-
           </div>
+            
+          <div class="form-floating"> 
+            <input type="input-user" class="form-control"  id="btn_rol" name="rol" value="<?= $rol?>" > 
+            <label for="floatingInput">Rol</label>
+          </div>
+            
+          <div class="form-floating"> 
+            <input type="input-user" class="form-control"  name="_imagen" value="<?= $avatar?>" > 
+            <label for="floatingInput">Imagen</label>
+          </div>
+             
           <div class="form-floating"> 
             <input type="password" class="form-control"  placeholder="Ingrese su contaseña" id="password" name="password"  value="<?= $password?>" >
             <label for="floatingInput">Contraseña</label>
           </div>
+          
           <div class="form-floating">
             <select class="form-select" aria-label="Floating label select example"  id="sexo" name="sexo" >           
               <option selected>Seleccione una opcion</option>
@@ -71,11 +83,13 @@
           </div>
           <br>
           <div class="item"> 
-            <label class="nav-link px-2 text-black text" >Elija una imagen como avatar </label>
-            <input type="file" class="form-control" id="customFile" id="avatar" name="avatar" value="<?= $avatar?>" >
+            <label class="nav-link px-2">Elija una imagen como avatar </label>
+            <input type="file" class="form-control" id="customFile" id="imagen" name="imagen" value="<?= $avatar?>"> 
           </div>
+
           <input type="input-email" class="form-control"  id="btn_id" name="usuario_id" value="<?= $idusuario?>" >
           <input class="form-control"  id="selecsexo"  value="<?= $sexo?>" >
+         
           
           <div class="espacio_Boton">
             <label class="nav-link px-2 text-black text-center"> 
@@ -88,6 +102,8 @@
               <input class="btn btn-danger"  type="submit"  name="deletePerfil"  id="btn_delete_Perfil" value="Borrar Cuenta">
             </label>
           </div>
-        </form>
-      </div>
-    </section>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

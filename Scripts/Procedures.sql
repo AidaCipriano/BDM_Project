@@ -44,9 +44,7 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
                 
                 set opc = "Registrado";
                 SELECT pnombreusuario as Usuario, opc as Mensaje;
-			END IF;
-			
-			
+			END IF;		
 			
 		END IF;
         
@@ -104,7 +102,10 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
 
 END$$
 
-/*call sp_Usuarios('Actualizar', 1, '1', '2', '3', '2000-12-10', '4', '5', '7', null, null, null);*/
+
+ call sp_Usuarios('Actualizar', 2, '1', '2', '3', '2000-12-10', '5', '5', '7', 'u', 'Cliente', 'images');
+select * from usuario;
+call sp_Usuarios('Registro', null, '1', '2', '3', '2000-12-10', '4', '5', '7', null, null, null);
 select * from usuario;
 /*select * from imagen_avatar;*/
 #Iniciar sesion
@@ -193,6 +194,19 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
     
     if(opc='Actualizar')
     then
+    	IF(pimagen = '')
+        THEN
+        	
+    		UPDATE CATEGORIA
+			SET
+                nombre 		= pnombre, 
+                descripcion	= pdescripcion
+		WHERE
+			id_categoria = pid_categoria ;
+       END IF;
+       IF(pimagen != '')
+        THEN
+        	
     		UPDATE CATEGORIA
 			SET
                 nombre 		= pnombre, 
@@ -200,6 +214,8 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
                 imagen		= pimagen
 		WHERE
 			id_categoria = pid_categoria ;
+        END IF;
+
     end if;
     
 	if(opc='Ver')
@@ -224,6 +240,7 @@ DELIMITER $$
     pid_usuario				varchar(50)	
 	)
 BEGIN
+DECLARE pmin int;
 	if(opc='Mis Categorias')
     then
 		select c.id_categoria as id_categoria, c.nombre as nombre , c.creador as creador, c.descripcion as descripcion, c.imagen as imagen, date(c.fechahoracreacion) as creacion, u.nombreusuario as nombreusuario, concat(u.nombres, ' ', u.apellidos) as nombrecompleto
@@ -234,24 +251,27 @@ BEGIN
     end if;
     if(opc='Mis productos')
     then
+    
+    set pmin = (select MIN(id_imagen_producto)  from  imagen_producto i inner join PRODUCTO_VENDEDOR pv on i.producto = pv.id_producto_vendedor  where  pid_usuario = pv.vendedor);
 		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible,
-        pv.cotizacionventa as cotizacionventa,  pv.categoria as categoria,  u.nombreusuario as nombreusuario
+        pv.cotizacionventa as cotizacionventa,  pv.categoria as categoria,  u.nombreusuario as nombreusuario, 
+        (select contenido from imagen_producto 
+        where   pmin = id_imagen_producto) as imagen
         from PRODUCTO_VENDEDOR pv 
          inner join usuario u
-			on u.id_usuario = pv.vendedor
-        where  pid_usuario = pv.vendedor;
+			on u.id_usuario = pv.vendedor;
     end if;
     if(opc='Editar Perfil')
     then
-		SELECT nombres, apellidos, email, nombreusuario, contrasena, genero, nacimiento, imagen, id_usuario FROM usuario where id_usuario = pid_usuario;
+		SELECT nombres, apellidos, email, nombreusuario, contrasena, genero, nacimiento, imagen, id_usuario, rol FROM usuario where id_usuario = pid_usuario;
     end if;
-END$$
+END $$
 
 
 INSERT INTO CATEGORIA ( nombre, creador, descripcion, fechahoracreacion)
 			VALUES( '2', 1, '3',  (SELECT DATE(NOW())));
-select * from categoria
-call sp_GestionCategorias('Ver', null, null, 1, null);
+call sp_GestionCategorias('Actualizar', 1, 'nombre', 1, 'imagen1', 'descripcion');select * from categoria
+
 #2. Vendedor - Gestion de los productos
 DROP procedure IF EXISTS sp_GestionProductos;
 DELIMITER $$
@@ -264,23 +284,46 @@ DELIMITER $$
     pdescripcion				varchar(300),
     pcantidad_disponible		int,
 	pcotizacionventa			varchar(2),
-	pcategoria					int
+	pcategoria					int,
+    pvideo						varchar(255),
+    pnombrevideo				varchar(255),
+    pimagen						longblob,
+    pimagennombre				varchar(255),
+    pimagen1						longblob,
+    pimagennombre1				varchar(255),
+    pimagen2						longblob,
+    pimagennombre2				varchar(255)
 	)
 BEGIN
+DECLARE pmin int;
 DECLARE busqueda_producto INT;
-
+declare pId int;	
 	SET busqueda_producto =  (SELECT COUNT(id_producto_vendedor) FROM PRODUCTO_VENDEDOR WHERE nombre = pnombre and pvendedor = vendedor);
     
 	if(opc='Crear')
     then
 		if (busqueda_producto= 0)
         then
-			INSERT INTO PRODUCTO_VENDEDOR (vendedor, nombre, costo, descripcion, activo, fecha_creacion, cantidad_disponible, cotizacion, venta, categoria)
-			VALUES(pvendedor, pnombre, pcosto, pdescripcion, 1,  (SELECT DATE(NOW())), pcantidad_disponible, pcotizacion, pventa, pcategoria);
-		end if;
+			INSERT INTO PRODUCTO_VENDEDOR (vendedor, nombre, costo, descripcion, activo, fecha_creacion, cantidad_disponible, cotizacionventa, categoria)
+			VALUES(pvendedor, pnombre, pcosto, pdescripcion, 1,  (SELECT DATE(NOW())), pcantidad_disponible, pcotizacionventa, pcategoria);
+
+			set pId = (select MAX(id_producto_vendedor) from PRODUCTO_VENDEDOR); 
+            
+            INSERT INTO video_producto (nombre, ruta, producto, vendedor)
+            VALUES(pnombrevideo, pvideo, pId, pvendedor);
+            
+            INSERT INTO imagen_producto (titulo, contenido, producto, vendedor)
+            VALUES(pimagennombre, pimagen, pId, pvendedor);
+            
+            INSERT INTO imagen_producto (titulo, contenido, producto, vendedor)
+            VALUES(pimagennombre1, pimagen1, pId, pvendedor);
+            
+            INSERT INTO imagen_producto (titulo, contenido, producto, vendedor)
+            VALUES(pimagennombre2, pimagen2, pId, pvendedor);
         
         set opc = "Se registro con exito";
              SELECT pnombre as Producto, opc as Mensaje;
+        end if;
         
          if(busqueda_producto= 1)
 		then
@@ -291,18 +334,9 @@ DECLARE busqueda_producto INT;
 	
     if(opc='Actualizar')
     then
-    		UPDATE PRODUCTO_VENDEDOR
-			SET
-                nombre	= pnombre, 
-                costo	= pcosto, 
-                descripcion		= pdescripcion, 
-                cantidad_disponible		= pcantidad_disponible, 
-                cotizacionventa	= pcotizacionventa, 
-                categoria = pcategoria
-		WHERE
-			id_producto_vendedor = pid_producto_vendedor ;
-    end if;
-    
+		    select * from producto_vendedor;
+		
+    END IF;
 	if(opc='Dar de baja')
     then
     		UPDATE PRODUCTO_VENDEDOR
@@ -314,8 +348,7 @@ DECLARE busqueda_producto INT;
     end if;
     	if(opc='Ver')
     then
-		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible,
-        pv.cotizacion as cotizacion, pv.venta as venta, pv.categoria as categoria,  u.nombreusuario as nombreusuario
+		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible, pv.categoria as categoria,  u.nombreusuario as nombreusuario
         from PRODUCTO_VENDEDOR pv 
          inner join usuario u
 			on u.id_usuario = c.creador
@@ -324,15 +357,24 @@ DECLARE busqueda_producto INT;
         
     if(opc='Editar Producto')
     then
-		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible,
-        pv.cotizacionventa as cotizacionventa, pv.categoria as categoria, ca.nombre as nombrecategoria, u.nombreusuario as nombreusuario
+     set pmin = (select MIN(id_imagen_producto)  from  imagen_producto  where  producto = pid_producto_vendedor);
+		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible, pv.cotizacionventa as cotizacionventa, pv.categoria as categoria, ca.nombre as nombrecategoria, u.nombreusuario as nombreusuario,  (select contenido from imagen_producto 
+        where   pmin = id_imagen_producto) as imagen,  (select titulo from imagen_producto 
+        where   pmin = id_imagen_producto) as nombreimagen, v.ruta as video
         from PRODUCTO_VENDEDOR pv 
          inner join usuario u
 			on u.id_usuario =  pv.vendedor
 		inner join categoria ca
 			on ca.id_categoria = pv.categoria
+        inner join imagen_producto i
+        	on i.producto = pv.id_producto_vendedor
+        inner join video_producto v
+        	on v.producto = pv.id_producto_vendedor
         where pid_producto_vendedor = id_producto_vendedor;
     end if;
 END$$
-call sp_GestionProductos('Crear', null, 1, '2', '1', '1', 1, 1, 1, 1);
+call sp_GestionProductos('Crear', null, 1, '3', '1', '1', 1, '1', '1', 1, '3', '4');
+select * from producto_vendedor;
+select * from video_producto
+
 

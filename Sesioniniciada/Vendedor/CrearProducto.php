@@ -3,7 +3,6 @@
  include("../controladores/CategoriasGestion.php");
  include("../controladores/ProductosGestion.php");
 
-
 ?>
 
 <!DOCTYPE html>
@@ -24,11 +23,13 @@
   <?php  include("header.php"); ?>
     <main class="main">
       <div class="row ">
-        <form  action="" method="post" id="form_producto" >
+        <form  action="" method="post" id="form_producto"  enctype="multipart/form-data" >
           <div class="col">
             <div class="row g-0 border rounded mb-4 shadow-sm ">
               <div class="col CrearLista_CajaImagen ">
-                <img src="../../img/Listas/img/Predeterminado.jpg" width="100%" >
+                <div id="visorArchivo">
+                  <!--Aqui se desplegará el fichero-->
+                </div>
               </div>  
               
               <div class="col-md-1 "> </div>
@@ -88,13 +89,23 @@
                 <div class="item"> 
                   <p></p><p></p>
                   <label class="nav-link px-2 text-black text-center">Elija un video</label>
-                  <input type="file" class="form-control" id="video_producto" name="video_producto"> 
+                  <input type="file" class="form-control" id="video_producto" name="video_producto" accept="video/mp4"  onchange="return validarExt_video()" required > 
                 </div>
                   
                 <div class="item"> 
                   <p></p><p></p>
                   <label class="nav-link px-2 text-black text-center">Elija una imagen</label>
-                  <input type="file" class="form-control" id="imagen_producto" name="imagen_producto" > 
+                  <input  type="file" id="archivoInput"  id="imagen_producto" class="form-control"  name="imagen_producto" accept="image/png, image/jpeg, image/jpg"  onchange="return validarExt_imagen()" required/>
+                </div>
+                <div class="item"> 
+                  <p></p><p></p>
+                  <label class="nav-link px-2 text-black text-center">Elija una imagen</label>
+                  <input  type="file" id="archivoInput1"  id="imagen_producto1" class="form-control"  name="imagen_producto1" accept="image/png, image/jpeg, image/jpg"  onchange="return validarExt_imagen1()" required/>
+                </div>
+                <div class="item"> 
+                  <p></p><p></p>
+                  <label class="nav-link px-2 text-black text-center">Elija una imagen</label>
+                  <input  type="file" id="archivoInput2"  id="imagen_producto2" class="form-control"  name="imagen_producto2" accept="image/png, image/jpeg, image/jpg"  onchange="return validarExt_imagen2()" required/>
                 </div>
                   
                 <p></p><p></p>
@@ -103,7 +114,8 @@
                     <label class="nav-link px-2 text-black text-center"> 
                       <input class="btn btn-success" onclick="btn_guardarProducto();" value="Guardar">
                       <p class="warnings" id="warnings"></p>
-                      <input class="btn btn-primary"  type="submit"  name="CrearProducto"  id="btn_guardar_producto" value="Enviar">
+                      <input class="btn btn-primary"  type="submit"  name="ActProducto"  id="btn_guardar_producto" value="Enviar">
+
                     </label>
                   </div>
                 <p></p><p></p>
@@ -116,6 +128,103 @@
     
     <script src="../../js/menu.js"></script>
     <script src="../../js/producto.js"></script>
+
+    <script type="text/javascript">
+
+    function validarExt_imagen()
+    {
+        var archivoInput = document.getElementById('archivoInput');
+        var archivoRuta = archivoInput.value;
+        var extPermitidas = /(.PNG|.JPG|.JPEG|.jpg|.jpeg|.png)$/i;
+        if(!extPermitidas.exec(archivoRuta)){
+            alert('Solo se permiten extensiones de imagen: jpg, png y jpeg');
+            archivoInput.value = '';
+            return false;
+        }
+
+        else
+        {
+            if (archivoInput.files && archivoInput.files[0]) 
+            {
+                var visor = new FileReader();
+                visor.onload = function(e) 
+                {
+                    document.getElementById('visorArchivo').innerHTML = 
+                    '<embed src="'+e.target.result+'" width="50%" height="50%" />';
+                };
+                visor.readAsDataURL(archivoInput.files[0]);
+            }
+        }
+    }
+
+    function validarExt_imagen1()
+    {
+        var archivoInput = document.getElementById('archivoInput1');
+        var archivoRuta = archivoInput.value;
+        var extPermitidas = /(.PNG|.JPG|.JPEG|.jpg|.jpeg|.png)$/i;
+        if(!extPermitidas.exec(archivoRuta)){
+            alert('Solo se permiten extensiones de imagen: jpg, png y jpeg');
+            archivoInput.value = '';
+            return false;
+        }
+
+        else
+        {
+            if (archivoInput.files && archivoInput.files[0]) 
+            {
+                var visor = new FileReader();
+                visor.onload = function(e) 
+                {
+                    document.getElementById('visorArchivo').innerHTML = 
+                    '<embed src="'+e.target.result+'" width="50%" height="50%" />';
+                };
+                visor.readAsDataURL(archivoInput.files[0]);
+            }
+        }
+    }
+    function validarExt_imagen2()
+    {
+        var archivoInput = document.getElementById('archivoInput2');
+        var archivoRuta = archivoInput.value;
+        var extPermitidas = /(.PNG|.JPG|.JPEG|.jpg|.jpeg|.png)$/i;
+        if(!extPermitidas.exec(archivoRuta)){
+            alert('Solo se permiten extensiones de imagen: jpg, png y jpeg');
+            archivoInput.value = '';
+            return false;
+        }
+
+        else
+        {
+            if (archivoInput.files && archivoInput.files[0]) 
+            {
+                var visor = new FileReader();
+                visor.onload = function(e) 
+                {
+                    document.getElementById('visorArchivo').innerHTML = 
+                    '<embed src="'+e.target.result+'" width="50%" height="50%" />';
+                };
+                visor.readAsDataURL(archivoInput.files[0]);
+            }
+        }
+    }
+
+    function validarExt_video()
+    {
+        var archivoInput = document.getElementById('video_producto');
+        var archivoRuta = archivoInput.value;
+        var extPermitidas = /(.mp4|.MP4)$/i;
+        if(!extPermitidas.exec(archivoRuta)){
+            alert('Solo se permiten extensiones de video: mp4');
+            archivoInput.value = '';
+            return false;
+        }
+
+        
+    }
+    </script>
+
+    
+
 
     <footer class="main-footer">
         <div class="footer__section">

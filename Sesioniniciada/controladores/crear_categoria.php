@@ -1,6 +1,20 @@
+<?php
+ include ('controlador.php');
+ $id =  $_REQUEST['id'];
+
+  $consulta = "CALL sp_Gestion('Editar Perfil', '$id')";
+  $resultado = mysqli_query($conexion, $consulta);
+
+  while($filas = mysqli_fetch_array($resultado)){
+    $rol =  $filas['rol'];
+
+  }
+?>
+
+
 <main class="main">
     <div class="row ">
-    <form action="" method="post" id="form_categoria" >
+    <form action="" method="post" id="form_categoria"  enctype="multipart/form-data" >
             <div class="">
               <div class="row g-0 border rounded mb-4 shadow-sm ">
               <div class="col CrearLista_CajaImagen " >
@@ -19,11 +33,19 @@
                     <input type="descripcion" class="form-control" name="descripcion"  id= "descripcioncat" 
                     required> 
                   </div>
-                  <div class="item"> 
-                    <p></p><p></p>
-                    <label class="nav-link px-2 text-black text-center">Elija una imagen</label>
-                    <input type="file" class="form-control" id="customFile" name="imagen_categoria" required> 
+
+                  
+                    <h4 class="product__title text-center mt-5"> <label> Imagen</label></h3>
+                    <input type="file" class="form-control" id="customFile" id="fileTest" name="fileTest" required> 
+
+                  
+                    
+
+                  <div class="form-floating"> 
+                    <input type="input-user" class="form-control"  id="btn_rol" name="rol" value="<?= $rol?>" > 
+                    
                   </div>
+                
                   <p></p><p></p>
                   <div class="espacio_Boton">
                     <label class="nav-link px-2 text-black text-center"> 

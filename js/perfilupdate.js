@@ -7,7 +7,6 @@ const pass = document.getElementById("password");
 const sex = document.getElementById("sexo");
 const type_user = document.getElementById("tipo_usuario");
 const rol = document.getElementById("rol");
-const avatar = document.getElementById("avatar");
 
 const form = document.getElementById("form");
 const parrafo = document.getElementById("warnings");

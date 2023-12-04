@@ -3,6 +3,7 @@
   include '../controladores/conexion.php';
   //$user = $_SESSION['usuario'];
 
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +29,8 @@
   <?php  include("header.php"); ?>
   
   <?php  include("../controladores/editar_categoria.php"); ?>
-       
+  
+  <script src="../../js/categoria.js"></script>
 
 
  

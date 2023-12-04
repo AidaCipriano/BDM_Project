@@ -31,27 +31,27 @@ if(isset($_POST['register'])){
         
         
        
-        // Directorio donde se guardarán las imágenes (ajustar según tu configuración)
+            // Directorio donde se guardarán las imágenes (ajustar según tu configuración)
 
-        // Obtener información de la imagen
-        $imagen_nombre = $_FILES['imagen']['name'];
-        $imagen_temp = $_FILES['imagen']['tmp_name'];
+            // Obtener información de la imagen
+            $imagen_nombre = $_FILES['imagen']['name'];
+            $imagen_temp = $_FILES['imagen']['tmp_name'];
 
-        // Mover la imagen al directorio de destino
-        move_uploaded_file($imagen_temp, $directorio_destino . $imagen_nombre);
+            // Mover la imagen al directorio de destino
+            move_uploaded_file($imagen_temp, $directorio_destino . $imagen_nombre);
 
-        // Guardar la ruta de la imagen en la variable $imagen_path
-        if(trim($_POST['rol']) == 1){
-            $directorio_destino = "images/";
+            // Guardar la ruta de la imagen en la variable $imagen_path
+            if(trim($_POST['rol']) == 1){
+                $directorio_destino = "images/";
+            }
+            else if(trim($_POST['rol'])== 2){
+                $directorio_destino = "../images/";
+            }
+
+
+
+            $imagen_path = $directorio_destino . $imagen_nombre;
         }
-        else if(trim($_POST['rol'])== 2){
-            $directorio_destino = "../images/";
-        }
-
-
-
-        $imagen_path = $directorio_destino . $imagen_nombre;
-    }
 
         $idsuario = null;
         $name = trim($_POST['name']);
@@ -63,6 +63,8 @@ if(isset($_POST['register'])){
         $password = trim($_POST['password']);
         $tipo_usuario = trim($_POST['tipo_usuario']);
         $rol = trim($_POST['rol']);
+
+        
       
         
         $consulta = "CALL sp_Usuarios('Registro', '$idsuario', '$name', '$apellido', '$sexo', '$nacimiento', '$email', '$username', '$password', '$tipo_usuario', '$rol', '$imagen_path');";
@@ -72,15 +74,6 @@ if(isset($_POST['register'])){
         $filas = mysqli_fetch_array($resultado);
 
         if($filas['Mensaje']=="Registrado"){
-
-            // Mover la imagen al directorio "imagenes"
-           // $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
-            // Usar el nombre original de la imagen
-           // $nombreImagen = $nombreArchivo;
-          //  $rutaImagenes = $_SERVER['DOCUMENT_ROOT'] . '/Imagenes/';
-          //  $rutaCompleta = $rutaImagenes . $nombreImagen;
-         //   move_uploaded_file($_FILES['foto']['tmp_name'], $rutaCompleta);
-
 
             echo '<script>  alert("Usuario registrado"); </script>';
             
@@ -97,7 +90,9 @@ if(isset($_POST['register'])){
 
     }
 
-    }else {
+    }
+    
+    else {
         echo 'Por favor, seleccione una imagen.';
     }
 }

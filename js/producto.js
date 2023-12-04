@@ -9,6 +9,8 @@ const parrafo = document.getElementById("warnings");
 
 const btn = document.getElementById("btn_guardar_producto");
 
+
+
 function btn_guardarProducto()
 {
 
@@ -71,8 +73,5 @@ function btn_guardarProducto()
         btn.click();
     }
 } 
-
-
-
 
 

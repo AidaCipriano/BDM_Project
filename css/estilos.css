@@ -379,7 +379,7 @@
     }
 
 
-    #btnregister, #btn_guardar_categoria, #btn_guardar_producto {
+    #btnregister, #btn_guardar_categoria, #btn_guardar_producto  {
         display: none;
     }
 
@@ -391,7 +391,7 @@
         display: none;
     }
 
-    #btn_id, #selecsexo, #seleccot {
+    #btn_id, #selecsexo, #seleccot, #btn_rol {
        display: none;
     }
 
@@ -931,8 +931,10 @@
    /* border: 2px solid blue;*/
     padding-right: 2rem;
     padding-left: 2rem;
+    text-align: center;
   }
 
+  
   .CrearLista_Texto{
 
     padding: 3rem;

@@ -30,11 +30,6 @@ function btn_guardarCategoria()
         entrar = true
     }
 
-    
-
-
-        
-    
 
     if(entrar == true){
         parrafo.innerHTML = warnings
