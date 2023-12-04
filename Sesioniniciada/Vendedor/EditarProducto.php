@@ -119,7 +119,7 @@
                   <p></p><p></p>
                   <label class="nav-link px-2 text-black text-center">Elija una imagen</label>
                   <input  type="file" id="archivoInput2"  id="imagen_producto2" class="form-control"  name="imagen_producto2" accept="image/png, image/jpeg, image/jpg"  
-                  onchange="return validarExt_imagen2()" value="<?= $imagennombre?>"/>
+                  onchange="return validarExt_imagen2()" />
                 </div>
                     <p></p><p></p>
                     <p></p><p></p>
@@ -239,7 +239,6 @@
 
 
 
-        <script src="../../js/menu.js"></script>
         <script src="../../js/producto.js"></script>
         <script src="../../js/cotizarvender.js"></script>
         

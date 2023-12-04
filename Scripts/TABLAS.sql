@@ -30,7 +30,7 @@ CREATE TABLE USUARIO (
     ultimamodicacion		datetime					not null comment "Ultima vez que el Usuario modifico su informacion",
     imagen					varchar(255)					null comment 	"Avatar/Imagen del Perfil del Usuario",
     activo					bit							not null comment "Estado del Usuario.",
-    administrador			bool						not null comment "Si el usuario es Admin o no",
+    administrador			tinyint						not null comment "Si el usuario es Admin o no",
 
 	CONSTRAINT PK_USUARIO
 			PRIMARY KEY (id_usuario)
@@ -61,7 +61,7 @@ CREATE TABLE PRODUCTO_VENDEDOR (
     activo						bit						not null comment "Estatus del Producto",
     fecha_creacion				date					not null comment "Fecha de creacion del Producto",
     cantidad_disponible			int						not null comment "Cantidad disponible del Producto",
-	cotizacionventa				varchar(2)				not null comment "Es para cotizar o vender el Producto?",
+	cotizacionventa				varchar(10)				not null comment "Es para cotizar o vender el Producto?",
 	categoria					int						not null comment "A que categoria el Producto?",
 
 	CONSTRAINT PK_PRODUCTO_VENDEDOR
@@ -93,7 +93,7 @@ CREATE TABLE VIDEO_PRODUCTO (
 
 CREATE TABLE IMAGEN_PRODUCTO (
 	id_imagen_producto		int auto_increment		not null comment "ID de la Imagen",
-	titulo  					int					not null comment "Titulo de la imagen del Producto",
+	titulo  					varchar(255)		not null comment "Titulo de la imagen del Producto",
 	contenido					longblob			not null comment "Imagen del producto",
     producto  					int					 null comment "ID del Producto",
     vendedor  					int					not null comment "Vendedor del Producto",

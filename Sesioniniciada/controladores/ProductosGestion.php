@@ -109,7 +109,7 @@
 
 if(isset($_POST['ActProducto'])){
     if(
-        strlen($_POST['usuario_id'])     >= 1 
+        strlen($_POST['nombre_producto'])  >= 1    
     ){
         if (!empty($_FILES['video_producto']['name'])) {
                 

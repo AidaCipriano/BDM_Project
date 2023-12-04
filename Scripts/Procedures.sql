@@ -44,7 +44,9 @@ SET v_buscaremail = (SELECT Count(email) FROM USUARIO WHERE email = pemail);
                 
                 set opc = "Registrado";
                 SELECT pnombreusuario as Usuario, opc as Mensaje;
-			END IF;		
+			END IF;
+			
+			
 			
 		END IF;
         
@@ -116,7 +118,7 @@ DELIMITER $$
 	IN pcontrasena				VARCHAR(20)	
 	) 
 BEGIN
-	DECLARE busqueda_Cuenta INT; DECLARE v_buscaremail int ; DECLARE v_buscarpasword VARCHAR(20) ; DECLARE v_id INT; declare prol varchar(50);
+DECLARE busqueda_Cuenta INT; DECLARE v_buscaremail int ; DECLARE v_buscarpasword VARCHAR(20) ; DECLARE v_id INT; declare prol varchar(50);
     declare pactivo bit; declare mensaje varchar(30);
 	SET busqueda_Cuenta =  (SELECT COUNT(id_usuario) FROM USUARIO WHERE email = pemail AND contrasena = pcontrasena);
     SET pactivo = (SELECT activo FROM USUARIO WHERE email = pemail);
@@ -160,6 +162,8 @@ IF (busqueda_Cuenta = 0)
             end if;
         
     END IF;
+    
+
 END$$
 
 DROP procedure IF EXISTS sp_GestionCategorias;
@@ -229,7 +233,12 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
         
     if(opc='Editar Categoria')
     then
-		SELECT id_categoria, nombre, creador, descripcion, imagen, fechahoracreacion FROM categoria where id_categoria = pid_categoria;
+		SELECT c.id_categoria as id_categoria, c.nombre as nombre, c.creador as creador, c.descripcion as descripcion, c.imagen as imagen, c.fechahoracreacion as fechahoracreacion, u.rol as rol
+        
+        FROM categoria c 
+         inner join usuario u
+			on u.id_usuario = c.creador
+        where c.id_categoria = pid_categoria;
     end if;
 END$$
 
@@ -265,7 +274,7 @@ DECLARE pmin int;
     then
 		SELECT nombres, apellidos, email, nombreusuario, contrasena, genero, nacimiento, imagen, id_usuario, rol FROM usuario where id_usuario = pid_usuario;
     end if;
-END $$
+END$$
 
 
 INSERT INTO CATEGORIA ( nombre, creador, descripcion, fechahoracreacion)
@@ -289,9 +298,9 @@ DELIMITER $$
     pnombrevideo				varchar(255),
     pimagen						longblob,
     pimagennombre				varchar(255),
-    pimagen1						longblob,
+	pimagen1						longblob,
     pimagennombre1				varchar(255),
-    pimagen2						longblob,
+	pimagen2						longblob,
     pimagennombre2				varchar(255)
 	)
 BEGIN
@@ -334,8 +343,22 @@ declare pId int;
 	
     if(opc='Actualizar')
     then
-		    select * from producto_vendedor;
-		
+UPDATE PRODUCTO_VENDEDOR
+							SET
+								nombre	= pnombre, 
+								costo	= pcosto, 
+								descripcion		= pdescripcion, 
+								cantidad_disponible		= pcantidad_disponible, 
+								cotizacionventa	= pcotizacionventa,
+								categoria = pcategoria
+						WHERE
+							id_producto_vendedor = pid_producto_vendedor ;
+						UPDATE video_producto
+							set 
+								nombre = pnombrevideo,
+								ruta = pvideo
+						 WHERE 
+							producto = pid_producto_vendedor;		
     END IF;
 	if(opc='Dar de baja')
     then
