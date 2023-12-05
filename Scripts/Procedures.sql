@@ -1,6 +1,9 @@
 /*Procedures*/
  /* USE BD_BDM_project;*/
 
+	set global net_buffer_length = 1000000; 
+    set global max_allowed_packet = 1000000000;
+
 #1. Gestion de Usuarios
 DROP procedure IF EXISTS sp_Usuarios;
 DELIMITER $$
@@ -282,6 +285,9 @@ INSERT INTO CATEGORIA ( nombre, creador, descripcion, fechahoracreacion)
 call sp_GestionCategorias('Actualizar', 1, 'nombre', 1, 'imagen1', 'descripcion');select * from categoria
 
 #2. Vendedor - Gestion de los productos
+
+
+    
 DROP procedure IF EXISTS sp_GestionProductos;
 DELIMITER $$
  CREATE PROCEDURE sp_GestionProductos(
@@ -303,6 +309,8 @@ DELIMITER $$
 	pimagen2						longblob,
     pimagennombre2				varchar(255)
 	)
+
+
 BEGIN
 DECLARE pmin int;
 DECLARE busqueda_producto INT;
@@ -373,6 +381,15 @@ UPDATE PRODUCTO_VENDEDOR
     then
 		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible, pv.categoria as categoria,  u.nombreusuario as nombreusuario
         from PRODUCTO_VENDEDOR pv 
+         inner join usuario u
+			on u.id_usuario = c.creador
+        where pcreador = creador;
+    end if;
+	if(opc='VerSolo')
+    then
+		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible, pv.categoria as categoria,  u.nombreusuario as nombreusuario
+        from PRODUCTO_VENDEDOR pv 
+		  from PRODUCTO_VENDEDOR pv 
          inner join usuario u
 			on u.id_usuario = c.creador
         where pcreador = creador;
