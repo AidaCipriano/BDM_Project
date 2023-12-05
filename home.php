@@ -56,7 +56,10 @@
                 
                 <?php include 'homepagno.php'; ?>
          
-            
+                   
+          <div class="espacio_Boton">
+              <center> <a class="boton4" href="tienda.php">Ver mas  </a> </center>
+          </div>    
             
         </main>
 

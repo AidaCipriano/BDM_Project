@@ -52,7 +52,9 @@
                     <?php include '../../../homepagno.php'; ?>
              
                 
-                
+                    <div class="espacio_Boton">
+              <center> <a class="boton4" href="Tienda.php?id=<?php echo( $id ); ?>">Ver mas  </a> </center>
+          </div>    
             </main>
                   
               

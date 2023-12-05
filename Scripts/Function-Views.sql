@@ -38,3 +38,17 @@ CREATE VIEW RecienLlegados AS
         
         WHERE pv.activo = '1' 
         order by pv.id_producto_vendedor desc limit 4;
+        
+CREATE VIEW CreadorCategoriaProductos AS
+ SELECT 
+    c.id_categoria as idcat, c.nombre as nombrecategoria, c.descripcion as descripcion, c.creador as idcreador, c.imagen as imagencategoria, 
+    pv.id_producto_vendedor as idproducto, pv.nombre as nombreproducto, concat(u.nombres, ' ', u.apellidos) as nombrecompleto, pv.costo as costo
+        
+       FROM categoria c
+        inner JOIN producto_vendedor pv
+        	on pv.categoria = c.id_categoria
+		inner join usuario u
+			on u.id_usuario = c.creador
+        
+        WHERE pv.activo = '1' 
+        ORDER BY pv.id_producto_vendedor;

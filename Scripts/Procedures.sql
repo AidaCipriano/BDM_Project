@@ -243,6 +243,13 @@ SET v_buscarcat = (SELECT Count(pnombre) FROM CATEGORIA WHERE nombre = pnombre);
 			on u.id_usuario = c.creador
         where c.id_categoria = pid_categoria;
     end if;
+    if(opc='VerProductos')
+    then
+		SELECT c.idcat, c.nombrecategoria, c.descripcion, c.idcreador, c.imagencategoria, c.idproducto, c.nombreproducto, c.nombrecompleto, c.costo,  i.contenido as contenido from creadorcategoriaproductos c
+        INNER JOIN imagen_producto i 
+        	ON i.producto = c.idproducto
+           WHERE i.showimagen = 1 AND pid_categoria = c.idcat;
+    end if;
 END$$
 
 DROP procedure IF EXISTS sp_Gestion;
@@ -324,7 +331,7 @@ declare pId int;
 
 			set pId = (select MAX(id_producto_vendedor) from PRODUCTO_VENDEDOR); 
             
-           INSERT INTO video_producto (nombre, ruta, producto, vendedor)
+            INSERT INTO video_producto (nombre, ruta, producto, vendedor)
             VALUES(pnombrevideo, pvideo, pId, pvendedor);
             
             INSERT INTO imagen_producto (titulo, contenido, showimagen, producto, vendedor)
@@ -383,14 +390,6 @@ UPDATE PRODUCTO_VENDEDOR
 			on u.id_usuario = c.creador
         where pcreador = creador;
     end if;
-	if(opc='VerSolo')
-    then
-		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible, pv.categoria as categoria,  u.nombreusuario as nombreusuario
-        from PRODUCTO_VENDEDOR pv 
-         inner join usuario u
-			on u.id_usuario = c.creador
-        where pcreador = creador;
-    end if;
         
     if(opc='Editar Producto')
     then
@@ -419,7 +418,7 @@ DELIMITER $$
 begin
 	if(opc='Todos los productos')
     then
-        select r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
+		select r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
         from TodosLosProductos r
         inner join imagen_producto i
         on i.producto= r.id
@@ -435,7 +434,7 @@ begin
         where i.showimagen = 1
         ;
     end if;
-end;
+end $$
 
 call sp_GestionProductos('Crear', null, 1, '3', '1', '1', 1, '1', '1', 1, '3', '4');
 select * from producto_vendedor;

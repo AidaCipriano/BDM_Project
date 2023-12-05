@@ -47,7 +47,7 @@
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
 
-                              <a type="button" class="btn btn-sm btn-outline-secondary" href="DetallesCategorias.php?id=<?php echo( $id ); ?>">Ver</a>
+                              <a type="button" class="btn btn-sm btn-outline-secondary" href="DetallesCategorias.php?id=<?php echo( $id ); ?>&id_cat=<?php echo $filas['id_categoria']; ?>&id_catnom=<?php echo $filas['nombre']; ?>">Ver</a>
                               <a type="button" class="btn btn-sm btn-outline-secondary" href="EditarCategoria.php?id=<?php echo( $id )?>&id_cat=<?php echo $filas['id_categoria']; ?>  ">Editar</a>
                               <button type="button" class="btn btn-sm btn-outline-secondary red">Eliminar</button>
                             </div>
