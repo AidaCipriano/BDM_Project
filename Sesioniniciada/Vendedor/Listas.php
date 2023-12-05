@@ -1,7 +1,5 @@
 <?php
-  session_start();
   include '../controladores/conexion.php';
-  $user = $_SESSION['usuario'];
 
 ?>
 
@@ -27,33 +25,8 @@
   
   <body>
   <?php  include("header.php"); ?>
-    
-    <main class="main">
-      <section class="py-5 text-center container">
-        <h1 class="fw-light">Categorias</h1>
-      </section>
-      <div class="album py-5 bg-light">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg" width="100%" height="225">
-                <div class="card-body">
-                  <dt><p class="Nombre-lista">Tecnologia</p></dt>
-                  <p>Creado por Juan Perez, el 23/02/2023 a las 13:05 horas</p>
-                  <p class="card-text">Adentrate en los campos de la era moderna y del futuro.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a type="button" class="btn btn-sm btn-outline-secondary" href="DetallesCategorias.php">Ver</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+  <?php  include("../controladores/ProductosporCategorias.php"); ?>
+
   
     <footer class="main-footer">
       <div class="footer__section">

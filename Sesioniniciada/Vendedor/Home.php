@@ -33,7 +33,7 @@
         <main class="main">
             
             <div class="SubTitulos"> </div>
-              <?php include '../../homepagno.php'; ?>
+              <?php include '../controladores/homevendedor.php'; ?>
               
               <div class="espacio_Boton">
               <center> <a class="boton4" href="Tienda.php?id=<?php echo( $id ); ?>">Ver mas  </a> </center>

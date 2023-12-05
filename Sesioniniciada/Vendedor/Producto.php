@@ -1,9 +1,29 @@
 <?php
-  session_start();
-  include '../controladores/conexion.php';
-  //$user = $_SESSION['usuario'];
+   include '../controladores/conexion.php';
 
+
+  $id =  $_REQUEST['id'];
+  
+  $id_pro =  $_REQUEST['id_pro']; // id categoria
+
+  $consulta = "CALL sp_InteraccionProducto('Ver Producto', '$id', '$id_pro');";
+  $resultado = mysqli_query($conexion, $consulta);
+
+  while($filas = mysqli_fetch_array($resultado)){
+   
+    $nombre= $filas['nombrecompleto'];
+    $producto = $filas['producto'];
+    $vendedor= $filas['vendedor'];
+    $costo = $filas['costo'];
+    $descripcion= $filas['descripcion'];
+    $fecha_creacion= $filas['fecha_creacion'];
+    $cantidad_disponible = $filas['cantidad_disponible'];
+    $categoria= $filas['categoria'];
+    $contenido = 'data:image/jpeg;base64,' . base64_encode($filas['contenido']);
+  }
+  //$nombrecompleto = $nombre;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -27,12 +47,12 @@
           <div class="col">
             <div class="row g-0 border rounded mb-4 shadow-sm " width="500" height="750">
                 <div class="col " width="200" height="950" >
-                <img src="../../img/Listas/img/Predeterminado.jpg" width="100%" class="col CrearLista_CajaImagen" >
+                <img src="<?php echo $contenido; ?>" width="70%"  class="col CrearLista_CajaImagen" >
                 </div>  
             
                 <div class="col">
         
-                  <h1 class="product__title text-center mt-5">Titulo</h1>
+                  <h1 class="product__title text-center mt-5"><?php echo $producto; ?></h1>
                   <div class="row g-5">
               
                     <div class="col-md-11 text-ce">
@@ -43,8 +63,8 @@
                       </h3>
         
                       <article class="blog-post">
-                      <h2 class="blog-post-title mb-1">Descripcion</h2>
-                      <p class="blog-post-meta">Publicado en Enero  1, 2021 por <a href="#">Mark</a></p>
+                      <h2 class="blog-post-title mb-1">Informacion</h2>
+                      <p class="blog-post-meta">Publicado el <?php echo $fecha_creacion; ?> por <a href="#"><?php echo $nombre; ?></a></p>
         
                       <form>
                         <p class="clasificacion ">
@@ -64,16 +84,16 @@
                         </form>
         
         
-                      <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
+                      <p><?php echo $descripcion; ?>.</p>
                       <hr>
                       <dt>Categoria</dt>
-                      <dd>The language used to describe and define the content of a Web page</dd>
+                      <dd><?php echo $categoria; ?></dd>
                       <dt>Cantidad disponible</dt>
-                      <dd>Used to describe the appearance of Web content</dd>
+                      <dd><?php echo $cantidad_disponible; ?></dd>
                       
         
                       <div class="product ">
-                        <h3 class="product__price">$Precio</h3> 
+                        <h3 class="product__price">$<?php echo $costo; ?> MX</h3> 
                         <p></p>
                         <div>
                           <button type="button" class="btn btn-warning">Agregar al carrito</button>

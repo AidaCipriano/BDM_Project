@@ -274,11 +274,13 @@ DECLARE pmin int;
     set pmin = (select MIN(id_imagen_producto)  from  imagen_producto i inner join PRODUCTO_VENDEDOR pv on i.producto = pv.id_producto_vendedor  where  pid_usuario = pv.vendedor);
 		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible,
         pv.cotizacionventa as cotizacionventa,  pv.categoria as categoria,  u.nombreusuario as nombreusuario, 
-        (select contenido from imagen_producto 
-        where   pmin = id_imagen_producto) as imagen
+        i.contenido as imagen
         from PRODUCTO_VENDEDOR pv 
          inner join usuario u
-			on u.id_usuario = pv.vendedor;
+			on u.id_usuario = pv.vendedor
+         inner JOIN imagen_producto i
+         	on i.producto = pv.id_producto_vendedor
+         where i.showimagen = 1;
     end if;
     if(opc='Editar Perfil')
     then
@@ -287,11 +289,6 @@ DECLARE pmin int;
 END$$
 
 
-INSERT INTO CATEGORIA ( nombre, creador, descripcion, fechahoracreacion)
-			VALUES( '2', 1, '3',  (SELECT DATE(NOW())));
-call sp_GestionCategorias('Actualizar', 1, 'nombre', 1, 'imagen1', 'descripcion');select * from categoria
-
-#2. Vendedor - Gestion de los productos
 
 
     
@@ -418,7 +415,7 @@ DELIMITER $$
 begin
 	if(opc='Todos los productos')
     then
-		select r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
+		select r.id, r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
         from TodosLosProductos r
         inner join imagen_producto i
         on i.producto= r.id
@@ -427,17 +424,45 @@ begin
     end if;
     if(opc='Recien')
     then
-		select r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
+		select  r.id, r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
         from RecienLlegados r
         inner join imagen_producto i
         on i.producto= r.id
         where i.showimagen = 1
         ;
     end if;
+	 if(opc='Categorias')
+    then
+		select r.id_cat, r.nombrecategoria, r.idproducto, r.nombreproducto, r.nombrecompleto,
+        r.descripcion, r.costo, i.contenido
+        from CategoriaProductos r
+        inner join imagen_producto i
+        on i.producto= r.idproducto
+        where i.showimagen = 1
+		ORDER BY r.idcat
+        ;
+    end if;
 end $$
 
-call sp_GestionProductos('Crear', null, 1, '3', '1', '1', 1, '1', '1', 1, '3', '4');
-select * from producto_vendedor;
-select * from video_producto
+DROP procedure IF EXISTS sp_InteraccionProducto;
+DELIMITER $$
+ CREATE PROCEDURE sp_InteraccionProducto(
+	opc							varchar(30),
+    pusario						int,
+    pproducto					int
+)
+begin
+	if(opc='Ver Producto')
+    then
+		select pv.id_producto_vendedor, pv.nombre as producto, pv.vendedor, concat(u.nombres, ' ', u.apellidos)  as nombrecompleto, pv.costo, pv.descripcion, pv.fecha_creacion, pv.cantidad_disponible, pv.categoria,
+		i.contenido
+        from producto_vendedor pv
 
-
+		inner join imagen_producto i
+			on i.producto = pv.id_producto_vendedor
+		inner join usuario u
+			on u.id_usuario = pv.vendedor
+		where pv.id_producto_vendedor = pproducto AND i.showimagen=1
+        ;
+    end if;
+end $$
