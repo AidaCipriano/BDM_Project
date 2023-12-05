@@ -309,8 +309,6 @@ DELIMITER $$
 	pimagen2						longblob,
     pimagennombre2				varchar(255)
 	)
-
-
 BEGIN
 DECLARE pmin int;
 DECLARE busqueda_producto INT;
@@ -326,17 +324,17 @@ declare pId int;
 
 			set pId = (select MAX(id_producto_vendedor) from PRODUCTO_VENDEDOR); 
             
-            INSERT INTO video_producto (nombre, ruta, producto, vendedor)
+           INSERT INTO video_producto (nombre, ruta, producto, vendedor)
             VALUES(pnombrevideo, pvideo, pId, pvendedor);
             
-            INSERT INTO imagen_producto (titulo, contenido, producto, vendedor)
-            VALUES(pimagennombre, pimagen, pId, pvendedor);
+            INSERT INTO imagen_producto (titulo, contenido, showimagen, producto, vendedor)
+            VALUES(pimagennombre, pimagen, 1, pId, pvendedor);
             
-            INSERT INTO imagen_producto (titulo, contenido, producto, vendedor)
-            VALUES(pimagennombre1, pimagen1, pId, pvendedor);
+            INSERT INTO imagen_producto (titulo, contenido, showimagen, producto, vendedor)
+            VALUES(pimagennombre1, pimagen1, 0, pId, pvendedor);
             
-            INSERT INTO imagen_producto (titulo, contenido, producto, vendedor)
-            VALUES(pimagennombre2, pimagen2, pId, pvendedor);
+            INSERT INTO imagen_producto (titulo, contenido, showimagen, producto, vendedor)
+            VALUES(pimagennombre2, pimagen2, 0, pId, pvendedor);
         
         set opc = "Se registro con exito";
              SELECT pnombre as Producto, opc as Mensaje;
@@ -389,7 +387,6 @@ UPDATE PRODUCTO_VENDEDOR
     then
 		select pv.id_producto_vendedor as id_producto_vendedor, pv.nombre as nombre , pv.vendedor as vendedor, pv.costo as costo, pv.descripcion as descripcion, pv.cantidad_disponible as cantidad_disponible, pv.categoria as categoria,  u.nombreusuario as nombreusuario
         from PRODUCTO_VENDEDOR pv 
-		  from PRODUCTO_VENDEDOR pv 
          inner join usuario u
 			on u.id_usuario = c.creador
         where pcreador = creador;
@@ -413,6 +410,33 @@ UPDATE PRODUCTO_VENDEDOR
         where pid_producto_vendedor = id_producto_vendedor;
     end if;
 END$$
+
+DROP procedure IF EXISTS sp_GestionPagina;
+DELIMITER $$
+ CREATE PROCEDURE sp_GestionPagina(
+	opc							varchar(30)
+)
+begin
+	if(opc='Todos los productos')
+    then
+        select r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
+        from TodosLosProductos r
+        inner join imagen_producto i
+        on i.producto= r.id
+        where i.showimagen = 1
+        ;
+    end if;
+    if(opc='Recien')
+    then
+		select r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
+        from RecienLlegados r
+        inner join imagen_producto i
+        on i.producto= r.id
+        where i.showimagen = 1
+        ;
+    end if;
+end;
+
 call sp_GestionProductos('Crear', null, 1, '3', '1', '1', 1, '1', '1', 1, '3', '4');
 select * from producto_vendedor;
 select * from video_producto

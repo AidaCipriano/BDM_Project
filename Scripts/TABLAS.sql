@@ -95,6 +95,7 @@ CREATE TABLE IMAGEN_PRODUCTO (
 	id_imagen_producto		int auto_increment		not null comment "ID de la Imagen",
 	titulo  					varchar(255)		not null comment "Titulo de la imagen del Producto",
 	contenido					longblob			not null comment "Imagen del producto",
+    showimagen					bit					not null comment "Se mostrara o no la imagen",
     producto  					int					 null comment "ID del Producto",
     vendedor  					int					not null comment "Vendedor del Producto",
 

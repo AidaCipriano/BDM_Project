@@ -127,7 +127,7 @@
                     <label class="nav-link px-2 text-black text-center"> 
                       <input class="btn btn-success" onclick="btn_guardarProducto();" value="Guardar">
                       <p class="warnings" id="warnings"></p>
-                      <input class="btn btn-primary"  type="submit"  name="ActProducto"  id="btn_guardar_producto" value="Enviar">
+                     <input class="btn btn-primary"  type="submit"  name="ActProducto"  id="btn_guardar_producto" value="Enviar">
 
                     </label>
                   </div>

@@ -51,11 +51,11 @@
 
         <main class="main">
             
-        <h2 class="main-title">Recien llegados</h2>
-            <section class="container-products">
+        <h2 class="main-title"></h2>
+           
                 
                 <?php include 'homepagno.php'; ?>
-            </section>
+         
             
             
         </main>

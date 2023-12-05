@@ -36,7 +36,7 @@
           </header>
       <main class="main">
             
-        <div class="SubTitulos">Top Ventas </div>
+        <div class="SubTitulos"> </div>
           <?php include 'productostienda.php'; ?>
           
         

@@ -144,6 +144,7 @@ if(isset($_POST['tipoperfil'])){
        // $consulta = "INSERT INTO usuario(id_usuario, email, nombreusuario, contrasena)
        //                 VALUES('$idsuario', '$email', '$username', '$password')";
         $resultado = mysqli_query($conexion, $consulta);
+        $filas = mysqli_fetch_array($resultado);
         if($filas['tipousuario']==1){
 			$_SESSION['usuario'] = $filas['nombreusuario'];
 			//$nombre['nombres'] = $filas['nombres'];
@@ -160,3 +161,5 @@ if(isset($_POST['tipoperfil'])){
 
     }
 }
+
+?>

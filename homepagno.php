@@ -1,35 +1,245 @@
 <?php
 include("Sesioniniciada/controladores/conexion.php");
-$consulta = "CALL sp_GestionProductos('Ver Solo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
-$resultado = mysqli_query($conexion, $consulta);
-
-$ultimosProductosQuery = "SELECT pv.id_producto_vendedor, pv.nombre,  pv.vendedor , pv.costo, pv.descripcion, pv.cantidad_disponible, pv.categoria
-                          FROM PRODUCTO_VENDEDOR pv 
-                          LEFT JOIN imagen_producto i ON pv.id_producto_vendedor = i.producto
-                          GROUP BY pv.id_producto_vendedor
-                          ORDER BY pv.nombre DESC
-                          LIMIT 4";
-
-$ultimosProductosResult = $conexion->query($ultimosProductosQuery);
 
 ?>
 
+<main class="main">
+            
+          <div class="SubTitulos">Top Ventas
 
-<section class="container-products" >
-    <?php
-    while ($row_producto = $ultimosProductosResult->fetch_assoc()) {
-        echo "<div class='product'>
-                <img src='../Sesioniniciada/" . $row_producto['Imagen'] . "' alt='' class='product__img'>
-                <div class='product__description'>
-                   <h3 class='product__title'>" . $row_producto['NombreProduct'] . "</h3>
-                    <span class='product__price'>$" . $row_producto['Precio'] . "</span> 
+          </div>
+
+          <div class="row row-cols-1 row-cols-md-4 g-4">
+              <div class="col">
+                <div class="card h-100">
+                  <div class="row">
+                      <div id="open">
+                        <a href="#" class="thumbnail">
+                          <img src="/img/products/accesorio1.jpg" class="card-img-top" alt="..." >
+                        </a>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="Cartas_Titulos">Teclado</h5>
+                    <h6 class="Cartas_Intructor">Por Johann Perez.</h6>
+                    <center>
+                      <div class="pie-carta">
+                       <a class="boton3" href="#">Comprar $165 MXN</a>
+                    </div>
+                    </center>
+                  </div>
                 </div>
-                <i class='product__icon fa-solid fa-cart-plus'></i>
-            </div>";
-    }
-    echo "</section>";
-    $conexion->close();
-    ?>
+              </div>
+              
+              <div class="col">
+                  <div class="card h-100">
+                    <div class="row">
+                        <div id="open">
+                          <a href="#" class="thumbnail">
+                            <img src="/img/products/accesorio2.JPG" class="card-img-top" alt="..." >
+                          </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="Cartas_Titulos">Teclado</h5>
+                      <h6 class="Cartas_Intructor">Un curso de Deiv Choi.</h6>
+                     
+                      <center>
+                        <div class="pie-carta">
+                         <a class="boton3" href="#">Comprar $165 MXN</a>
+                      </div>
+                      </center>
+                    </div>
+                  
+                  </div>
+               
+              </div>
+                
+              <div class="col">
+                <div class="card h-100">
+                  <div class="row">
+                      <div id="open">
+                        <a href="#" class="thumbnail">
+                          <img src="/img/products/accesorio1.jpg" class="card-img-top" alt="..." >
+                        </a>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="Cartas_Titulos">Teclado</h5>
+                    <h6 class="Cartas_Intructor">Por Johann Perez.</h6>
+                    <center>
+                      <div class="pie-carta">
+                       <a class="boton3" href="#">Comprar $165 MXN</a>
+                    </div>
+                    </center>
+                  </div>
+                </div>
+              </div>
 
+                
+              <div class="col">
+                <div class="card h-100">
+                  <div class="row">
+                      <div id="open">
+                        <a href="#" class="thumbnail">
+                          <img src="/img/products/accesorio2.JPG" class="card-img-top" alt="..." >
+                        </a>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="Cartas_Titulos">Teclado</h5>
+                    <h6 class="Cartas_Intructor">Un curso de Deiv Choi.</h6>
+                   
+                    <center>
+                      <div class="pie-carta">
+                       <a class="boton3" href="#">Comprar $165 MXN</a>
+                    </div>
+                    </center>
+                  </div>
+                
+                </div>
+             
+            </div>
+          
+          </div>
+            
+          <div class="SubTitulos">Mejor Calificados
 
-</section>
+          </div>
+
+          <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+              <div class="card h-100">
+                <div class="row">
+                    <div id="open">
+                      <a href="#" class="thumbnail">
+                        <img src="/img/products/accesorio1.jpg" class="card-img-top" alt="..." >
+                      </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="Cartas_Titulos">Teclado</h5>
+                  <h6 class="Cartas_Intructor">Por Johann Perez.</h6>
+                  <center>
+                    <div class="pie-carta">
+                     <a class="boton3" href="#">Comprar $165 MXN</a>
+                  </div>
+                  </center>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col">
+                <div class="card h-100">
+                  <div class="row">
+                      <div id="open">
+                        <a href="#" class="thumbnail">
+                          <img src="/img/products/accesorio2.JPG" class="card-img-top" alt="..." >
+                        </a>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="Cartas_Titulos">Teclado</h5>
+                    <h6 class="Cartas_Intructor">Un curso de Deiv Choi.</h6>
+                   
+                    <center>
+                      <div class="pie-carta">
+                       <a class="boton3" href="#">Comprar $165 MXN</a>
+                    </div>
+                    </center>
+                  </div>
+                
+                </div>
+             
+            </div>
+              
+            <div class="col">
+              <div class="card h-100">
+                <div class="row">
+                    <div id="open">
+                      <a href="#" class="thumbnail">
+                        <img src="/img/products/accesorio1.jpg" class="card-img-top" alt="..." >
+                      </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="Cartas_Titulos">Teclado</h5>
+                  <h6 class="Cartas_Intructor">Por Johann Perez.</h6>
+                  <center>
+                    <div class="pie-carta">
+                     <a class="boton3" href="#">Comprar $165 MXN</a>
+                  </div>
+                  </center>
+                </div>
+              </div>
+            </div>
+
+              
+            <div class="col">
+              <div class="card h-100">
+                <div class="row">
+                    <div id="open">
+                      <a href="#" class="thumbnail">
+                        <img src="/img/products/accesorio2.JPG" class="card-img-top" alt="..." >
+                      </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="Cartas_Titulos">Teclado</h5>
+                  <h6 class="Cartas_Intructor">Un curso de Deiv Choi.</h6>
+                 
+                  <center>
+                    <div class="pie-carta">
+                     <a class="boton3" href="#">Comprar $165 MXN</a>
+                  </div>
+                  </center>
+                </div>
+              
+              </div>
+           
+          </div>
+        
+        </div>
+                  
+              
+          <div class="SubTitulos">Mas recientes
+
+          </div>
+
+          
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+<?php 
+    $consulta = "CALL sp_GestionPagina('Recien')";
+    $resultado = mysqli_query($conexion, $consulta);
+    while($filas = mysqli_fetch_array($resultado)){ ?>
+    
+    <div class="col">
+        <div class="card h-100">
+            <div class="row">
+                <div id="open">
+                    <a href="#" class="thumbnail">
+                        <img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($filas['contenido'])?>" class="card-img-top" width="100%" height="225" >
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="Cartas_Titulos"> <?php echo $filas['nombre'] ?></h5>
+                <h6 class="Cartas_Intructor">Por <?php echo $filas['nombrecompleto'] ?>.</h6>
+                <center>
+                    <div class="pie-carta">
+                        <a class="boton3" href="#">Comprar $<?php echo $filas['costo'] ?> MXN</a>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+</div>
+          
+             
+          <div class="espacio_Boton">
+              <center> <a class="boton4" href="tienda.php">Ver mas  </a> </center>
+          </div>    
+          
+          
+      </main>
