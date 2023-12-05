@@ -77,6 +77,23 @@
         </footer>
         <div class="Copyright"><p class="copy">© 2022, Echo</p></div>
         <script src="../../../js/bootstrap.bundle.min.js"></script>
+
+
+        <script type="text/javascript">
+            function buscar_ahora(buscar){
+                var parametros = {"buscar": buscar};
+                $.ajax({
+                    data:parametros,
+                    type: 'POST',
+                    url: 'buscador.php',
+                    success :function(data){
+                        document.getElementById("datos_buscador").innerHTML = data;
+
+                    }
+                });
+            }
+        </script>
+        
     </body>
 
 

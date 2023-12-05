@@ -17,7 +17,7 @@
             </div>
           </ul>
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-5" role="search">
-            <input type="search" class="form-control " placeholder="Buscar ..." aria-label="Search">
+            <input onkeyup="buscar_ahora($('#buscar_1').val());" type="search" class="form-control " placeholder="Buscar ..." aria-label="Search">
           </form>
           <ul class="nav col-12 col-lg-auto  mb-md-0">
             <li>

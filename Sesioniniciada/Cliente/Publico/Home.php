@@ -57,109 +57,6 @@
           </div>    
             </main>
                   
-              
-          <div class="SubTitulos">Mas recientes
-
-          </div>
-
-          <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col">
-              <div class="card h-100">
-                <div class="row">
-                    <div id="open">
-                      <a href="#" class="thumbnail">
-                        <img src="/img/products/accesorio1.jpg" class="card-img-top" alt="..." >
-                      </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                  <h5 class="Cartas_Titulos">Teclado</h5>
-                  <h6 class="Cartas_Intructor">Por Johann Perez.</h6>
-                  <center>
-                    <div class="pie-carta">
-                     <a class="boton3" href="#">Comprar $165 MXN</a>
-                  </div>
-                  </center>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col">
-                <div class="card h-100">
-                  <div class="row">
-                      <div id="open">
-                        <a href="#" class="thumbnail">
-                          <img src="/img/products/accesorio2.JPG" class="card-img-top" alt="..." >
-                        </a>
-                      </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="Cartas_Titulos">Teclado</h5>
-                    <h6 class="Cartas_Intructor">Un curso de Deiv Choi.</h6>
-                   
-                    <center>
-                      <div class="pie-carta">
-                       <a class="boton3" href="#">Comprar $165 MXN</a>
-                    </div>
-                    </center>
-                  </div>
-                
-                </div>
-             
-            </div>
-              
-            <div class="col">
-              <div class="card h-100">
-                <div class="row">
-                    <div id="open">
-                      <a href="#" class="thumbnail">
-                        <img src="/img/products/accesorio1.jpg" class="card-img-top" alt="..." >
-                      </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                  <h5 class="Cartas_Titulos">Teclado</h5>
-                  <h6 class="Cartas_Intructor">Por Johann Perez.</h6>
-                  <center>
-                    <div class="pie-carta">
-                     <a class="boton3" href="#">Comprar $165 MXN</a>
-                  </div>
-                  </center>
-                </div>
-              </div>
-            </div>
-
-              
-            <div class="col">
-              <div class="card h-100">
-                <div class="row">
-                    <div id="open">
-                      <a href="#" class="thumbnail">
-                        <img src="/img/products/accesorio2.JPG" class="card-img-top" alt="..." >
-                      </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                  <h5 class="Cartas_Titulos">Teclado</h5>
-                  <h6 class="Cartas_Intructor">Un curso de Deiv Choi.</h6>
-                 
-                  <center>
-                    <div class="pie-carta">
-                     <a class="boton3" href="#">Comprar $165 MXN</a>
-                  </div>
-                  </center>
-                </div>
-              
-              </div>
-           
-          </div>
-        
-        </div>
-             
-          <div class="espacio_Boton">
-              <center> <a class="boton4" href="/Sesionsininiciar/tienda.php">Ver mas  </a> </center>
-          </div>    
-          
           
       </main>
 
@@ -193,6 +90,23 @@
         </footer>
         <div class="Copyright"><p class="copy">© 2022, Echo</p></div>
         <script src="../../../js/bootstrap.bundle.min.js"></script>
+
+
+        <script type="text/javascript">
+            function buscar_ahora(buscar){
+                var parametros = {"buscar": buscar};
+                $.ajax({
+                    data:parametros,
+                    type: 'POST',
+                    url: 'buscador.php',
+                    success :function(data){
+                        document.getElementById("datos_buscador").innerHTML = data;
+
+                    }
+                });
+            }
+        </script>
+
     </body>
 
 

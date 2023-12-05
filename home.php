@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
         <link rel="icon" type="image/png" href="img/logo.JPG">
        
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
 
@@ -27,7 +27,7 @@
                 </ul>
         
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-5" role="search">
-                  <input type="search" class="form-control " placeholder="Buscar ..." aria-label="Search">
+                  <input onkeyup="buscar_ahora($('#buscar_1').val());" type="search" class="form-control " placeholder="Buscar ..." aria-label="Search">
                 </form>
         
                 <div class="text-end">
@@ -52,9 +52,10 @@
         <main class="main">
             
         <h2 class="main-title"></h2>
-           
-                
-                <?php include 'homepagno.php'; ?>
+
+            <div id="datos_buscador"> </div>
+
+            <?php include 'homepagno.php'; ?>
          
                    
           <div class="espacio_Boton">
@@ -91,6 +92,22 @@
             
         </footer>
         <div class="Copyright"><p class="copy">© 2022, Echo</p></div>
+
+
+        <script type="text/javascript">
+            function buscar_ahora(buscar){
+                var parametros = {"buscar": buscar};
+                $.ajax({
+                    data:parametros,
+                    type: 'POST',
+                    url: 'buscador.php',
+                    success :function(data){
+                        document.getElementById("datos_buscador").innerHTML = data;
+
+                    }
+                });
+            }
+        </script>
         
     </body>
 </html>

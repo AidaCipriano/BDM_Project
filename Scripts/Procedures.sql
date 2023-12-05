@@ -434,6 +434,15 @@ begin
         where i.showimagen = 1
         ;
     end if;
+	 if(opc='Buscador')
+    then
+		select r.nombre, r.vendedor,  r.nombrecompleto, r.costo, r.descripcion, i.contenido
+        from RecienLlegados r
+        inner join imagen_producto i
+        on i.producto= r.id
+        where i.showimagen = 1
+        ;
+    end if;
 end $$
 
 call sp_GestionProductos('Crear', null, 1, '3', '1', '1', 1, '1', '1', 1, '3', '4');

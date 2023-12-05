@@ -14,30 +14,28 @@ end ; $$
 
 #Vistas
 #1
-/*DROP VIEW IF EXISTS TodosLosProductos;*/
+
 CREATE VIEW TodosLosProductos AS
  SELECT 
  pv.nombre as nombre, pv.vendedor as vendedor, concat(u.nombres, ' ', u.apellidos) as nombrecompleto, pv.costo as costo, pv.descripcion as descripcion,
  pv.id_producto_vendedor as id
         
         FROM producto_vendedor pv
-	inner join usuario u
-		on u.id_usuario = pv.vendedor
+	inner JOIN usuario u
+		ON u.id_usuario = pv.vendedor
         
         WHERE pv.activo = '1' ;
 #2        
-/*DROP VIEW IF EXISTS RecienLlegados;*/
 CREATE VIEW RecienLlegados AS
- SELECT  
+ SELECT 
  pv.nombre as nombre, pv.vendedor as vendedor, concat(u.nombres, ' ', u.apellidos) as nombrecompleto, pv.costo as costo, pv.descripcion as descripcion,
  pv.id_producto_vendedor as id
-        
         FROM producto_vendedor pv
-	inner join usuario u
-		on u.id_usuario = pv.vendedor
+	inner JOIN usuario u
+		ON u.id_usuario = pv.vendedor
         
         WHERE pv.activo = '1' 
-        order by pv.id_producto_vendedor desc limit 4;
+        ORDER BY pv.id_producto_vendedor DESC LIMIT 4;
         
 CREATE VIEW CreadorCategoriaProductos AS
  SELECT 
